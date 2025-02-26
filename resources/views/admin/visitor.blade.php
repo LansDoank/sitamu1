@@ -40,7 +40,7 @@
 
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$user->role_id}}</x-slot:user>
+            <x-slot:user>{{ $user->role_id }}</x-slot:user>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -93,7 +93,16 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-xl text-gray-800">Tabel Tamu</h1>
-
+                    @if (session('visitor_error'))
+                        <div
+                            class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                            {{ session('visitor_error') }}</div>
+                    @endif
+                    @if (session('visitor_success'))
+                        <div
+                            class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
+                            {{ session('visitor_success') }}</div>
+                    @endif
                     <div class="flex mb-3 ">
                         <a href="/form/desa"
                             class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
@@ -126,12 +135,12 @@
                                             <tr>
                                                 <td>{{ $no }}</td>
                                                 <td class="">
-                                                        <a href="/admin/visitor/{{ $visitor->id }}">
+                                                    <a href="/admin/visitor/{{ $visitor->id }}">
                                                         <img class="mx-auto"
                                                             style="width: 50px; height: 50px; object-position: center; object-fit: cover;"
                                                             src="{{ asset("storage/$visitor->visitor_photo") }}"
                                                             alt="">
-                                                        </a>
+                                                    </a>
                                                 </td>
                                                 <td>{{ Str::limit($visitor->fullname, 10) }}</td>
                                                 <td>{{ $visitor->institution }}</td>

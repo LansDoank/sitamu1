@@ -156,7 +156,7 @@
                                         name="province" id="province" required>
                                         <option disabled selected>Pilih Provinsi Anda</option>
                                         @foreach ($provinces as $province)
-                                            <option value="{{ $province->code }}" @selected($province->code == $oldVisit->province_code)>
+                                            <option value="{{ $province->code }}">
                                                 {{ $province->name }}</option>
                                         @endforeach
                                     </select>
@@ -167,7 +167,7 @@
                                     <label for="district" class="mb-2">Kabupaten</label>
                                     <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
                                         name="district" id="district" required>
-                                        <option disabled selected>Pilih Kabupaten Anda</option>
+                                        <option disabled selected>Pilih Kabupaten</option>
                                     </select>
                                 </div>
                             </li>
@@ -176,7 +176,7 @@
                                     <label for="sub_district" class="mb-2">Kecamatan</label>
                                     <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
                                         name="sub_district" id="sub_district" required>
-                                        <option disabled selected>Pilih Kecamatan Anda</option>
+                                        <option disabled selected>Pilih Kecamatan</option>
                                     </select>
                                 </div>
                             </li>
@@ -185,7 +185,7 @@
                                     <label for="village" class="mb-2">Desa</label>
                                     <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
                                         name="village" id="village" required>
-                                        <option disabled selected>Pilih Desa Anda</option>
+                                        <option disabled selected>Pilih Desa</option>
                                     </select>
                                 </div>
                             </li>
@@ -210,7 +210,7 @@
                                     <label for="objective" class="mb-2">Tujuan</label>
                                     <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
                                         name="objective" id="objective" required>
-                                        <option disabled>Pilih Tujuan Anda</option>
+                                        <option disabled selected>Pilih Tujuan Anda</option>
                                         <option value="Koordinasi" @selected('Koordinasi' == $oldVisit->objective)>Koordinasi</option>
                                         <option value="Cari Informasi" @selected('Cari Informasi' == $oldVisit->objective)>Cari Informasi
                                         </option>
@@ -388,7 +388,7 @@
                         .then(response => response.json())
                         .then(data => {
                             districtSelect.innerHTML =
-                                '<option disabled selected>Pilih Kabupaten Anda</option>';
+                                '<option disabled selected>Pilih Kabupaten</option>';
                             data.forEach(district => {
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;
@@ -407,7 +407,7 @@
                         .then(response => response.json())
                         .then(data => {
                             subDistrictSelect.innerHTML =
-                                '<option selected disabled>Pilih Kecamatan Anda</option>';
+                                '<option selected disabled>Pilih Kecamatan</option>';
                             data.forEach(subDistrict => {
                                 subDistrictSelect.innerHTML +=
                                     `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
@@ -426,7 +426,7 @@
                         .then(response => response.json())
                         .then(data => {
                             villageSelect.innerHTML =
-                                '<option selected disabled>Pilih Desa Anda</option>';
+                                '<option selected disabled>Pilih Desa</option>';
                             data.forEach(village => {
                                 villageSelect.innerHTML +=
                                     `<option value="${village.code}">${village.name}</option>`;

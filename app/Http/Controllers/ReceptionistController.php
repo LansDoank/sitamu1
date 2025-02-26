@@ -72,10 +72,9 @@ class ReceptionistController extends Controller
     {
         $duplicate = User::where('username', $request->username)->first();
         if ($duplicate) {
-            return redirect()->route('admin.receptionists')->with('error', 'Username sudah sudah dipakai!');
+            return redirect()->route('admin.receptionists')->with('receptionist_error', 'Username sudah sudah digunakan!');
         }
 
-        // dd($request);
 
         $receptionist = new User();
         $receptionist->name = $request->name;
@@ -86,7 +85,6 @@ class ReceptionistController extends Controller
         $receptionist->district_code = $request->district;
         $receptionist->sub_district_code = $request->sub_district;
         $receptionist->village_code = $request->village;
-        // dd($request->file('receptionist_photo'));
         if ($request->hasFile('receptionist_photo')) {
             $receptionist->photo = $request->file('receptionist_photo')->store('receptionist_photo');
         }
@@ -95,7 +93,7 @@ class ReceptionistController extends Controller
 
         $visit = VisitType::where('village_code', $request->village)->first();
         if ($visit) {
-            return redirect()->route('admin.receptionists')->with('success', 'Receptionist added successfully with QR Code');
+            return redirect()->route('admin.receptionists')->with('receptionist_success', 'Akun resepsionis baru telah ditambahkan!');
         }
 
         $slug = Str::slug(Village::where('code', $request->village)->first()->name);
@@ -110,7 +108,7 @@ class ReceptionistController extends Controller
         $village->village_code = $request->village;
         $village->save();
 
-        return redirect()->route('admin.receptionists')->with('success', 'Receptionist added successfully with QR Code');
+        return redirect()->route('admin.receptionists')->with('receptionist_success', 'Akun resepsionis baru telah ditambahkan!');
     }
 
 
@@ -120,13 +118,12 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
         $receptionist = User::find($id);
-        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::all(), 'districts' => District::all(), 'sub_districts' => SubDistrict::all(), 'villages' => Village::all()]);
+        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::all(),'']);
     }
 
     public function update(Request $request)
     {
         $receptionist = User::find($request->id);
-        // dd($request->province,$request->district,$request->sub_district,$request->village);
         $receptionist->update([
             'name' => $request->name,
             'username' => $request->username,
@@ -145,16 +142,13 @@ class ReceptionistController extends Controller
             ]);
         }
 
-        // $receptionist->update([
-        //     'photo' => 'p'
-        // ]);
 
-        return redirect()->route('admin.receptionists')->with('success', 'Data Berhasil Diubah!');
+        return redirect()->route('admin.receptionists')->with('receptionist_success', 'Data resepsionis berhasil diubah!');
     }
 
     public function delete($id)
     {
         User::find($id)->delete();
-        return redirect()->route('admin.receptionists')->with('success', 'Receptionist deleted successfully');
+        return redirect()->route('admin.receptionists')->with('receptionist_success', 'Data resepsionis berhasil dihapus!');
     }
 }

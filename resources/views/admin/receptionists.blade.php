@@ -25,7 +25,7 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="icon" href="/img/logo.png">
     <style>
-        @media screen and (max-width:576px){
+        @media screen and (max-width:576px) {
             #brand {
                 display: none;
             }
@@ -40,7 +40,7 @@
 
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$user->role_id}}</x-slot:user>
+            <x-slot:user>{{ $user->role_id }}</x-slot:user>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -71,13 +71,12 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{asset("storage/" . $photo)}}">
+                                <img class="img-profile rounded-circle" src="{{ asset('storage/' . $photo) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/logout" data-toggle="modal"
-                                    data-target="#logoutModal">
+                                <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -94,9 +93,20 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tabel Resepsionis</h1>
-
+                    @if (session('receptionist_error'))
+                        <div
+                            class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                            {{session('receptionist_error')}}</div>
+                    @endif
+                    @if (session('receptionist_success'))
+                        <div
+                            class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
+                            {{session('receptionist_success')}}</div>
+                    @endif
                     <div class="flex mb-3 ">
-                        <a href="/admin/receptionist/add" class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+ Buat Akun</a>
+                        <a href="/admin/receptionist/add"
+                            class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
+                            Buat Akun</a>
                     </div>
 
                     <!-- DataTales Example -->
@@ -119,26 +129,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $no = 1 ?>
+                                        <?php $no = 1; ?>
                                         @foreach ($receptionists as $receptionist)
                                             <tr>
-                                                <td>{{$no}}</td>
+                                                <td>{{ $no }}</td>
                                                 <td class="">
-                                                    <img class="mx-auto" style="width: 50px; height: 50px; object-position: center; object-fit: cover;"  src="{{asset('storage/' . $receptionist->photo)}}" alt=""></td>
-                                                <td>{{$receptionist->name}}</td>
-                                                <td>{{$receptionist->username}}</td>
-                                                <td class="col-1">{{Str::limit($receptionist->password,30   )}}</td>
-                                                <td>{{Str::limit($receptionist->address->name,20)}}</td>
+                                                    <img class="mx-auto"
+                                                        style="width: 50px; height: 50px; object-position: center; object-fit: cover;"
+                                                        src="{{ asset('storage/' . $receptionist->photo) }}"
+                                                        alt="">
+                                                </td>
+                                                <td>{{ $receptionist->name }}</td>
+                                                <td>{{ $receptionist->username }}</td>
+                                                <td class="col-1">{{ Str::limit($receptionist->password, 30) }}</td>
+                                                <td>{{ Str::limit($receptionist->address->name, 20) }}</td>
                                                 <td class="flex">
-                                                    <a class="rounded text-white w-1/2 h-10 text-center flex items-center justify-center text-decoration-none " href="/admin/receptionist/edit/{{$receptionist->id}}">
+                                                    <a class="rounded text-white w-1/2 h-10 text-center flex items-center justify-center text-decoration-none "
+                                                        href="/admin/receptionist/edit/{{ $receptionist->id }}">
                                                         <img class="w-5" src="/img/edit.png" alt="">
                                                     </a>
-                                                    <a class="rounded text-white w-1/2 h-10 text-center justify-center flex items-center text-decoration-none " onclick="return confirm('Yakin?')" href="/admin/receptionist/delete/{{$receptionist->id}}">
+                                                    <a class="rounded text-white w-1/2 h-10 text-center justify-center flex items-center text-decoration-none "
+                                                        onclick="return confirm('Yakin?')"
+                                                        href="/admin/receptionist/delete/{{ $receptionist->id }}">
                                                         <img class="w-5" src="/img/trashcan.png" alt="">
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <?php $no++ ?>
+                                            <?php $no++; ?>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -190,7 +207,7 @@
     </div>
 
     {{-- Add Modal --}}
-    
+
     {{-- <div class="w-full h-screen bg-gray-100">
     </div> --}}
 

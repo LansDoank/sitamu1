@@ -71,19 +71,22 @@ class VisitorController extends Controller
         $request->validate([
             'fullname' => 'required',
             'institution' => 'required',
-            'address' => 'required',
             'check_in' => 'required',
             'check_out' => 'required',
             'telephone' => 'required',
             'visitor_photo' => 'required',
-            'visit_type_id' => 'required',
+            'visit_type' => 'required',
             'objective' => 'required',
-            'i_n_i' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'sub_district' => 'required',
+            'village' => 'required',
             'province_code' => 'required',
             'district_code' => 'required',
             'sub_district_code' => 'required',
             'village_code' => 'required',
         ]);
+
 
         $newVisitor = new Visitor();
         $newVisitor->fullname = $request->fullname;
@@ -123,17 +126,14 @@ class VisitorController extends Controller
         $request->validate([
             'fullname' => 'required',
             'institution' => 'required',
-            'address' => 'required',
             'check_in' => 'required',
             'check_out' => 'required',
             'telephone' => 'required',
-            'visit_type_id' => 'required',
             'objective' => 'required',
-            'i_n_i' => 'required',
-            'province_code' => 'required',
-            'district_code' => 'required',
-            'subdistrict_code' => 'required',
-            'village_code' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'sub_district' => 'required',
+            'village' => 'required',
         ]);
 
         $visitor = Visitor::find($request->id);
@@ -162,12 +162,12 @@ class VisitorController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.visitors')->with('visitor_success','Data Berhasil Diperbaharui');
+        return redirect()->route('admin.visitors')->with('visitor_success','Data tamu berhasil diperbaharui');
     }
 
     public function delete($id)
     {
         Visitor::find($id)->delete();
-        return redirect()->route('admin.visitors')->with('visitor_delete', 'Data berhasil dihapus');
+        return redirect()->route('admin.visitors')->with('visitor_success', 'Data tamu berhasil dihapus');
     }
 }

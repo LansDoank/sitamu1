@@ -40,7 +40,7 @@
 
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$user->role_id}}</x-slot:user>
+            <x-slot:user>{{ $user->role_id }}</x-slot:user>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -59,18 +59,13 @@
                     </button>
 
                     <div>
-                        <a class="text-decoration-none" href="/admin/visitor">
+                        <a class="text-decoration-none" href="/admin/receptionist">
                             <h1 class="text-gray-600 text-sm md:text-2xl ">&laquo; Edit Data Resepsonis</h1>
                         </a>
                     </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-
-
-
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -78,7 +73,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{asset("storage/" . $photo)}}">
+                                <img class="img-profile rounded-circle" src="{{ asset('storage/' . $photo) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -122,21 +117,31 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name@company.com" value="{{ $oldReceptionist->username }}" required>
                         </div>
-                        <div>
-                            <label for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required>
+                        <div class="relative flex">
+                            <div class="w-full">
+                                <label for="password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="password" name="password" id="password" placeholder="••••••••"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required autocomplete="off">
+                            </div>
+                            <svg onclick="seePassword()" id="eye" class="cursor-pointer absolute right-4 top-11"
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="province" class="mb-2">Provinsi</label>
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="province" id="province">
-                                <option selected>Pilih Provinsi Anda</option>
+                                <option disabled selected>Pilih Provinsi</option>
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->code }}" @selected($province->code == $oldReceptionist->province_code)>{{ $province->name }}</option>
+                                    <option value="{{ $province->code }}" @selected($province->code == $oldReceptionist->province_code)>
+                                        {{ $province->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -145,21 +150,21 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option selected>Pilih Kabupaten</option>
+                                <option disabled selected>Pilih Kabupaten</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2">Kecamatan</label>
                             <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option selected>Pilih Kecamatan</option>
+                                <option disabled selected>Pilih Kecamatan</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2">Desa</label>
                             <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option selected>Pilih Desa</option>
+                                <option disabled selected>Pilih Desa</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start w-full">
@@ -304,7 +309,8 @@
                     fetch(`/api/districts/${provinceCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            districtSelect.innerHTML = '<option selected>Pilih Kabupaten</option>';
+                            districtSelect.innerHTML =
+                                '<option disabled selected>Pilih Kabupaten</option>';
                             data.forEach(district => {
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;
@@ -321,7 +327,7 @@
                         .then(response => response.json())
                         .then(data => {
                             subDistrictSelect.innerHTML =
-                                '<option selected>Pilih Kecamatan</option>';
+                                '<option disabled selected>Pilih Kecamatan</option>';
                             data.forEach(subDistrict => {
                                 subDistrictSelect.innerHTML +=
                                     `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
@@ -337,7 +343,7 @@
                     fetch(`/api/villages/${subDistrictCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            villageSelect.innerHTML = '<option selected>Pilih Desa</option>';
+                            villageSelect.innerHTML = '<option disabled selected>Pilih Desa</option>';
                             data.forEach(village => {
                                 villageSelect.innerHTML +=
                                     `<option value="${village.code}">${village.name}</option>`;
@@ -346,6 +352,26 @@
                 }
             });
         });
+    </script>
+    <script>
+        const eye = document.querySelector('#eye');
+        const password = document.querySelector('#password');
+
+        const seePassword = () => {
+            if (password.type == 'password') {
+                password.setAttribute('type', 'text')
+                eye.innerHTML = `
+  <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+  <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+`
+            } else {
+                password.setAttribute('type', 'password')
+                eye.innerHTML =
+                    `<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                    <path
+                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />`
+            }
+        }
     </script>
 </body>
 

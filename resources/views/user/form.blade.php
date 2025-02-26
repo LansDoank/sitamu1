@@ -27,13 +27,13 @@
                         <div class="flex flex-col items-start w-full md:w-1/2">
                             <label for="fullname" class="mb-2 text-sm md:text-base">Nama Lengkap</label>
                             <input type="text" name="fullname" id="fullname"
-                                class="form-input border border-gray-200 rounded w-full h-10 px-3" required
+                                class="form-input border text-gray-700 border-gray-200 rounded w-full h-10 px-3" required
                                 placeholder="Masukkan nama anda">
                         </div>
                         <div class="flex flex-col items-start w-full md:w-1/2">
                             <label for="institution" class="mb-2 text-sm md:text-base">Instansi</label>
                             <select
-                                class="instance form-input text-gray-500 border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                                class="instance form-input text-gray-700 border border-gray-200 px-2 h-10 w-full md:w-1/2"
                                 name="institution" id="institution">
                                 <option disabled selected>Pilih Instansi</option>
                                 <option value="Supra Desa">Supra desa</option>
@@ -52,7 +52,7 @@
                         <div class="flex flex-col items-start">
                             <label for="telephone" class="mb-2 text-sm md:text-base">No. Telepon</label>
                             <input type="text" name="telephone" id="telephone"
-                                class="form-input border border-gray-200 rounded w-full h-10 px-3" required
+                                class="form-input border text-gray-700 border-gray-200 rounded w-full h-10 px-3" required
                                 placeholder="Masukkan telepon anda">
                         </div>
                     </li>
@@ -61,7 +61,7 @@
                             <label for="province" class="mb-2 text-sm md:text-base">Provinsi</label>
                             <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
                                 name="province" id="province">
-                                <option selected>Pilih Provinsi Anda</option>
+                                <option disabled selected>Pilih Provinsi Anda</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->code }}">{{ $province->name }}</option>
                                 @endforeach
@@ -73,7 +73,7 @@
                             <label for="district" class="mb-2 text-sm md:text-base">Kabupaten</label>
                             <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option selected>Pilih Kabupaten Anda</option>
+                                <option disabled selected>Pilih Kabupaten Anda</option>
                             </select>
                         </div>
                     </li>
@@ -82,10 +82,7 @@
                             <label for="sub_district" class="mb-2 text-sm md:text-base">Kecamatan</label>
                             <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option selected>Pilih Kecamatan Anda</option>
-                                {{-- @foreach ($sub_districts as $sub_district)
-                                    <option value="{{ $sub_district->code }}">{{ $sub_district->name }}</option>
-                                @endforeach --}}
+                                <option disabled selected>Pilih Kecamatan Anda</option>
                             </select>
                         </div>
                     </li>
@@ -94,10 +91,7 @@
                             <label for="village" class="mb-2 text-sm md:text-base">Desa</label>
                             <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option selected>Pilih Desa Anda</option>
-                                {{-- @foreach ($villages as $village)
-                                    <option value="{{ $village->code }}">{{ $village->name }}</option>
-                                @endforeach --}}
+                                <option disabled selected>Pilih Desa Anda</option>
                             </select>
                         </div>
                     </li>
@@ -120,9 +114,6 @@
                             <label for="objective" class="mb-2 text-sm md:text-base">Tujuan</label>
                             <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
                                 name="objective" id="objective">
-                                {{-- @foreach ($visitTypes as $visitType)
-                                    <option selected value="{{$visitType->id}}">{{$visitType->name}}</option>
-                                @endforeach --}}
                                 <option>Pilih Tujuan Anda</option>
                                 <option value="Koordinasi">Koordinasi</option>
                                 <option value="Cari Informasi">Cari Informasi</option>
@@ -229,7 +220,7 @@
                     fetch(`/api/districts/${provinceCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            districtSelect.innerHTML = '<option selected>Pilih Kabupaten</option>';
+                            districtSelect.innerHTML = '<option disabled selected>Pilih Kabupaten Anda</option>';
                             data.forEach(district => {
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;
@@ -247,7 +238,7 @@
                     fetch(`/api/sub-districts/${districtCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            subDistrictSelect.innerHTML = '<option selected>Pilih Kecamatan</option>';
+                            subDistrictSelect.innerHTML = '<option disabled selected>Pilih Kecamatan Anda</option>';
                             data.forEach(subDistrict => {
                                 subDistrictSelect.innerHTML +=
                                     `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
@@ -265,64 +256,7 @@
                     fetch(`/api/villages/${subDistrictCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            villageSelect.innerHTML = '<option selected>Pilih Desa</option>';
-                            data.forEach(village => {
-                                villageSelect.innerHTML +=
-                                    `<option value="${village.code}">${village.name}</option>`;
-                            });
-                        });
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const provinceSelect = document.getElementById('province');
-            const districtSelect = document.getElementById('district');
-            const subDistrictSelect = document.getElementById('sub_district');
-            const villageSelect = document.getElementById('village');
-
-            provinceSelect.addEventListener('change', function() {
-                const provinceCode = this.value;
-
-                if (provinceCode) {
-                    fetch(`/api/districts/${provinceCode}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            districtSelect.innerHTML = '<option selected>Pilih Kabupaten</option>';
-                            data.forEach(district => {
-                                districtSelect.innerHTML +=
-                                    `<option value="${district.code}">${district.name}</option>`;
-                            });
-                        });
-                }
-            });
-
-            districtSelect.addEventListener('change', function() {
-                const districtCode = this.value;
-
-                if (districtCode) {
-                    fetch(`/api/sub-districts/${districtCode}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            subDistrictSelect.innerHTML =
-                                '<option selected>Pilih Kecamatan</option>';
-                            data.forEach(subDistrict => {
-                                subDistrictSelect.innerHTML +=
-                                    `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
-                            });
-                        });
-                }
-            });
-
-            subDistrictSelect.addEventListener('change', function() {
-                const subDistrictCode = this.value;
-
-                if (subDistrictCode) {
-                    fetch(`/api/villages/${subDistrictCode}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            villageSelect.innerHTML = '<option selected>Pilih Desa</option>';
+                            villageSelect.innerHTML = '<option disabled selected>Pilih Desa Anda</option>';
                             data.forEach(village => {
                                 villageSelect.innerHTML +=
                                     `<option value="${village.code}">${village.name}</option>`;
