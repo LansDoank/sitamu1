@@ -36,11 +36,11 @@ class AdminController extends Controller
             ->get()->count();
         $guestYearly = $visitor->whereYear('check_in', today()->year)->get()->count();
 
-        $studi_banding = $visitor->where('objective','Studi Banding')->get()->count();
-        $cari_informasi = $visitor->where('objective','Cari Informasi')->get()->count();
-        $pembinaan = $visitor->where('objective','Pembinaan')->get()->count();
-        $koordinasi = $visitor->where('objective','Koordinasi')->get()->count();
-        $lainnya = Visitor::whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
+        $studi_banding = (clone $visitor)->where('objective','Studi Banding')->count();
+        $cari_informasi = (clone $visitor)->where('objective','Cari Informasi')->count();
+        $pembinaan = (clone $visitor)->where('objective','Pembinaan')->count();
+        $koordinasi = (clone $visitor)->where('objective','Koordinasi')->count();
+        $lainnya = (clone $visitor)->whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
         return view(
             'admin.dashboard',
             [

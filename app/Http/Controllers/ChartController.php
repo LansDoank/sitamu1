@@ -6,6 +6,7 @@ use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ChartController extends Controller
 {
@@ -15,7 +16,14 @@ class ChartController extends Controller
 
     public function line()
     {
-        $visitors = Visitor::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        $user = Auth::user();
+        if(Auth::user()->role_id == '1') {
+            $visitor = Visitor::query();
+        } else {
+            $visitor = Visitor::where('village_code',$user->village_code);
+        }
+
+        $visitors = $visitor->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
             ->groupBy('month')
             ->orderBy('month')
             ->get();
@@ -23,27 +31,52 @@ class ChartController extends Controller
     }
 
     public function candle(){
-        $supra_desa = Visitor::where('institution','Supra desa')->get()->count();
-        $aph = Visitor::where('institution','APH')->get()->count();
-        $warga = Visitor::where('institution','Warga')->get()->count();
-        $media = Visitor::where('institution','Media')->get()->count();
-        $lainnya = Visitor::whereNotIn('institution', ['Supra desa', 'APH', 'Warga', 'Media'])->count();
+        $user = Auth::user();
+        if(Auth::user()->role_id == '1') {
+            $visitor = Visitor::query();
+        } else {
+            $visitor = Visitor::where('village_code',$user->village_code);
+        }
+
+        $supra_desa = (clone $visitor)->where('institution','Supra desa')->count();
+        $aph = (clone $visitor)->where('institution','APH')->count();
+        $warga = (clone $visitor)->where('institution','Warga')->count();
+        $media = (clone $visitor)->where('institution','Media')->count();
+        $lainnya = (clone $visitor)->whereNotIn('institution', ['Supra desa', 'APH', 'Warga', 'Media'])->count();
         $data = [$supra_desa,$aph,$warga,$media,$lainnya];
         return response()->json($data);
     }
 
     public function doughnut() {
-        $studi_banding = Visitor::where('objective','Studi Banding')->get()->count();
-        $cari_informasi = Visitor::where('objective','Cari Informasi')->get()->count();
-        $pembinaan = Visitor::where('objective','Pembinaan')->get()->count();
-        $koordinasi = Visitor::where('objective','Koordinasi')->get()->count();
-        $lainnya = Visitor::whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
-        $objective = [$studi_banding,$cari_informasi,$pembinaan,$koordinasi,$lainnya];
+        $user = Auth::user();
+        
+        if ($user->role_id == '1') {
+            $visitor = Visitor::query();
+        } else {
+            $visitor = Visitor::where('village_code', $user->village_code);
+        }
+    
+        $studi_banding = (clone $visitor)->where('objective', 'Studi Banding')->count();
+        $cari_informasi = (clone $visitor)->where('objective', 'Cari Informasi')->count();
+        $pembinaan = (clone $visitor)->where('objective', 'Pembinaan')->count();
+        $koordinasi = (clone $visitor)->where('objective', 'Koordinasi')->count();
+        $lainnya = (clone $visitor)->whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
+    
+        $objective = [$studi_banding, $cari_informasi, $pembinaan, $koordinasi, $lainnya];
+    
         return response()->json($objective);
     }
+    
 
     public function geographical(){
-        $geoData = Visitor::select('province_code', DB::raw('COUNT(*) as visitors'))
+        $user = Auth::user();
+        if(Auth::user()->role_id == '1') {
+            $visitor = Visitor::query();
+        } else {
+            $visitor = Visitor::where('village_code',$user->village_code);
+        }
+
+        $geoData = $visitor->select('province_code', DB::raw('COUNT(*) as visitors'))
         ->groupBy('province_code')
         ->get();
 
@@ -52,7 +85,14 @@ class ChartController extends Controller
 
 
     public function time() {
-        $guest_data = Visitor::select(
+        $user = Auth::user();
+        if(Auth::user()->role_id == '1') {
+            $visitor = Visitor::query();
+        } else {
+            $visitor = Visitor::where('village_code',$user->village_code);
+        }
+
+        $guest_data = $visitor->select(
             DB::raw("HOUR(check_in) as hour"), // Ambil jam saja
             DB::raw("COUNT(*) as guests") // Hitung jumlah tamu per jam
         )

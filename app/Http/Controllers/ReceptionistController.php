@@ -75,6 +75,8 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.receptionists')->with('error', 'Username sudah sudah dipakai!');
         }
 
+        // dd($request);
+
         $receptionist = new User();
         $receptionist->name = $request->name;
         $receptionist->username = $request->username;
@@ -84,7 +86,7 @@ class ReceptionistController extends Controller
         $receptionist->district_code = $request->district;
         $receptionist->sub_district_code = $request->sub_district;
         $receptionist->village_code = $request->village;
-
+        // dd($request->file('receptionist_photo'));
         if ($request->hasFile('receptionist_photo')) {
             $receptionist->photo = $request->file('receptionist_photo')->store('receptionist_photo');
         }

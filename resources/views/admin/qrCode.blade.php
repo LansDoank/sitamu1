@@ -95,11 +95,13 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tabel Kode Qr</h1>
 
+                    @if ($admin)
                     <div class="flex mb-3 ">
                         <a href="/admin/qr_code/add"
                             class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
                             Buat Qr Code</a>
                     </div>
+                    @endif
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
