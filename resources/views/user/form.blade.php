@@ -18,6 +18,10 @@
                 <input type="hidden" name="sub_district_code" value="{{ $visit->sub_district_code }}">
                 <input type="hidden" name="village_code" value="{{ $visit->village_code }}">
                 <input type="hidden" name="visit_type" value="{{ $visit->id }}">
+                @if ($errors->any())
+                    <div class="bg-red-100 mt-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                        Mohon isi semua form data!</div>
+                @endif
                 <ul class="md:my-5">
                     <li class="flex gap-3 md:gap-x-5  md:my-3 flex-wrap md:flex-nowrap">
                         <div class="flex flex-col items-start w-full md:w-1/2">
@@ -31,7 +35,7 @@
                             <select
                                 class="instance form-input text-gray-500 border border-gray-200 px-2 h-10 w-full md:w-1/2"
                                 name="institution" id="institution">
-                                <option selected>Pilih Instansi</option>
+                                <option disabled selected>Pilih Instansi</option>
                                 <option value="Supra Desa">Supra desa</option>
                                 <option value="APH">APH</option>
                                 <option value="Warga">Warga</option>

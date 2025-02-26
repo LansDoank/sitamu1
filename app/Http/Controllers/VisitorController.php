@@ -26,6 +26,13 @@ class VisitorController extends Controller
     
 
     public function dataDesa(Request $request) {
+        $request->validate([
+            'province' => 'required',
+            'district' => 'required',
+            'sub_district' => 'required',
+            'village' => 'required',
+        ]);
+
         $village = VisitType::where('village_code',$request->village)->first();
         if($village) {
             return redirect("/form/$village->village_code/$village->slug");
@@ -56,23 +63,27 @@ class VisitorController extends Controller
 
     public function preview($id) {
         $visitor = Visitor::find($id);
-        return view('visitor.preview',['user' => Auth::user(),'username' => Auth::user()->name,'photo' => Auth::user()->photo,'visitor' => $visitor]);
+        return view('visitor.preview',['user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitor' => $visitor]);
     }
 
     public function addVisitor(Request $request)
     {
-        // $request->validate([
-        //     'fullname' => 'required',
-        //     'email' => 'required',
-        //     'telephone' => 'required',
-        //     'address' => 'required',
-        //     'check_in' => 'required',
-        //     'check_out' => 'required',
-        //     'purpose' => 'required',
-        //     'person' => 'required',
-        //     'room' => 'required',
-        //     'status' => 'required'
-        // ]);
+        $request->validate([
+            'fullname' => 'required',
+            'institution' => 'required',
+            'address' => 'required',
+            'check_in' => 'required',
+            'check_out' => 'required',
+            'telephone' => 'required',
+            'visitor_photo' => 'required',
+            'visit_type_id' => 'required',
+            'objective' => 'required',
+            'i_n_i' => 'required',
+            'province_code' => 'required',
+            'district_code' => 'required',
+            'sub_district_code' => 'required',
+            'village_code' => 'required',
+        ]);
 
         $newVisitor = new Visitor();
         $newVisitor->fullname = $request->fullname;
@@ -108,6 +119,23 @@ class VisitorController extends Controller
     }
 
     public function update(Request $request){
+
+        $request->validate([
+            'fullname' => 'required',
+            'institution' => 'required',
+            'address' => 'required',
+            'check_in' => 'required',
+            'check_out' => 'required',
+            'telephone' => 'required',
+            'visit_type_id' => 'required',
+            'objective' => 'required',
+            'i_n_i' => 'required',
+            'province_code' => 'required',
+            'district_code' => 'required',
+            'subdistrict_code' => 'required',
+            'village_code' => 'required',
+        ]);
+
         $visitor = Visitor::find($request->id);
         $visitor->update([
             'fullname' => $request->fullname,

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,17 +20,20 @@
     </script>
     <style>
         .bg-daun {
-        background-image: url(/img/bgnowb.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+            background-image: url(/img/bgnowb.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     </style>
 </head>
+
 <body>
     <div class="w-full flex items-center bg-daun">
         <div class="w-full flex items-center md:py-10">
-            <form class="bg-white rounded md:rounded-lg p-5 md:h-max m-5 md:my-0 md:p-10 m-5 md:mx-auto w-[88%] md:w-[500px] shadow" action="/form/desa/data" method="POST">
+            <form
+                class="bg-white rounded md:rounded-lg p-5 md:h-max m-5 md:my-0 md:p-10 m-5 md:mx-auto w-[88%] md:w-[500px] shadow"
+                action="/form/desa/data" method="POST">
                 @csrf
                 <div class="header">
                     <div class="logo flex items-center">
@@ -39,31 +43,36 @@
                     <p class="my-3 text-sm text-gray-700">Silahkan pilih alamat kantor desa</p>
                 </div>
                 <h2 class="text-lg md:text-xl mb-3">Pilih lokasi tujuan desa anda</h2>
+                @if ($errors->any())
+                    <div class="bg-red-100 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                        Mohon isi semua form data!</div>
+                @endif
                 <div class="flex flex-col my-2">
                     <label class="mb-2" for="province">Provinsi</label>
                     <select class="border border-gray-500 p-3 rounded text-gray-700" name="province" id="province">
-                        <option value="">Pilih Provinsi Tujuan</option>
+                        <option disabled selected>Pilih Provinsi</option>
                         @foreach ($provinces as $province)
-                            <option value="{{$province->code}}">{{$province->name}}</option>
+                            <option value="{{ $province->code }}">{{ $province->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="flex flex-col my-2">
                     <label class="mb-2" for="district">Kabupaten</label>
                     <select class="border border-gray-500 p-3 rounded text-gray-700" name="district" id="district">
-                        <option value="">Pilih Kabupaten Tujuan</option>
+                        <option disabled selected>Pilih Kabupaten</option>
                     </select>
                 </div>
                 <div class="flex flex-col my-2">
                     <label class="mb-2" for="sub_district">Kecamatan</label>
-                    <select class="border border-gray-500 p-3 rounded text-gray-700" name="sub_district" id="sub_district">
-                        <option value="">Pilih Kecamatan Tujuan</option>
+                    <select class="border border-gray-500 p-3 rounded text-gray-700" name="sub_district"
+                        id="sub_district">
+                        <option disabled selected>Pilih Kecamatan</option>
                     </select>
                 </div>
                 <div class="flex flex-col my-2">
                     <label class="mb-2" for="village">Desa</label>
                     <select class="border border-gray-500 p-3 rounded text-gray-700" name="village" id="village">
-                        <option value="">Pilih Desa Tujuan</option>
+                        <option disabled selected>Pilih Desa</option>
                     </select>
                 </div>
                 <div class="mt-5">
@@ -87,7 +96,8 @@
                     fetch(`/api/districts/${provinceCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            districtSelect.innerHTML = '<option selected>Pilih Kabupaten</option>';
+                            districtSelect.innerHTML =
+                                '<option disabled selected>Pilih Kabupaten</option>';
                             data.forEach(district => {
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;
@@ -104,7 +114,7 @@
                         .then(response => response.json())
                         .then(data => {
                             subDistrictSelect.innerHTML =
-                                '<option selected>Pilih Kecamatan</option>';
+                                '<option disabled selected>Pilih Kecamatan</option>';
                             data.forEach(subDistrict => {
                                 subDistrictSelect.innerHTML +=
                                     `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
@@ -120,7 +130,7 @@
                     fetch(`/api/villages/${subDistrictCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            villageSelect.innerHTML = '<option selected>Pilih Desa</option>';
+                            villageSelect.innerHTML = '<option disabled selected>Pilih Desa</option>';
                             data.forEach(village => {
                                 villageSelect.innerHTML +=
                                     `<option value="${village.code}">${village.name}</option>`;
@@ -131,4 +141,5 @@
         });
     </script>
 </body>
+
 </html>
