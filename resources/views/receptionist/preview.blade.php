@@ -142,7 +142,7 @@
                             <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
                             </label>
                             <div class="w-full flex justify-center">
-                                <img class="max-w-[250px]" src="{{ asset('storage/' . $users->photo) }}"
+                                <img class="w-full h-full object-cover max-w-[300px]" src="{{ asset('storage/' . $users->photo) }}"
                                     alt="">
                             </div>
                         </div>

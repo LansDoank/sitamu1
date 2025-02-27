@@ -211,7 +211,7 @@
                                     <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
                                     </label>
                                     <div class="w-full flex justify-center">
-                                        <img class="w-full h-full object-cover" src="{{asset('storage/' . $visitor->visitor_photo)}}" alt="">
+                                        <img class="w-full max-w-[300px] h-full object-cover" src="{{asset('storage/' . $visitor->visitor_photo)}}" alt="">
                                     </div>
                                 </div>
                             </li>
