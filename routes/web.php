@@ -24,7 +24,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/visitor', [AdminController::class, 'visitors'])->name('admin.visitors');
 
-    Route::get('admin/visitor/{id}',[VisitorController::class,'preview'])->name('visitor.preview');
+    Route::get('/admin/visitor/add', [VisitorController::class, 'add'])->name('visitor.add');
+
+    Route::post('/admin/visitor/create', [VisitorController::class, 'create'])->name('visitor.create');
+
+    Route::get('admin/visitor/preview/{id}',[VisitorController::class,'preview'])->name('visitor.preview');
 
     Route::get('/admin/visitor/edit/{id}', [VisitorController::class, 'edit'])->name('visitor.edit');
 
@@ -33,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/visitor/delete/{id}', [VisitorController::class, 'delete'])->name('visitor.delete');
 
     Route::get('/admin/receptionist', [AdminController::class, 'receptionist'])->name('admin.receptionists');
+
+    Route::get('/admin/receptionist/preview/{id}',[ReceptionistController::class,'preview'])->name('receotionist.preview');
 
     Route::get('/admin/receptionist/add', [ReceptionistController::class, 'addReceptionist'])->name('receptionist.addReceptionist');
 

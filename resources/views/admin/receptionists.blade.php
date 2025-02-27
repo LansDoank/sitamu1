@@ -124,7 +124,7 @@
                                             <th class="col-2">Nama</th>
                                             <th class="col-2">Username</th>
                                             <th class="col-1">Password</th>
-                                            <th class="col-5">Alamat</th>
+                                            <th class="col-5">Desa</th>
                                             <th class="col-1">Opsi</th>
                                         </tr>
                                     </thead>
@@ -134,10 +134,12 @@
                                             <tr>
                                                 <td>{{ $no }}</td>
                                                 <td class="">
-                                                    <img class="mx-auto"
+                                                    <a href="/admin/receptionist/preview/{{$receptionist->id}}">
+                                                        <img class="mx-auto"
                                                         style="width: 50px; height: 50px; object-position: center; object-fit: cover;"
                                                         src="{{ asset('storage/' . $receptionist->photo) }}"
                                                         alt="">
+                                                    </a>
                                                 </td>
                                                 <td>{{ $receptionist->name }}</td>
                                                 <td>{{ $receptionist->username }}</td>

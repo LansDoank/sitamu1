@@ -18,4 +18,8 @@ class Province extends Model
     public function visitor() :HasMany {
         return $this->hasMany(Visitor::class,'province_code', 'code');
     }
+
+    public function user() :HasMany {
+        return $this->hasMany(User::class,'province_code','code');
+    }
 }

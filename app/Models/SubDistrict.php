@@ -19,4 +19,7 @@ class SubDistrict extends Model
     public function visitor() :HasMany {
         return $this->hasMany(Visitor::class,'code', 'subdistrict_code');
     }
+    public function user() :HasMany {
+        return $this->hasMany(User::class,'sub_district_code', 'code');
+    }
 }

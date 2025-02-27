@@ -70,6 +70,17 @@ class ReceptionistController extends Controller
 
     public function add(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            "sub_district" => 'required',
+            'village' => 'required',
+            'receptionist_photo' => 'required',
+        ]);
+
         $duplicate = User::where('username', $request->username)->first();
         if ($duplicate) {
             return redirect()->route('admin.receptionists')->with('receptionist_error', 'Username sudah sudah digunakan!');
@@ -108,7 +119,14 @@ class ReceptionistController extends Controller
         $village->village_code = $request->village;
         $village->save();
 
-        return redirect()->route('admin.receptionists')->with('receptionist_success', 'Akun resepsionis baru telah ditambahkan!');
+        return redirect()->route('admin.receptionists')->with('receptionist_success', 'Akun resepsionis baru dan kode qr baru telah ditambahkan!');
+    }
+
+    public function preview($id) {
+        $users = User::find($id);
+        $user = Auth::user();
+
+        return view('receptionist.preview',['users' => $users,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
     }
 
 
@@ -127,11 +145,33 @@ class ReceptionistController extends Controller
         $receptionist->update([
             'name' => $request->name,
             'username' => $request->username,
-            'province_code' => $request->province,
-            'district_code' => $request->district,
-            'sub_district_code' => $request->sub_district,
-            'village_code' => $request->village,
         ]);
+
+        if($request->password) {
+            $receptionist->update([
+                'password' => $request->password,
+            ]);
+        } else {
+            $receptionist->update([
+                'password' => $request->old_password,
+            ]);
+        }
+
+        if($request->village) {
+            $receptionist->update([
+                'province_code' => $request->province,
+                'district_code' => $request->district,
+                'sub_district_code' => $request->sub_district,
+                'village_code' => $request->village,
+            ]);
+        } else {
+            $receptionist->update([
+                'province_code' => $request->old_province,
+                'district_code' => $request->old_district,
+                'sub_district_code' => $request->old_sub_district,
+                'village_code' => $request->old_village,
+            ]);
+        }
 
         if ($request->file('image')) {
             if ($request->oldPhoto) {

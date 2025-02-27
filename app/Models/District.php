@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\User;
 
 class District extends Model
 {
@@ -16,5 +17,8 @@ class District extends Model
     }
     public function visitor() :HasMany {
         return $this->hasMany(Visitor::class,'district_code', 'code');
+    }
+    public function user() :HasMany {
+        return $this->hasMany(User::class,'district_code', 'code');
     }
 }

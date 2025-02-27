@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Village;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Visitor;
 use App\Models\User;
 use App\Models\VisitType;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+
 
 class AdminController extends Controller
 {
@@ -68,11 +71,12 @@ class AdminController extends Controller
         } else {
             $visitor = Visitor::where('village_code',$user->village_code)->get();
         }
-
+        $village_code = $user->village_code;
+        $slug = Str::slug(Village::where('code',$village_code)->first()->name);
 
         return view(
             'admin.visitor',
-                ['visitors' => $visitor, 'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,]
+                ['visitors' => $visitor, 'user' => Auth::user(),'village_code' => $user->village_code,'slug' => $slug,'username' => Auth::user()->username,'photo' => Auth::user()->photo,]
         );
     }
 

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Qr Code</title>
+    <title>Sitamu - Tambah Kode Qr</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -125,6 +125,11 @@
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Tambah Data Kode Qr
                     </h1>
+                    @if ($errors->any())
+                        <div
+                            class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                            Mohon isi semua form!</div>
+                    @endif
                     <div class="text-red-500 text-md">{{ session('login') }}</div>
                     <form class="space-y-4 md:space-y-6" action="/admin/qr_code/create" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -133,7 +138,7 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="province" id="province">
-                                <option selected>Pilih Provinsi Anda</option>
+                                <option disabled selected>Pilih Provinsi</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{$province->code}}">{{$province->name}}</option>
                                 @endforeach
@@ -144,24 +149,21 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option selected>Pilih Kabupaten Anda</option>
+                                <option disabled selected>Pilih Kabupaten</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2">Kecamatan</label>
                             <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option selected>Pilih Kecamatan Anda</option>
+                                <option disabled selected>Pilih Kecamatan</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2">Desa</label>
                             <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option selected>Pilih Desa Anda</option>
-                                {{-- @foreach ($villages as $village)
-                                <option value="{{$village->code}}">{{$village->name}}</option>
-                            @endforeach --}}
+                                <option selected>Pilih Desa</option>
                             </select>
                         </div>
                         <button type="submit"
@@ -268,7 +270,7 @@
                         fetch(`/api/districts/${provinceCode}`)
                             .then(response => response.json())
                             .then(data => {
-                                districtSelect.innerHTML = '<option selected>Pilih Kabupaten</option>';
+                                districtSelect.innerHTML = '<option disabled selected>Pilih Kabupaten</option>';
                                 data.forEach(district => {
                                     districtSelect.innerHTML +=
                                         `<option value="${district.code}">${district.name}</option>`;
@@ -285,7 +287,7 @@
                             .then(response => response.json())
                             .then(data => {
                                 subDistrictSelect.innerHTML =
-                                    '<option selected>Pilih Kecamatan</option>';
+                                    '<option disabled selected>Pilih Kecamatan</option>';
                                 data.forEach(subDistrict => {
                                     subDistrictSelect.innerHTML +=
                                         `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
@@ -301,7 +303,7 @@
                         fetch(`/api/villages/${subDistrictCode}`)
                             .then(response => response.json())
                             .then(data => {
-                                villageSelect.innerHTML = '<option selected>Pilih Desa</option>';
+                                villageSelect.innerHTML = '<option disabled selected>Pilih Desa</option>';
                                 data.forEach(village => {
                                     villageSelect.innerHTML +=
                                         `<option value="${village.code}">${village.name}</option>`;

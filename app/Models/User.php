@@ -25,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'photo',
         'name',
-        'email',
+        'username',
         'password',
         'province_code',
         'district_code',
@@ -35,11 +35,21 @@ class User extends Authenticatable
 
     // protected $with = ['roles'];
 
-    protected $with = ['role','address'];
+    protected $with = ['role','address','province','district','sub_district'];
 
 
     public function role() : BelongsTo{
         return $this->belongsTo(Role::class,'role_id','id');
+    }
+
+    public function province() : BelongsTo {
+        return $this->belongsTo(Province::class,'province_code','code');
+    }
+    public function district() : BelongsTo {
+        return $this->belongsTo(District::class,'district_code','code');
+    }
+    public function sub_district() : BelongsTo {
+        return $this->belongsTo(SubDistrict::class,'sub_district_code','code');
     }
 
     public function address(): BelongsTo

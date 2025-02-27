@@ -103,11 +103,19 @@
                             class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
                             {{ session('visitor_success') }}</div>
                     @endif
+                    @if ($user->role_id == '1')
+                        <div class="flex mb-3 ">
+                            <a href="/form/desa"
+                                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
+                                Buat Data Tamu</a>
+                        </div>                        
+                    @else
                     <div class="flex mb-3 ">
-                        <a href="/form/desa"
+                            <a href="/admin/visitor/add?village={{$user->village_code . '&slug='. $slug}}"
                             class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
                             Buat Data Tamu</a>
-                    </div>
+                    </div>                        
+                    @endif
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -135,7 +143,7 @@
                                             <tr>
                                                 <td>{{ $no }}</td>
                                                 <td class="">
-                                                    <a href="/admin/visitor/{{ $visitor->id }}">
+                                                    <a href="/admin/visitor/preview/{{ $visitor->id }}">
                                                         <img class="mx-auto"
                                                             style="width: 50px; height: 50px; object-position: center; object-fit: cover;"
                                                             src="{{ asset("storage/$visitor->visitor_photo") }}"

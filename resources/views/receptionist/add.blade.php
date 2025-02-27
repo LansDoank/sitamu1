@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Receptionist</title>
+    <title>Sitamu - Tambah Resepsionis</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -93,6 +93,11 @@
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Buat Akun Receptionist
                     </h1>
+                    @if ($errors->any())
+                        <div
+                            class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                            Mohon isi semua form!</div>
+                    @endif
                     <div class="text-red-500 text-md">{{ session('login') }}</div>
                     <form class="space-y-4 md:space-y-6" action="/admin/receptionist/create" method="POST"
                         enctype="multipart/form-data">

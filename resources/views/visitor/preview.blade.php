@@ -98,10 +98,10 @@
                     @csrf
                     <div class="form-header">
                         <div class="flex items-center md:my-3">
-                            <img class="w-12 me-2" src="/img/logo.png" alt="">
-                            <h5 class="text-klipaa font-semibold text-3xl">Sitamu</h5>
+                            <img class="w-10 me-2" src="/img/logo.png" alt="">
+                            <h5 class="text-klipaa font-semibold text-2xl">Sitamu</h5>
                         </div>
-                        <p class="text-gray-600 font-medium">Silakan isi data buku tamu dengan benar.</p>
+                        <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silakan isi data buku tamu dengan benar.</p>
                     </div>
                     <div class="form-body">
                         
@@ -211,7 +211,7 @@
                                     <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
                                     </label>
                                     <div class="w-full flex justify-center">
-                                        <img class="max-w-[250px]" src="{{asset('storage/' . $visitor->visitor_photo)}}" alt="">
+                                        <img class="w-full h-full object-cover" src="{{asset('storage/' . $visitor->visitor_photo)}}" alt="">
                                     </div>
                                 </div>
                             </li>
@@ -294,7 +294,7 @@
                         inputPhoto.innerHTML = `
                             Foto
                             <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                <img class="max-w-[400px] max-h-[200px] object-cover" src="${e.target.result}" alt="">
+                                <img class="w-full h-full object-cover" src="${e.target.result}" alt="">
                             </div>`;
                     };
                     reader.readAsDataURL(file);

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Qr Code</title>
+    <title>Sitamu - Kode Qr</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -60,7 +60,7 @@
                     </button>
 
                     <div>
-                        <h1 class="text-gray-600 text-2xl ">Kode Qr</h1>
+                        <h1 class="text-gray-600 text-xl ">Kode Qr</h1>
                     </div>
 
                     <!-- Topbar Navbar -->
@@ -93,14 +93,24 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tabel Kode Qr</h1>
+                    <h1 class="h3 mb-2 text-gray-800 text-xl">Tabel Kode Qr</h1>
+                    @if (session('qrcode_error'))
+                        <div
+                            class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
+                            {{ session('qrcode_error') }}</div>
+                    @endif
+                    @if (session('qrcode_success'))
+                        <div
+                            class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
+                            {{ session('qrcode_success') }}</div>
+                    @endif
 
                     @if ($admin)
-                    <div class="flex mb-3 ">
-                        <a href="/admin/qr_code/add"
-                            class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
-                            Buat Qr Code</a>
-                    </div>
+                        <div class="flex mb-3 ">
+                            <a href="/admin/qr_code/add"
+                                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
+                                Buat Qr Code</a>
+                        </div>
                     @endif
 
                     <!-- DataTales Example -->

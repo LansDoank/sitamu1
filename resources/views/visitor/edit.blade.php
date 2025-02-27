@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Edit Visitor</title>
+    <title>Sitamu - Edit Tamu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -98,10 +98,10 @@
                     @csrf
                     <div class="form-header">
                         <div class="flex items-center md:my-3">
-                            <img class="w-12 me-2" src="/img/logo.png" alt="">
-                            <h5 class="text-klipaa font-semibold text-3xl">Sitamu</h5>
+                            <img class="w-10 me-2" src="/img/logo.png" alt="">
+                            <h5 class="text-klipaa font-semibold text-2xl">Sitamu</h5>
                         </div>
-                        <p class="text-gray-600 font-medium">Silakan isi data buku tamu dengan benar.</p>
+                        <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silakan isi data buku tamu dengan benar.</p>
                     </div>
                     <div class="form-body">
                         <input type="hidden" name="province_code" value="{{ $oldVisit->province_code }}">
@@ -110,6 +110,10 @@
                         <input type="hidden" name="village_code" value="{{ $oldVisit->village_code }}">
                         <input type="hidden" name="id" value="{{ $oldVisit->id }}">
                         <input type="hidden" name="oldPhoto" value="{{ $oldVisit->visitor_photo }}">
+                        <input type="hidden" name="old_province" value="{{ $oldVisit->province_code }}">
+                        <input type="hidden" name="old_district" value="{{ $oldVisit->district_code }}">
+                        <input type="hidden" name="old_sub_district" value="{{ $oldVisit->subdistrict_code }}">
+                        <input type="hidden" name="old_village" value="{{ $oldVisit->village_code }}">
                         @if ($errors->any())
                             <div
                                 class="bg-red-100 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
@@ -154,7 +158,7 @@
                                     <label for="province" class="mb-2">Provinsi</label>
                                     <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
                                         name="province" id="province" required>
-                                        <option disabled selected>Pilih Provinsi Anda</option>
+                                        <option disabled selected>Pilih Provinsi</option>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->code }}">
                                                 {{ $province->name }}</option>
@@ -333,7 +337,7 @@
                         inputPhoto.innerHTML = `
                             Foto
                             <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                <img class="max-w-[400px] max-h-[200px] object-cover" src="${e.target.result}" alt="">
+                                <img class="w-full h-full object-cover" src="${e.target.result}" alt="">
                             </div>`;
                     };
                     reader.readAsDataURL(file);
