@@ -26,15 +26,15 @@ class AdminController extends Controller
             $visitor = Visitor::where('village_code',$user->village_code);
         }
 
-        $guestDaily = $visitor->whereDate('check_in', today())->get()->count();
-        $guestWeekly = $visitor->whereBetween('check_in', [
+        $guestDaily = (clone $visitor)->whereDate('check_in', today())->get()->count();
+        $guestWeekly = (clone $visitor)->whereBetween('check_in', [
             Carbon::now()->startOfWeek(),
             Carbon::now()->endOfWeek()
         ])->get()->count();
-        $guestMonthly = $visitor->whereMonth('check_in', today()->month)
+        $guestMonthly = (clone $visitor)->whereMonth('check_in', today()->month)
             ->whereYear('check_in', today()->year)
             ->get()->count();
-        $guestYearly = $visitor->whereYear('check_in', today()->year)->get()->count();
+        $guestYearly = (clone $visitor)->whereYear('check_in', today()->year)->get()->count();
 
         $studi_banding = (clone $visitor)->where('objective','Studi Banding')->count();
         $cari_informasi = (clone $visitor)->where('objective','Cari Informasi')->count();

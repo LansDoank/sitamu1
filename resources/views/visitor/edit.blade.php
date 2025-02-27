@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Tables</title>
+    <title>Sitamu - Edit Visitor</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -210,19 +210,19 @@
                                     <label for="objective" class="mb-2">Tujuan</label>
                                     <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
                                         name="objective" id="objective" required>
-                                        <option disabled selected>Pilih Tujuan Anda</option>
+                                        <option disabled>Pilih Tujuan Anda</option>
                                         <option value="Koordinasi" @selected('Koordinasi' == $oldVisit->objective)>Koordinasi</option>
                                         <option value="Cari Informasi" @selected('Cari Informasi' == $oldVisit->objective)>Cari Informasi
                                         </option>
                                         <option value="Pembinaan" @selected('Pembinaan' == $oldVisit->objective)>Pembinaan</option>
                                         <option value="Studi Banding" @selected('Studi Banding' == $oldVisit->objective)>Studi Banding
                                         </option>
-                                        <option value="Lainnya" @selected('Lainnya' == $oldVisit->objective)>Lainnya</option>
+                                        <option value="Lainnya" @selected('Lainnya' == 'Lainnya')>Lainnya</option>
                                     </select>
                                 </div>
                             </li>
                             <li class="md:my-3">
-                                <textarea class="hidden w-full border border-gray-200 px-3 py-2" name="objective" id="objective_textarea"
+                                <textarea class="hidden w-full border border-gray-200 px-3 py-2" id="objective_textarea"
                                     placeholder="Sebutkan Tujuan Anda"></textarea>
                             </li>
                             <li class="md:my-3">

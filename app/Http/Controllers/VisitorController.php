@@ -122,7 +122,6 @@ class VisitorController extends Controller
     }
 
     public function update(Request $request){
-
         $request->validate([
             'fullname' => 'required',
             'institution' => 'required',
