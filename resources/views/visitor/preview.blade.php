@@ -60,7 +60,7 @@
 
                     <div>
                         <a class="text-decoration-none" href="/admin/visitor">
-                            <h1 class="text-gray-600 text-sm md:text-2xl ">&laquo; Pratinjau Data Tamu</h1>
+                            <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Pratinjau Data Tamu</h1>
                         </a>
                     </div>
 

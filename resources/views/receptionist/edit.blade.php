@@ -60,7 +60,7 @@
 
                     <div>
                         <a class="text-decoration-none" href="/admin/receptionist">
-                            <h1 class="text-gray-600 text-sm md:text-2xl ">&laquo; Edit Data Resepsonis</h1>
+                            <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Edit Data Resepsonis</h1>
                         </a>
                     </div>
 
