@@ -56,7 +56,7 @@
                     </button>
 
                     <div>
-                        <h1 class="text-gray-600 text-2xl ">Dasbor</h1>
+                        <h1 class="text-gray-600 text-xl md:text-2xl mb-0">Dasbor</h1>
                     </div>
 
                     <!-- Topbar Navbar -->

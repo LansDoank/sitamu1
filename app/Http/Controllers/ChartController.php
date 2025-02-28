@@ -86,22 +86,27 @@ class ChartController extends Controller
 
     public function time() {
         $user = Auth::user();
-        if(Auth::user()->role_id == '1') {
+    
+        // Query berdasarkan role
+        if ($user->role_id == 1) {
             $visitor = Visitor::query();
         } else {
-            $visitor = Visitor::where('village_code',$user->village_code);
+            $visitor = Visitor::where('village_code', $user->village_code);
         }
-
+    
+        // Ambil data jumlah tamu per jam tanpa filter tanggal
         $guest_data = $visitor->select(
-            DB::raw("HOUR(check_in) as hour"), // Ambil jam saja
-            DB::raw("COUNT(*) as guests") // Hitung jumlah tamu per jam
-        )
-        ->whereDate('check_in', Carbon::today()) // Filter untuk hari ini
-        ->groupBy('hour')
-        ->orderBy('hour')
-        ->get();
+                DB::raw("HOUR(check_in) as hour"), // Ambil jam dari check_in
+                DB::raw("COUNT(*) as guests") // Hitung jumlah tamu per jam
+            )
+            ->groupBy('hour') // Kelompokkan berdasarkan jam
+            ->orderBy('hour') // Urutkan berdasarkan jam
+            ->get();
+    
         return response()->json($guest_data);
     }
+    
+    
 
     public function index()
     {

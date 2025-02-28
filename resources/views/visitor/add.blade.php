@@ -323,7 +323,7 @@
                         inputPhoto.innerHTML = `
                             Foto
                             <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                <img class="w-full h-full object-cover" src="${e.target.result}" alt="">
+                                <img class="w-full h-full max-w-[25     0px] object-cover" src="${e.target.result}" alt="">
                             </div>`;
                     };
                     reader.readAsDataURL(file);

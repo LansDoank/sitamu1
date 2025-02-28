@@ -59,7 +59,7 @@
                     </button>
 
                     <div>
-                        <h1 class="text-gray-600 text-2xl ">Tamu</h1>
+                        <h1 class="text-gray-600 text-xl md:text-2xl mb-0">Tamu</h1>
                     </div>
 
                     <!-- Topbar Navbar -->
@@ -92,7 +92,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-xl text-gray-800">Tabel Tamu</h1>
+                    <h1 class="mb-2 text-2xl md:text-3xl text-gray-800">Tabel Tamu</h1>
                     @if (session('visitor_error'))
                         <div
                             class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
