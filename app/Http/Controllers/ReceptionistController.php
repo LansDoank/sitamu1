@@ -27,8 +27,9 @@ class ReceptionistController extends Controller
         if (Auth::user()->role_id == '2') {
             return redirect()->route('admin.dashboard');
         }
-        return view('receptionist.add', ['title' => 'Add Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::all()]);
+        return view('receptionist.add', ['title' => 'Add Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
+
 
     public function create()
     {
@@ -43,21 +44,27 @@ class ReceptionistController extends Controller
     // Fungsi untuk mengambil kabupaten berdasarkan provinsi yang dipilih
     public function getDistrictsByProvince($province_code)
     {
-        $districts = District::where('province_code', $province_code)->get();
+        $districts = District::where('province_code', $province_code)
+        ->orderBy('name', 'asc')
+        ->get();
         return response()->json($districts);
     }
 
     // Fungsi untuk mengambil kecamatan berdasarkan kabupaten yang dipilih
     public function getSubDistrictsByDistrict($district_code)
     {
-        $sub_districts = SubDistrict::where('district_code', $district_code)->get();
+        $sub_districts = SubDistrict::where('district_code', $district_code)
+        ->orderBy('name', 'asc')
+        ->get();
         return response()->json($sub_districts);
     }
 
     // Fungsi untuk mengambil desa berdasarkan kecamatan yang dipilih
     public function getVillagesBySubDistrict($sub_district_code)
     {
-        $villages = Village::where('sub_district_code', $sub_district_code)->get();
+        $villages = Village::where('sub_district_code', $sub_district_code)
+        ->orderBy('name', 'asc')
+        ->get();
         return response()->json($villages);
     }
 
@@ -136,7 +143,7 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
         $receptionist = User::find($id);
-        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::all(),'']);
+        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)

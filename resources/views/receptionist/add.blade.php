@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Tambah Resepsionis</title>
+    <title>Form - Tambah Akun Resepsionis</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -91,7 +91,7 @@
                 <div class="p-6 sm:p-8 bg-white max-w-5xl mx-auto my-10">
                     <h1
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Buat Akun Receptionist
+                        Buat Akun Resepsionis
                     </h1>
                     @if ($errors->any())
                         <div
@@ -137,7 +137,7 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="province" id="province">
-                                <option selected>Pilih Provinsi</option>
+                                <option disabled selected>Pilih Provinsi</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->code }}">{{ $province->name }}</option>
                                 @endforeach
@@ -148,30 +148,21 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option selected>Pilih Kabupaten</option>
-                                {{-- @foreach ($districts as $district)
-                                    <option value="{{ $district->code }}">{{ $district->name }}</option>
-                                @endforeach --}}
+                                <option disabled selected>Pilih Kabupaten</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2">Kecamatan</label>
                             <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option selected>Pilih Kecamatan</option>
-                                {{-- @foreach ($sub_districts as $sub_district)
-                                    <option value="{{ $sub_district->code }}">{{ $sub_district->name }}</option>
-                                @endforeach --}}
+                                <option disabled selected>Pilih Kecamatan</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2">Desa</label>
                             <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option selected>Pilih Desa</option>
-                                {{-- @foreach ($villages as $village)
-                                    <option value="{{ $village->code }}">{{ $village->name }}</option>
-                                @endforeach --}}
+                                <option disabled selected>Pilih Desa</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start w-full">
@@ -195,7 +186,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>
@@ -230,11 +221,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Add Modal --}}
-
-    {{-- <div class="w-full h-screen bg-gray-100">
-    </div> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const provinceSelect = document.getElementById('province');
@@ -249,7 +235,7 @@
                     fetch(`/api/districts/${provinceCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            districtSelect.innerHTML = '<option selected>Pilih Kabupaten</option>';
+                            districtSelect.innerHTML = '<option disabled selected>Pilih Kabupaten</option>';
                             data.forEach(district => {
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;
@@ -266,7 +252,7 @@
                         .then(response => response.json())
                         .then(data => {
                             subDistrictSelect.innerHTML =
-                                '<option selected>Pilih Kecamatan</option>';
+                                '<option disabled selected>Pilih Kecamatan</option>';
                             data.forEach(subDistrict => {
                                 subDistrictSelect.innerHTML +=
                                     `<option value="${subDistrict.code}">${subDistrict.name}</option>`;
@@ -282,7 +268,7 @@
                     fetch(`/api/villages/${subDistrictCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            villageSelect.innerHTML = '<option selected>Pilih Desa</option>';
+                            villageSelect.innerHTML = '<option disabled selected>Pilih Desa</option>';
                             data.forEach(village => {
                                 villageSelect.innerHTML +=
                                     `<option value="${village.code}">${village.name}</option>`;
@@ -292,7 +278,6 @@
             });
         });
     </script>
-
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -343,26 +328,6 @@
     </script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    {{-- <script>
-        $(document).ready(function(){
-            $("#province").select2({
-                placeholder: "Pilih Provinsi Anda",
-                ajax: {
-                    url: {{route('province.index')}},
-                    processResults = function({data}) {
-                        return {
-                            results: $.map(data,function(item) {
-                                return {
-                                id: item.id,
-                                text: item.name
-                                }
-                            })
-                        }
-                    }
-                }
-            })
-        })
-    </script> --}}
 </body>
 
 </html>

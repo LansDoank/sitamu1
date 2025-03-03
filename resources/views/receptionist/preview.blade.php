@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Tables</title>
+    <title>TamuDesa - Pratinjau Resepsionis</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -96,7 +96,7 @@
                 <div class="p-6 sm:p-8 bg-white max-w-5xl mx-auto my-10">
                     <h1
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Pratinjau Akun Receptionist
+                        Pratinjau Akun Resepsionis
                     </h1>
                     <div class="text-red-500 text-md">{{ session('login') }}</div>
                     <form class="space-y-4 md:space-y-6">
@@ -155,7 +155,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>

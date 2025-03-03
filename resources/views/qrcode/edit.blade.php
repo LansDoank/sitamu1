@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Tables</title>
+    <title>Form - Edit Kode Qr</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -161,7 +161,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>

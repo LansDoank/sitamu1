@@ -8,7 +8,7 @@ use App\Models\VisitType;
 class UserController extends Controller
 {
     public function index () {
-        return view('user.index',['title' => 'Sitamu']);
+        return view('user.index',['title' => 'TAMUDESA']);
     }
 
 }

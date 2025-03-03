@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Tambah Tamu</title>
+    <title>Form - Tambah Data Tamu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -106,7 +106,7 @@
                     <div class="form-header">
                         <div class="flex items-center md:my-3">
                             <img class="w-10 me-2" src="/img/logo.png" alt="">
-                            <h5 class="text-klipaa font-semibold text-2xl">Sitamu</h5>
+                            <h5 class="text-klipaa font-semibold text-2xl mb-0">TamuDesa</h5>
                         </div>
                         <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silakan isi data buku
                             tamu dengan benar.</p>
@@ -253,7 +253,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>

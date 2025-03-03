@@ -37,7 +37,7 @@
     <div id="wrapper" class="flex justify-between">
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$user->role_id}}</x-slot:user>
+            <x-slot:user>{{ $user->role_id }}</x-slot:user>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -69,7 +69,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{asset("storage/" . $photo)}}">
+                                <img class="img-profile rounded-circle" src="{{ asset('storage/' . $photo) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -240,31 +240,31 @@
                                             <li class="flex my-3 text-sm md:text-xl justify-between">
                                                 Studi Banding
                                                 <div class="md:mx-5 flex">
-                                                    {{$studi_banding}}
+                                                    {{ $studi_banding }}
                                                 </div>
                                             </li>
                                             <li class="flex my-3 text-sm md:text-xl justify-between">
                                                 Cari Informasi
                                                 <div class="md:mx-5 flex">
-                                                    {{$cari_informasi}}
+                                                    {{ $cari_informasi }}
                                                 </div>
                                             </li>
                                             <li class="flex my-3 text-sm md:text-xl justify-between">
                                                 Pembinaan
                                                 <div class="md:mx-5 flex">
-                                                    {{$pembinaan}}
+                                                    {{ $pembinaan }}
                                                 </div>
                                             </li>
                                             <li class="flex my-3 text-sm md:text-xl justify-between">
                                                 Koordinasi
                                                 <div class="md:mx-5 flex">
-                                                    {{$koordinasi}}
+                                                    {{ $koordinasi }}
                                                 </div>
                                             </li>
                                             <li class="flex my-3 text-sm md:text-xl justify-between">
                                                 Lainnya
                                                 <div class="md:mx-5 flex">
-                                                    {{$lainnya}}
+                                                    {{ $lainnya }}
                                                 </div>
                                             </li>
                                         </ul>
@@ -332,7 +332,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>
@@ -389,15 +389,17 @@
     {{-- Chart --}}
     <script>
         fetch('/chart/line')
-            .then((res) => res.json())
-            .then((data) => {
+            .then(res => res.json())
+            .then(data => {
+
                 const labels = data.map(item => {
                     const months = [
                         "Januari", "Februari", "Maret", "April", "Mei", "Juni",
                         "Juli", "Agustus", "September", "Oktober", "November", "Desember"
                     ];
-                    return months[item.month - 1]; // Ubah angka bulan menjadi nama bulan
+                    return months[item.month - 1];
                 });
+
 
                 const values = data.map(item => item.total);
 

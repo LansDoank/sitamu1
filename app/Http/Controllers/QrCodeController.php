@@ -57,12 +57,18 @@ class QrCodeController extends Controller
             $visitor = Visitor::where('village_code', $user->village_code);
         }
         $visit = VisitType::find($id);
-        return view('qrCode.edit', ['title' => 'Edit Kode Qr', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::all()]);
+        return view('qrCode.edit', ['title' => 'Edit Kode Qr', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
     public function update(Request $request)
     {
+        $visitDuplicate = VisitType::where('village_code', $request->village)->first();
+        if ($visitDuplicate) {
+            return redirect()->route('admin.qrCode')->with('qrcode_error', 'Kode Qr Sama Telah Terdaftarkan!');
+        }
+
         $visit = VisitType::find($request->id);
+
 
         if ($request->village) {
             $slug = Str::slug(Village::where('code', $request->village)->first()->name);
@@ -99,7 +105,7 @@ class QrCodeController extends Controller
 
     public function delete($id)
     {
-        $visit = VisitType::find($id)->delete();
+        VisitType::find($id)->delete();
         return redirect()->route('admin.qrCode')->with('qrcode_success', 'Data kode qr berhasil dihapus!');
     }
 }

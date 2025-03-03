@@ -28,17 +28,17 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/admin/visitor/create', [VisitorController::class, 'create'])->name('visitor.create');
 
-    Route::get('admin/visitor/preview/{id}',[VisitorController::class,'preview'])->name('visitor.preview');
+    Route::get('admin/visitor/preview/{id}', [VisitorController::class, 'preview'])->name('visitor.preview');
 
     Route::get('/admin/visitor/edit/{id}', [VisitorController::class, 'edit'])->name('visitor.edit');
 
-    Route::post('/admin/visitor/update',[VisitorController::class,'update'])->name('visitor.update');
+    Route::post('/admin/visitor/update', [VisitorController::class, 'update'])->name('visitor.update');
 
     Route::get('/admin/visitor/delete/{id}', [VisitorController::class, 'delete'])->name('visitor.delete');
 
     Route::get('/admin/receptionist', [AdminController::class, 'receptionist'])->name('admin.receptionists');
 
-    Route::get('/admin/receptionist/preview/{id}',[ReceptionistController::class,'preview'])->name('receotionist.preview');
+    Route::get('/admin/receptionist/preview/{id}', [ReceptionistController::class, 'preview'])->name('receotionist.preview');
 
     Route::get('/admin/receptionist/add', [ReceptionistController::class, 'addReceptionist'])->name('receptionist.addReceptionist');
 
@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/receptionist/delete/{id}', [ReceptionistController::class, 'delete'])->name('receptionist.delete');
 
-    Route::get('/admin/master_data',[AdminController::class,'masterData'])->name('admin.master_data');
+    Route::get('/admin/master_data', [AdminController::class, 'masterData'])->name('admin.master_data');
 
     Route::get('/admin/qr_code', [AdminController::class, 'qrCode'])->name('admin.qrCode');
 
@@ -58,18 +58,18 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/admin/qr_code/create', [QrCodeController::class, 'create']);
 
-    Route::get('/admin/qr_code/edit/{id}',[QrCodeController::class,'edit']);
+    Route::get('/admin/qr_code/edit/{id}', [QrCodeController::class, 'edit']);
 
-    Route::post('/admin/qr_code/update',[QrCodeController::class,'update']);
+    Route::post('/admin/qr_code/update', [QrCodeController::class, 'update']);
 
-    Route::get('/admin/qr_code/delete/{id}',[QrCodeController::class,'delete']);
+    Route::get('/admin/qr_code/delete/{id}', [QrCodeController::class, 'delete']);
 });
 
-Route::get('/chart/line',[ChartController::class,'line'])->name('chart.line');
-Route::get('/chart/candle',[ChartController::class,'candle'])->name('chart.candle');
-Route::get('/chart/doughnut',[ChartController::class,'doughnut'])->name('chart.doughnut');
-Route::get('/chart/geographical',[ChartController::class,'geographical'])->name('chart.geographical');
-Route::get('/chart/time',[ChartController::class,'time'])->name('chart.time');
+Route::get('/chart/line', [ChartController::class, 'line'])->name('chart.line');
+Route::get('/chart/candle', [ChartController::class, 'candle'])->name('chart.candle');
+Route::get('/chart/doughnut', [ChartController::class, 'doughnut'])->name('chart.doughnut');
+Route::get('/chart/geographical', [ChartController::class, 'geographical'])->name('chart.geographical');
+Route::get('/chart/time', [ChartController::class, 'time'])->name('chart.time');
 
 
 Route::get('/admin/receptionist/create', [ReceptionistController::class, 'create']);
@@ -77,18 +77,18 @@ Route::get('/api/districts/{province_code}', [ReceptionistController::class, 'ge
 Route::get('/api/sub-districts/{district_code}', [ReceptionistController::class, 'getSubDistrictsByDistrict']);
 Route::get('/api/villages/{sub_district_code}', [ReceptionistController::class, 'getVillagesBySubDistrict']);
 
-Route::get('/visitor',function(){
+Route::get('/visitor', function () {
     return response()->json(Visitor::all());
 });
 
 Route::get('/form', [VisitorController::class, 'form'])->name('visitor.form');
 
-Route::get('/form/desa',[VisitorController::class,'desa'])->name('visitor.desa');
+Route::get('/form/desa', [VisitorController::class, 'desa'])->name('visitor.desa');
 
-Route::post('/form/desa/data',[VisitorController::class,'dataDesa'])->name('visitor.desa.data');
+Route::post('/form/desa/data', [VisitorController::class, 'dataDesa'])->name('visitor.desa.data');
 
 Route::get('/form/{id}/{slug}', [VisitorController::class, 'show'])->name('visitor.show');
 
 Route::post('/form/create', [VisitorController::class, 'addVisitor']);
 
-Route::get('/form/popup',[VisitorController::class,'popup'])->name('visitor.popup');
+Route::get('/form/popup', [VisitorController::class, 'popup'])->name('visitor.popup');

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Tambah Kode Qr</title>
+    <title>Form - Tambah Kode Qr</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -61,7 +61,7 @@
 
                     <div>
                         <a class="text-decoration-none" href="/admin/qr_code">
-                            <h1 class="text-gray-600 text-2xl ">&laquo; Tambah Data Qr Code</h1>
+                            <h1 class="text-gray-600 text-2xl ">&laquo; Tambah Data Kode Qr</h1>
                         </a>
                     </div>
 
@@ -178,7 +178,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>

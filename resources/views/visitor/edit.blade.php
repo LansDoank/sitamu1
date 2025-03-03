@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Edit Tamu</title>
+    <title>Form - Edit Data Tamu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -99,7 +99,7 @@
                     <div class="form-header">
                         <div class="flex items-center md:my-3">
                             <img class="w-10 me-2" src="/img/logo.png" alt="">
-                            <h5 class="text-klipaa font-semibold text-2xl">Sitamu</h5>
+                            <h5 class="text-klipaa font-semibold text-2xl mb-0">TamuDesa</h5>
                         </div>
                         <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silakan isi data buku tamu dengan benar.</p>
                     </div>
@@ -114,6 +114,8 @@
                         <input type="hidden" name="old_district" value="{{ $oldVisit->district_code }}">
                         <input type="hidden" name="old_sub_district" value="{{ $oldVisit->subdistrict_code }}">
                         <input type="hidden" name="old_village" value="{{ $oldVisit->village_code }}">
+                        <input type="hidden" id="old_institution" name="old_institution" value="{{$oldVisit->institution}}">
+                        <input type="hidden" id="old_objective" name="old_objective" value="{{$oldVisit->objective}}">
                         @if ($errors->any())
                             <div
                                 class="bg-red-100 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
@@ -227,7 +229,7 @@
                             </li>
                             <li class="md:my-3">
                                 <textarea class="hidden w-full border border-gray-200 px-3 py-2" id="objective_textarea"
-                                    placeholder="Sebutkan Tujuan Anda"></textarea>
+                                    placeholder="Sebutkan Tujuan Anda" ></textarea>
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
@@ -256,7 +258,7 @@
                             </li>
                             <li class="md:my-3">
                                 <button class="w-full bg-klipaa rounded text-white font-normal h-12"
-                                    type="submit">Kirim</button>
+                                    type="submit">Simpan</button>
                             </li>
                         </ul>
                     </div>
@@ -267,7 +269,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>
@@ -347,6 +349,16 @@
 
         const institutionInput = document.getElementById("institution");
         const institutionTextArea = document.getElementById("institution-textarea");
+        const oldInstitution = document.getElementById("old_institution");
+
+        document.addEventListener('DOMContentLoaded',function(){
+            if(institutionInput.value == 'Lainnya') {
+                institutionInput.removeAttribute("name");
+                institutionTextArea.setAttribute("name", "institution");
+                institutionTextArea.classList.remove("hidden");
+                institutionTextArea.value = oldInstitution.value;
+            }
+        })
 
         institutionInput.addEventListener("change", function() {
             if (institutionInput.value === "Lainnya") {
@@ -362,6 +374,16 @@
 
         const objective = document.getElementById("objective");
         const objectiveArea = document.getElementById("objective_textarea");
+        const oldObjective = document.getElementById("old_objective");
+
+        document.addEventListener('DOMContentLoaded',function(){
+            if(objective.value == 'Lainnya') {
+                objective.removeAttribute("name");
+                objectiveArea.setAttribute("name", "objective");
+                objectiveArea.classList.remove("hidden");
+                objectiveArea.value = oldObjective.value;
+            }
+        })
 
         objective.addEventListener("change", function() {
             if (objective.value === "Lainnya") {

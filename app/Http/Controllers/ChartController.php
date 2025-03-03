@@ -10,103 +10,107 @@ use Illuminate\Support\Facades\Auth;
 
 class ChartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
 
     public function line()
-    {
-        $user = Auth::user();
-        if(Auth::user()->role_id == '1') {
-            $visitor = Visitor::query();
-        } else {
-            $visitor = Visitor::where('village_code',$user->village_code);
-        }
+{
+    $user = Auth::user();
 
-        $visitors = $visitor->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
-        return response()->json($visitors);
+    if ($user->role_id == '1') {
+        $visitor = Visitor::query();
+    } else {
+        $visitor = Visitor::where('village_code', $user->village_code);
     }
 
-    public function candle(){
+    $checkIns = $visitor->selectRaw('MONTH(check_in) as month, COUNT(*) as total')
+        ->whereYear('check_in', now()->year)
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+    return response()->json($checkIns);
+}
+
+    public function candle()
+    {
         $user = Auth::user();
-        if(Auth::user()->role_id == '1') {
+        if (Auth::user()->role_id == '1') {
             $visitor = Visitor::query();
         } else {
-            $visitor = Visitor::where('village_code',$user->village_code);
+            $visitor = Visitor::where('village_code', $user->village_code);
         }
 
-        $supra_desa = (clone $visitor)->where('institution','Supra desa')->count();
-        $aph = (clone $visitor)->where('institution','APH')->count();
-        $warga = (clone $visitor)->where('institution','Warga')->count();
-        $media = (clone $visitor)->where('institution','Media')->count();
+        $supra_desa = (clone $visitor)->where('institution', 'Supra desa')->count();
+        $aph = (clone $visitor)->where('institution', 'APH')->count();
+        $warga = (clone $visitor)->where('institution', 'Warga')->count();
+        $media = (clone $visitor)->where('institution', 'Media')->count();
         $lainnya = (clone $visitor)->whereNotIn('institution', ['Supra desa', 'APH', 'Warga', 'Media'])->count();
-        $data = [$supra_desa,$aph,$warga,$media,$lainnya];
+        $data = [$supra_desa, $aph, $warga, $media, $lainnya];
         return response()->json($data);
     }
 
-    public function doughnut() {
+    public function doughnut()
+    {
         $user = Auth::user();
-        
+
         if ($user->role_id == '1') {
             $visitor = Visitor::query();
         } else {
             $visitor = Visitor::where('village_code', $user->village_code);
         }
-    
+
         $studi_banding = (clone $visitor)->where('objective', 'Studi Banding')->count();
         $cari_informasi = (clone $visitor)->where('objective', 'Cari Informasi')->count();
         $pembinaan = (clone $visitor)->where('objective', 'Pembinaan')->count();
         $koordinasi = (clone $visitor)->where('objective', 'Koordinasi')->count();
         $lainnya = (clone $visitor)->whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
-    
+
         $objective = [$studi_banding, $cari_informasi, $pembinaan, $koordinasi, $lainnya];
-    
+
         return response()->json($objective);
     }
-    
 
-    public function geographical(){
+
+    public function geographical()
+    {
         $user = Auth::user();
-        if(Auth::user()->role_id == '1') {
+        if (Auth::user()->role_id == '1') {
             $visitor = Visitor::query();
         } else {
-            $visitor = Visitor::where('village_code',$user->village_code);
+            $visitor = Visitor::where('village_code', $user->village_code);
         }
 
         $geoData = $visitor->select('province_code', DB::raw('COUNT(*) as visitors'))
-        ->groupBy('province_code')
-        ->get();
+            ->groupBy('province_code')
+            ->get();
 
-    return response()->json($geoData);
+        return response()->json($geoData);
     }
 
 
-    public function time() {
+    public function time()
+    {
         $user = Auth::user();
-    
+
         // Query berdasarkan role
         if ($user->role_id == 1) {
             $visitor = Visitor::query();
         } else {
             $visitor = Visitor::where('village_code', $user->village_code);
         }
-    
+
         // Ambil data jumlah tamu per jam tanpa filter tanggal
         $guest_data = $visitor->select(
-                DB::raw("HOUR(check_in) as hour"), // Ambil jam dari check_in
-                DB::raw("COUNT(*) as guests") // Hitung jumlah tamu per jam
-            )
+            DB::raw("HOUR(check_in) as hour"), // Ambil jam dari check_in
+            DB::raw("COUNT(*) as guests") // Hitung jumlah tamu per jam
+        )
             ->groupBy('hour') // Kelompokkan berdasarkan jam
             ->orderBy('hour') // Urutkan berdasarkan jam
             ->get();
-    
+
         return response()->json($guest_data);
     }
-    
-    
+
+
 
     public function index()
     {

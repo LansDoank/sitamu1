@@ -6,7 +6,7 @@
             <div class="md:w-1/2 w-full flex flex-col justify-center p-5 md:p-0">
                 <h1 class="text-klipaa font-poppins text-xl md:text-4xl lg:text-5xl font-semibold md:my-5 leading-snug" data-aos="fade-right"
                     data-aos-duration="1500">SELAMAT DATANG
-                    DI SITAMU !</h1>
+                    DI TAMUDESA!</h1>
                 <p class="lg:text-sm md:text-xs text-xs my-3 md:my-0 lg:text-sm text-slate-500 font-medium" data-aos="fade-right" data-aos-duration="1500"
                     data-aos-delay="300">Mudah, Cepat, dan Efisien! Buku Tamu Digital membantu
                     mencatat kunjungan warga dengan
@@ -31,7 +31,7 @@
     <div id="about" class="md:p-7 flex flex-col items-center">
         <div class="container bg-klipaa  md:rounded-2xl p-5 md:p-0 flex justify-center flex-col items-center md:p-10">
             <div class="md:mb-8" data-aos="fade-up" data-aos-duration="900">
-                <h1 class="text-white text-xl md:text-3xl my-5 md:my-0 font-semibold">APA ITU SITAMU?</h1>
+                <h1 class="text-white text-xl md:text-3xl my-5 md:my-0 font-semibold">APA ITU TAMUDESA?</h1>
             </div>
             <div class="flex flex-wrap md:flex-nowrap">
                 <figure class="md:w-1/2 my-5 md:my-0 w-full md:flex items-center">
@@ -39,13 +39,13 @@
                         data-aos-duration="1500">
                 </figure>
                 <div class="md:w-1/2 w-full flex flex-col justify-center items-start pB-10 md:pb-0 md:p-5">
-                    <p class="text-white text-xs mb-3 md:text-xs lg:text-base md:mb-4" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1500">Sitamu
+                    <p class="text-white text-xs mb-3 md:text-xs lg:text-base md:mb-4" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1500">TamuDesa
                         adalah platform digital yang dirancang khusus untuk mendukung
-                        pengelolaan administrasi dan dokumentasi di tingkat desa. Sitamu digunakan oleh kantor desa
+                        pengelolaan administrasi dan dokumentasi di tingkat desa. TamuDesa digunakan oleh kantor desa
                         untuk mempermudah proses pencatatan, penyimpanan, dan pencarian berbagai data penting yang
                         berkaitan dengan kegiatan administratif desa
                     </p>
-                    <p class="text-white text-xs md:text-xs lg:text-base" data-aos="fade-left" data-aos-delay="500" data-aos-duration="1500">SITAMU
+                    <p class="text-white text-xs md:text-xs lg:text-base" data-aos="fade-left" data-aos-delay="500" data-aos-duration="1500">TamuDesa
                         menjadi alat yang sangat efektif untuk meningkatkan efisiensi, transparansi, dan
                         akuntabilitas dalam pengelolaan administrasi desa, serta mendukung kemajuan digitalisasi di
                         tingkat pemerintahan desa.</p>
@@ -56,7 +56,7 @@
     <div id="why" class="flex flex-col items-center md:p-5">
         <div class="my-10 py-10 md:py-0">
             <h1 class="font-semibold text-klipaa text-xl md:text-3xl" data-aos="fade-up" data-aos-delay="200"
-                data-aos-duration="900">Mengapa memilih Sitamu?</h1>
+                data-aos-duration="900">Mengapa Memilih TamuDesa?</h1>
         </div>
         <div class="container border p-5 md:p-10 border-klipaa md:rounded-2xl flex flex-wrap gap-5 md:flex-nowrap justify-center md:gap-5 lg:gap-10 md:rounded-lg">
             <div class="card bg-klipaa md:py-8 text-white text-center p-5 w-full md:w-48 lg:w-80 shrink-0 rounded flex flex-col items-center"
@@ -67,7 +67,7 @@
                 <div class="card-body">
                     <h2 class="font-medium lg:my-5 md:text-lg lg:text-2xl mb-3">Efisiensi Waktu dan
                         Proses</h2>
-                    <p class="lg:text-sm md:text-[10px] text-xs font-normal">Dengan SITAMU, semua proses administrasi yang biasanya memakan waktu
+                    <p class="lg:text-sm md:text-[10px] text-xs font-normal">Dengan TamuDesa, semua proses administrasi yang biasanya memakan waktu
                         dan tenaga, seperti
                         pengelolaan data tamu yang berkunjung,, bisa dilakukan dengan lebih cepat dan efektif.</p>
                 </div>
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <h2 class="font-medium lg:my-5 md:text-lg lg:text-2xl mb-3">Keamanan Data yang
                         Terjamin</h2>
-                    <p class="lg:text-sm md:text-[10px] text-xs font-normal">Keamanan data menjadi prioritas utama dalam SITAMU. Sistem ini
+                    <p class="lg:text-sm md:text-[10px] text-xs font-normal">Keamanan data menjadi prioritas utama dalam TamuDesa. Sistem ini
                         menggunakan enkripsi dan pengamanan yang canggih untuk memastikan bahwa semua data yang
                         tersimpan terlindungi dari akses yang tidak sah.</p>
                 </div>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="card-body">
                     <h2 class="font-medium lg:my-5 md:text-lg lg:text-2xl mb-3">Transparansi dan Akuntabilitas</h2>
-                    <p class="lg:text-sm md:text-[10px] text-xs font-normal text-center md:mt-3">SITAMU menyediakan fitur yang memungkinkan semua data dan informasi
+                    <p class="lg:text-sm md:text-[10px] text-xs font-normal text-center md:mt-3">TamuDesa menyediakan fitur yang memungkinkan semua data dan informasi
                         penting tercatat dengan rapi dan transparan.</p>
                 </div>
             </div>
@@ -135,7 +135,7 @@
     <div id="guide" class="flex flex-col items-center md:p-5 md:my-10">
         <div class="md:my-10 py-10 md:py-0">
             <h1 class="text-klipaa text-xl md:text-3xl font-semibold" data-aos="fade-up" data-aos-delay="200"
-                data-aos-duration="900">Panduan Penggunaan Sitamu</h1>
+                data-aos-duration="900">Panduan Penggunaan TamuDesa</h1>
         </div>
         <div class="container py-10 flex flex-wrap md:flex-nowrap border md:rounded-2xl justify-center p-5 gap-5 md:p-10 lg:gap-10 md:gap-5 border-klipaa">
             <div class="card max-w-xs h-72 md:h-96 rounded-lg text-klipaa border border-klipaa text-center bg-white  md:p-5 lg:h-80 md:h-64 flex flex-col items-center justify-center"
@@ -173,8 +173,8 @@
         <div class="footer-body p-5 flex flex-wrap md:flex-nowrap justify-between">
             <div class="logo lg:w-2/3 md:w-1/2 mb-5 md:m-0">
                 <div class="flex items-center font-semibold text-3xl">
-                    <img class="w-10 md:w-14" src="/img/logo.png" alt="Sitamu">
-                    <h5 class="text-2xl md:text-3xl">Sitamu</h5>
+                    <img class="w-10 md:w-14" src="/img/logo.png" alt="TamuDesa">
+                    <h5 class="text-2xl md:text-3xl">TamuDesa</h5>
                 </div>
                 <p class="font-medium text-sm md:text-base ms-2 md:m-0">Buku Tamu Digital</p>
             </div>
@@ -190,7 +190,7 @@
                     <li class="my-5">
                         <div class="flex">
                             <img class="w-5 h-5 me-2" src="/img/mail.png" alt="">
-                            <p class="md:text-sm text-xs font-medium">sitamu19@gmail.com</p>
+                            <p class="md:text-sm text-xs font-medium">tamudesa1@gmail.com</p>
                         </div>
                     </li>
                     <li class="my-5">
@@ -206,7 +206,7 @@
         <hr>
         <div class="copyright flex justify-between p-5">
             <div class="">
-                &copy; 2025 Sitamu
+                Copyright &copy; 2025 TamuDesa
             </div>
             <div class="flex gap-5">
                 <a href="#">

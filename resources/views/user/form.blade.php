@@ -7,7 +7,7 @@
             <div class="form-header">
                 <div class="flex items-center md:my-3">
                     <img class="md:w-12 w-10 me-2" src="/img/logo.png" alt="">
-                    <h5 class="text-klipaa font-semibold text-2xl  md:text-3xl">Sitamu</h5>
+                    <h5 class="text-klipaa font-semibold text-2xl  md:text-3xl">TamuDesa</h5>
                 </div>
                 <p class="text-gray-500 font-medium my-3 text-xs md:text-sm md:m-0">Silakan isi data buku tamu dengan
                     benar.</p>
@@ -114,7 +114,7 @@
                             <label for="objective" class="mb-2 text-sm md:text-base">Tujuan</label>
                             <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
                                 name="objective" id="objective">
-                                <option>Pilih Tujuan Anda</option>
+                                <option selected disabled>Pilih Tujuan Anda</option>
                                 <option value="Koordinasi">Koordinasi</option>
                                 <option value="Cari Informasi">Cari Informasi</option>
                                 <option value="Pembinaan">Pembinaan</option>

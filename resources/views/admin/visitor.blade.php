@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sitamu - Visitors</title>
+    <title>Admin - Tamu</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom fonts for this template -->
@@ -107,7 +107,7 @@
                         <div class="flex mb-3 ">
                             <a href="/form/desa"
                                 class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
-                                Buat Data Tamu</a>
+                                Tambah Data Tamu</a>
                         </div>                        
                     @else
                     <div class="flex mb-3 ">
@@ -182,7 +182,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Sitamu 2025</span>
+                        <span>Copyright &copy; TamuDesa 2025</span>
                     </div>
                 </div>
             </footer>

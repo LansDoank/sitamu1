@@ -38,7 +38,7 @@
                 <div class="header">
                     <div class="logo flex items-center">
                         <img class="w-12" src="/img/logo.png" alt="">
-                        <h5 class="text-2xl ms-2 text-klipaa font-bold">Sitamu</h5>
+                        <h5 class="text-2xl ms-2 text-klipaa font-bold">TamuDesa</h5>
                     </div>
                     <p class="my-3 text-sm text-gray-700">Silahkan pilih alamat kantor desa</p>
                 </div>
@@ -76,7 +76,7 @@
                     </select>
                 </div>
                 <div class="mt-5">
-                    <button class="w-full bg-klipaa py-3 rounded-lg text-white" type="submit">Pilih</button>
+                    <button class="w-full bg-klipaa py-3 rounded-lg text-white" type="submit">Selanjutnya</button>
                 </div>
             </form>
         </div>
