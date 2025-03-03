@@ -90,7 +90,7 @@ class ReceptionistController extends Controller
 
         $duplicate = User::where('username', $request->username)->first();
         if ($duplicate) {
-            return redirect()->route('admin.receptionists')->with('receptionist_error', 'Username sudah sudah digunakan!');
+            return redirect()->route('admin.receptionists')->with('receptionist_error', 'Username sudah digunakan!');
         }
 
 

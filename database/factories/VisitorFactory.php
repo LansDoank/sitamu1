@@ -24,7 +24,7 @@ class VisitorFactory extends Factory
             'check_out' => today(),
             'telephone' => fake()->phoneNumber(),
             'visitor_photo' => 'user_photo/profile.png',
-            'visit_type_id' => 1,
+            'visit_type_id' => 5,
             'objective' => 'Studi Banding',
             'i_n_i' => fake()->sentence(),
             'province_code' => '32',

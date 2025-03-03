@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\SubDistrict;
+use App\Models\User;
 use App\Models\Village;
 use App\Models\Visitor;
 use App\Models\VisitType;
@@ -16,7 +17,7 @@ class QrCodeController extends Controller
 {
     public function add()
     {
-        return view('qrcode.add', ['user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::all()]);
+        return view('qrcode.add', ['user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
     public function create(Request $request)
@@ -105,7 +106,11 @@ class QrCodeController extends Controller
 
     public function delete($id)
     {
-        VisitType::find($id)->delete();
-        return redirect()->route('admin.qrCode')->with('qrcode_success', 'Data kode qr berhasil dihapus!');
+        $qr_code = VisitType::find($id);
+        $visitor = Visitor::where('visit_type_id',$id)->delete();
+        $receptionist = User::where('role_id',2)->where('village_code',$qr_code->village_code)->delete();
+        $qr_code->delete();
+
+        return redirect()->route('admin.qrCode')->with('qrcode_success', "Data desa $qr_code->name berhasil dihapus!");
     }
 }

@@ -22,7 +22,7 @@ class VisitorController extends Controller
 
     public function desa()
     {
-        return view('visitor.village', ['title' => 'Form - Desa', 'provinces' => Province::all()]);
+        return view('visitor.village', ['title' => 'Form - Desa', 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
 
