@@ -1,4 +1,4 @@
-<header class="bg-white z-50 fixed shadow w-full border border-b-[#65AE3A] flex items-center justify-between px-3 py-2 md:py-3 md:px-16">
+<header class="bg-white z-50 fixed shadow w-full border border-b-klipaa flex items-center justify-between px-3 py-2 md:py-3 md:px-16">
     <div class="flex items-center">
         <img class="md:w-12 me-2 w-8" src="/img/logo.png" alt="">
         <h5 class="text-klipaa font-semibold md:text-2xl text-xl" >Sitamu</h5>

@@ -38,7 +38,7 @@
                     <img src="/img/about.png" alt="" data-aos="fade-up" data-aos-delay="500"
                         data-aos-duration="1500">
                 </figure>
-                <div class="md:w-1/2 w-full flex flex-col justify-center items-start md:p-5">
+                <div class="md:w-1/2 w-full flex flex-col justify-center items-start pB-10 md:pb-0 md:p-5">
                     <p class="text-white text-xs mb-3 md:text-xs lg:text-base md:mb-4" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1500">Sitamu
                         adalah platform digital yang dirancang khusus untuk mendukung
                         pengelolaan administrasi dan dokumentasi di tingkat desa. Sitamu digunakan oleh kantor desa
@@ -49,15 +49,12 @@
                         menjadi alat yang sangat efektif untuk meningkatkan efisiensi, transparansi, dan
                         akuntabilitas dalam pengelolaan administrasi desa, serta mendukung kemajuan digitalisasi di
                         tingkat pemerintahan desa.</p>
-
-                    {{-- <button class="w-36 bg-white h-14 text-klipaa md:my-5 rounded font-medium" data-aos="fade-up"
-                        data-aos-delay="700" data-aos-duration="1500">Selengkapnya</button> --}}
                 </div>
             </div>
         </div>
     </div>
     <div id="why" class="flex flex-col items-center md:p-5">
-        <div class="my-10">
+        <div class="my-10 py-10 md:py-0">
             <h1 class="font-semibold text-klipaa text-xl md:text-3xl" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="900">Mengapa memilih Sitamu?</h1>
         </div>
@@ -102,7 +99,7 @@
         </div>
     </div>
     <div id="preview" class="flex flex-col items-center md:m-0 md:p-5">
-        <div class="text-center my-10 md:my-10">
+        <div class="text-center my-10 md:my-10 py-10 md:py-0">
             <h1 class="text-klipaa font-semibold text-2xl md:text-3xl" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="900">Pratinjau Aplikasi</h1>
         </div>
@@ -136,11 +133,11 @@
         </div>
     </div>
     <div id="guide" class="flex flex-col items-center md:p-5 md:my-10">
-        <div class="md:my-10">
-            <h1 class="text-klipaa text-xl my-10 md:text-3xl font-semibold" data-aos="fade-up" data-aos-delay="200"
+        <div class="md:my-10 py-10 md:py-0">
+            <h1 class="text-klipaa text-xl md:text-3xl font-semibold" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="900">Panduan Penggunaan Sitamu</h1>
         </div>
-        <div class="container flex flex-wrap md:flex-nowrap border md:rounded-2xl justify-center p-5 gap-5 md:p-10 lg:gap-10 md:gap-5 border-klipaa">
+        <div class="container py-10 flex flex-wrap md:flex-nowrap border md:rounded-2xl justify-center p-5 gap-5 md:p-10 lg:gap-10 md:gap-5 border-klipaa">
             <div class="card max-w-xs h-72 md:h-96 rounded-lg text-klipaa border border-klipaa text-center bg-white  md:p-5 lg:h-80 md:h-64 flex flex-col items-center justify-center"
                 data-aos="flip-up" data-aos-delay="300" data-aos-duration="1500">
                 <figure class="card-header flex justify-center items-center md:my-7">

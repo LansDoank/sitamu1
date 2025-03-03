@@ -130,7 +130,7 @@
                                             <th class="col-1">No</th>
                                             <th class="col-1">Foto</th>
                                             <th class="col-1">Nama</th>
-                                            <th class="col-1">Intansi</th>
+                                            <th class="col-1">Instansi</th>
                                             <th class="col-1">No. Telp</th>
                                             <th class="col-1">Check-in</th>
                                             <th class="col-1">Check-out</th>
@@ -152,7 +152,7 @@
                                                 </td>
                                                 <td>{{ Str::limit($visitor->fullname, 10) }}</td>
                                                 <td>{{ $visitor->institution }}</td>
-                                                <td>{{ $visitor->telephone }}</td>
+                                                <td>{{ Str::limit($visitor->telephone,15) }}</td>
                                                 <td>{{ $visitor->check_in }}</td>
                                                 <td>{{ $visitor->check_out }}</td>
                                                 <td class="flex">

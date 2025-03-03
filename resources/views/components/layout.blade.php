@@ -52,6 +52,13 @@
         background-position: center;
     }
 
+    @media screen and (max-width:768px) {
+        .swiper {
+            width: 350px;
+            height: 300px;
+        }
+    }
+
     @media screen and (max-width:576px) {
         .swiper {
             width: 250px;
