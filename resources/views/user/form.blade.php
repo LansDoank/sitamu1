@@ -45,7 +45,7 @@
                         </div>
                     </li>
                     <li class="md:my-3">
-                        <textarea class="hidden w-full border border-gray-200 px-3 py-2" id="institution-textarea"
+                        <textarea class="hidden w-full border rounded-lg border-gray-200 px-3 py-2" id="institution-textarea"
                             placeholder="Sebutkan Instansi Anda"></textarea>
                     </li>
                     <li class="my-3">
@@ -59,7 +59,7 @@
                     <li class="my-3">
                         <div class="flex flex-col items-start">
                             <label for="province" class="mb-2 text-sm md:text-base">Provinsi</label>
-                            <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
+                            <select class="form-input text-gray-500 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                 name="province" id="province">
                                 <option disabled selected>Pilih Provinsi Anda</option>
                                 @foreach ($provinces as $province)
@@ -71,7 +71,7 @@
                     <li class="my-3">
                         <div class="flex flex-col items-start">
                             <label for="district" class="mb-2 text-sm md:text-base">Kabupaten</label>
-                            <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
+                            <select class="form-input text-gray-500 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                 name="district" id="district">
                                 <option disabled selected>Pilih Kabupaten Anda</option>
                             </select>
@@ -80,7 +80,7 @@
                     <li class="my-3">
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2 text-sm md:text-base">Kecamatan</label>
-                            <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
+                            <select class="form-input text-gray-500 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
                                 <option disabled selected>Pilih Kecamatan Anda</option>
                             </select>
@@ -89,7 +89,7 @@
                     <li class="my-3">
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2 text-sm md:text-base">Desa</label>
-                            <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
+                            <select class="form-input text-gray-500 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                 name="village" id="village">
                                 <option disabled selected>Pilih Desa Anda</option>
                             </select>
@@ -100,19 +100,19 @@
                             <div class="flex flex-col items-start w-full md:w-1/2">
                                 <label for="check_in" class="mb-2 text-sm md:text-base">Waktu Datang</label>
                                 <input type="datetime-local" name="check_in" id="check_in"
-                                    class="form-input w-full text-gray-500 border border-gray-200 px-2 h-10 w-1/2">
+                                    class="form-input w-full rounded-lg text-gray-500 border border-gray-200 px-2 h-10 w-1/2">
                             </div>
                             <div class="flex flex-col items-start w-full md:w-1/2">
                                 <label for="check_out" class="mb-2 text-sm md:text-base">Waktu Pulang</label>
                                 <input type="datetime-local" name="check_out" id="check_out"
-                                    class="form-input w-full text-gray-500 border border-gray-200 px-2 h-10 w-1/2">
+                                    class="form-input w-full rounded-lg text-gray-500 border border-gray-200 px-2 h-10 w-1/2">
                             </div>
                         </div>
                     </li>
                     <li class="my-3">
                         <div class="flex flex-col items-start">
                             <label for="objective" class="mb-2 text-sm md:text-base">Tujuan</label>
-                            <select class="form-input text-gray-500 border border-gray-200 px-2 h-10 w-full"
+                            <select class="form-input text-gray-500 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                 name="objective" id="objective">
                                 <option selected disabled>Pilih Tujuan Anda</option>
                                 <option value="Koordinasi">Koordinasi</option>
@@ -164,9 +164,9 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         inputPhoto.innerHTML = `
-                            Foto
-                            <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                <img class="max-w-[400px] max-h-[200px] object-cover" src="${e.target.result}" alt="">
+                        Foto
+                        <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
+                            <img class="max-w-[400px] max-h-[200px] object-cover" src="${e.target.result}" alt="">
                             </div>`;
                     };
                     reader.readAsDataURL(file);
@@ -202,7 +202,7 @@
                     objective.setAttribute("name", "objective");
                 }
             });
-        });
+        })
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

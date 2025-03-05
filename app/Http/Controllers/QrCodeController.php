@@ -80,7 +80,7 @@ class QrCodeController extends Controller
         }
 
         $visit->update([
-            'qr_code' => "127.0.0.1/form/$request->village/$slug",
+            'qr_code' => "tamudesa.id/form/$request->village/$slug",
             'name' => $village_name,
             'slug' => Str::slug($village_name),
         ]);

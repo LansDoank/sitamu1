@@ -144,7 +144,7 @@
                                 </div>
                             </li>
                             <li class="md:my-3">
-                                <textarea class="hidden w-full border border-gray-200 px-3 py-2" id="institution-textarea"
+                                <textarea class="hidden w-full rounded-lg border border-gray-200 px-3 py-2" id="institution-textarea"
                                     placeholder="Sebutkan Instansi Anda"></textarea>
                             </li>
                             <li class="md:my-3">
@@ -158,7 +158,7 @@
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="province" class="mb-2">Provinsi</label>
-                                    <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="province" id="province" required>
                                         <option disabled selected>Pilih Provinsi</option>
                                         @foreach ($provinces as $province)
@@ -171,7 +171,7 @@
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="district" class="mb-2">Kabupaten</label>
-                                    <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="district" id="district" required>
                                         <option disabled selected>Pilih Kabupaten</option>
                                     </select>
@@ -180,7 +180,7 @@
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="sub_district" class="mb-2">Kecamatan</label>
-                                    <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="sub_district" id="sub_district" required>
                                         <option disabled selected>Pilih Kecamatan</option>
                                     </select>
@@ -189,7 +189,7 @@
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="village" class="mb-2">Desa</label>
-                                    <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="village" id="village" required>
                                         <option disabled selected>Pilih Desa</option>
                                     </select>
@@ -200,13 +200,13 @@
                                     <div class="flex flex-col items-start w-full md:w-1/2">
                                         <label for="check_in" class="mb-2">Tanggal Datang</label>
                                         <input type="datetime-local" name="check_in" id="check_in"
-                                            class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                                            class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full md:w-1/2"
                                             value="{{ $oldVisit->check_in }}" required>
                                     </div>
                                     <div class="flex flex-col items-start w-full md:w-1/2">
                                         <label for="check_out" class="mb-2">Tanggal Pulang</label>
                                         <input type="datetime-local" name="check_out" id="check_out"
-                                            class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                                            class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full md:w-1/2"
                                             value="{{ $oldVisit->check_out }}" required>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="objective" class="mb-2">Tujuan</label>
-                                    <select class="form-input text-gray-600 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="objective" id="objective" required>
                                         <option disabled>Pilih Tujuan Anda</option>
                                         <option value="Koordinasi" @selected('Koordinasi' == $oldVisit->objective)>Koordinasi</option>
@@ -228,7 +228,7 @@
                                 </div>
                             </li>
                             <li class="md:my-3">
-                                <textarea class="hidden w-full border border-gray-200 px-3 py-2" id="objective_textarea"
+                                <textarea class="hidden w-full border rounded-lg border-gray-200 px-3 py-2" id="objective_textarea"
                                     placeholder="Sebutkan Tujuan Anda" ></textarea>
                             </li>
                             <li class="md:my-3">

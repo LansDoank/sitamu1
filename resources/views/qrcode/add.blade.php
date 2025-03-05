@@ -147,21 +147,21 @@
                         <div class="flex flex-col items-start">
                             <label for="district" class="mb-2">Kabupaten</label>
                             <select
-                                class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
+                                class="form-input bg-gray-50 border rounded-lg border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
                                 <option disabled selected>Pilih Kabupaten</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2">Kecamatan</label>
-                            <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
+                            <select class="form-input bg-gray-50 rounded-lg border border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
                                 <option disabled selected>Pilih Kecamatan</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2">Desa</label>
-                            <select class="form-input bg-gray-50 border border-gray-300 text-gray-700 px-2 h-10 w-full"
+                            <select class="form-input bg-gray-50 border rounded-lg border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
                                 <option selected>Pilih Desa</option>
                             </select>
