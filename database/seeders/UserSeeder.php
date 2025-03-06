@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'photo' => 'user_photo/profile.png',
+            'photo' => '/img/profile.png',
             'name' => fake()->name(),
             'username' => 'admin',
             'password' => bcrypt('admin123'),

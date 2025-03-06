@@ -37,7 +37,7 @@ class QrCodeController extends Controller
         $village_name = Village::where('code', $request->village)->first()->name;
         $slug = Str::slug(Village::where('code', $request->village)->first()->name);
         $qr_code = new VisitType();
-        $qr_code->qr_code = "127.0.0.1:8000/form/$request->village/$slug";
+        $qr_code->qr_code = "https://tamudesa.id/form/$request->village/$slug";
         $qr_code->name = $village_name;
         $qr_code->slug = Str::slug($village_name);
         $qr_code->province_code = $request->province;
@@ -80,7 +80,7 @@ class QrCodeController extends Controller
         }
 
         $visit->update([
-            'qr_code' => "tamudesa.id/form/$request->village/$slug",
+            'qr_code' => "https://tamudesa.id/form/$request->village/$slug",
             'name' => $village_name,
             'slug' => Str::slug($village_name),
         ]);

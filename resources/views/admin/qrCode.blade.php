@@ -128,7 +128,7 @@
                                             <th class="col-1">Nama</th>
                                             <th class="col-6">Alamat</th>
                                             @if ($admin)
-                                                <th class="col-1">Opsi</th>
+                                                <th class="col-1">Aksi</th>
                                             @endif
                                         </tr>
                                     </thead>

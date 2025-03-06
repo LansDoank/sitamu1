@@ -123,9 +123,8 @@
                                             <th class="col-2">Foto</th>
                                             <th class="col-2">Nama</th>
                                             <th class="col-2">Username</th>
-                                            <th class="col-1">Password</th>
                                             <th class="col-5">Desa</th>
-                                            <th class="col-1">Opsi</th>
+                                            <th class="col-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,7 +142,6 @@
                                                 </td>
                                                 <td>{{ $receptionist->name }}</td>
                                                 <td>{{ $receptionist->username }}</td>
-                                                <td class="col-1">{{ Str::limit($receptionist->password, 30) }}</td>
                                                 <td>{{ Str::limit($receptionist->address->name, 20) }}</td>
                                                 <td class="flex">
                                                     <a class="rounded text-white w-1/2 h-10 text-center flex items-center justify-center text-decoration-none "
