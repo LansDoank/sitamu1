@@ -28,7 +28,7 @@
                             <label for="fullname" class="mb-2 text-sm md:text-base">Nama Lengkap</label>
                             <input type="text" name="fullname" id="fullname"
                                 class="form-input border text-gray-700 border-gray-200 rounded w-full h-10 px-3" required
-                                placeholder="Masukkan nama anda">
+                                placeholder="Masukkan nama anda" value="{{old('fullname')}}">
                         </div>
                         <div class="flex flex-col items-start w-full md:w-1/2">
                             <label for="institution" class="mb-2 text-sm md:text-base">Instansi</label>
@@ -53,7 +53,7 @@
                             <label for="telephone" class="mb-2 text-sm md:text-base">No. Telepon</label>
                             <input type="text" name="telephone" id="telephone"
                                 class="form-input border text-gray-700 border-gray-200 rounded w-full h-10 px-3" required
-                                placeholder="Masukkan telepon anda">
+                                placeholder="Masukkan telepon anda" value="{{old('telephone')}}">
                         </div>
                     </li>
                     <li class="my-3">
@@ -63,7 +63,7 @@
                                 name="province" id="province">
                                 <option disabled selected>Pilih Provinsi Anda</option>
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->code }}">{{ $province->name }}</option>
+                                    <option value="{{ $province->code }}" {{old('province') == $province->code ? 'selected' : ''}}>{{ $province->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -99,12 +99,12 @@
                         <div class="flex w-full gap-3 md:gap-10 flex-wrap md:flex-nowrap">
                             <div class="flex flex-col items-start w-full md:w-1/2">
                                 <label for="check_in" class="mb-2 text-sm md:text-base">Waktu Datang</label>
-                                <input type="datetime-local" name="check_in" id="check_in"
+                                <input type="datetime-local" name="check_in" id="check_in" value="{{old('check_in')}}"
                                     class="form-input w-full rounded-lg text-gray-500 border border-gray-200 px-2 h-10 w-1/2">
                             </div>
                             <div class="flex flex-col items-start w-full md:w-1/2">
                                 <label for="check_out" class="mb-2 text-sm md:text-base">Waktu Pulang</label>
-                                <input type="datetime-local" name="check_out" id="check_out"
+                                <input type="datetime-local" name="check_out" id="check_out" value="{{old('check_out')}}"
                                     class="form-input w-full rounded-lg text-gray-500 border border-gray-200 px-2 h-10 w-1/2">
                             </div>
                         </div>
@@ -129,20 +129,20 @@
                     </li>
                     <li class="my-3">
                         <div class="flex flex-col items-start">
-                            <label for="i_n_i" class="mb-2 text-sm md:text-base">Keterangan</label>
+                            <label for="i_n_i" class="mb-2 text-sm md:text-base">Keterangan <span class="text-gray-500">(Optional)</span></label>
                             <textarea class="form-input rounded text-gray-500 border border-gray-200 px-2 h-10 w-full py-2 min-h-[150px]"
-                                name="i_n_i" id="i_n_i" placeholder="Masukan Keterangan Disini"></textarea>
+                                name="i_n_i" id="i_n_i" value="{{old('i_n_i')}}" placeholder="Masukan Keterangan Disini"></textarea>
                         </div>
                     </li>
                     <li class="my-3 ">
                         <div class="flex flex-col items-start w-full">
-                            <label for="visitor_photo" id="photo" class="mb-2 w-full text-sm md:text-base">Foto
+                            <label for="visitor_photo" id="photo" class="mb-2 w-full text-sm md:text-base">Foto Wajah
                                 <div
                                     class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
                                     <img src="/img/input_photo.png" alt="">
                                 </div>
                             </label>
-                            <input class="hidden" type="file" name="visitor_photo" id="visitor_photo">
+                            <input class="hidden" type="file" value="{{old('visitor_photo')}}" name="visitor_photo" id="visitor_photo">
                         </div>
                     </li>
                     <li class="my-3">
