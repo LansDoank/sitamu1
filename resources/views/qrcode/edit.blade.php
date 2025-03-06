@@ -117,6 +117,7 @@
                         <div class="w-full flex items-center flex-col">
                             <label class="text-lg" for="qr_code">Kode Qr</label>
                             {{QrCode::generate($oldVisit->qr_code)}}
+                            <a href="/generate/qrcode/{{$oldVisit->id}}" class="bg-blue-600 text-white rounded px-4 my-3 text-center flex items-center justify-center text-decoration-none py-2">Download Kode Qr</a>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="province" class="mb-2">Provinsi</label>

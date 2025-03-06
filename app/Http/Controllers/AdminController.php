@@ -23,11 +23,13 @@ class AdminController extends Controller
     {
 
         $user = Auth::user();
-        if(Auth::user()->role_id == '1') {
+        if($user->role_id == '1') {
             $visitor = Visitor::query();
         } else {
             $visitor = Visitor::where('village_code',$user->village_code);
         }
+
+        $is_admin = $user->role_id == 1 ? true : false;
 
         $guestDaily = (clone $visitor)->whereDate('check_in', today())->get()->count();
         $guestWeekly = (clone $visitor)->whereBetween('check_in', [
@@ -50,6 +52,7 @@ class AdminController extends Controller
                 'user' => Auth::user(),
                 'username' => Auth::user()->username,
                 'photo' => Auth::user()->photo,
+                'is_admin' => $is_admin,
                 'guestDaily' => $guestDaily,
                 'guestWeekly' => $guestWeekly,
                 'guestMonthly' => $guestMonthly,

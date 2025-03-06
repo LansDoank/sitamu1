@@ -233,4 +233,12 @@ class VisitorController extends Controller
         Visitor::find($id)->delete();
         return redirect()->route('admin.visitors')->with('visitor_success', 'Data tamu berhasil dihapus');
     }
+
+    public function generate() {
+        $user = Auth::user();
+        if ($user->role_id == 3) {
+            return redirect()->route('index');
+        }
+        return view('visitor.generate', ['title' => 'Buat Laporan Tamu','visitors' => Visitor::all()]);
+    }
 }

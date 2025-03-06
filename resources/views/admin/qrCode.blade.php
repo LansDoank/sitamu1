@@ -79,7 +79,7 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Keluar
                                 </a>
                             </div>
                         </li>
@@ -138,7 +138,9 @@
                                             <tr>
                                                 <td>{{ $no }}</td>
                                                 <td class="">
-                                                    {{ QrCode::generate($visitType->qr_code) }}
+                                                    <a href="/generate/qrcode/{{$visitType->id}}">
+                                                        {{ QrCode::generate($visitType->qr_code) }}
+                                                    </a>
                                                 <td>{{ $visitType->name }}</td>
                                                 <td class="col-1">
                                                     {{ $visitType->province->name . ',' . $visitType->district->name . ',' . $visitType->subdistrict->name . ',' . $visitType->village->name }}
@@ -202,7 +204,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Keluar</a>
                 </div>
             </div>
         </div>

@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/visitor/delete/{id}', [VisitorController::class, 'delete'])->name('visitor.delete');
 
+    Route::get('generate/visitor',[VisitorController::class, 'generate'])->name('visitor.generate')->middleware('auth');
+
     Route::get('/admin/receptionist', [AdminController::class, 'receptionist'])->name('admin.receptionists');
 
     Route::get('/admin/receptionist/preview/{id}', [ReceptionistController::class, 'preview'])->name('receotionist.preview');
@@ -63,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/qr_code/update', [QrCodeController::class, 'update']);
 
     Route::get('/admin/qr_code/delete/{id}', [QrCodeController::class, 'delete']);
+
+    Route::get('/generate/qrcode/{id}',[QrCodeController::class, 'generate'])->name('qrcode.generate')->middleware('auth');
 });
 
 Route::get('/chart/line', [ChartController::class, 'line'])->name('chart.line');

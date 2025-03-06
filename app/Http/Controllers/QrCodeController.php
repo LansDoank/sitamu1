@@ -107,10 +107,16 @@ class QrCodeController extends Controller
     public function delete($id)
     {
         $qr_code = VisitType::find($id);
-        $visitor = Visitor::where('visit_type_id',$id)->delete();
-        $receptionist = User::where('role_id',2)->where('village_code',$qr_code->village_code)->delete();
+        $visitor = Visitor::where('visit_type_id', $id)->delete();
+        $receptionist = User::where('role_id', 2)->where('village_code', $qr_code->village_code)->delete();
         $qr_code->delete();
 
         return redirect()->route('admin.qrCode')->with('qrcode_success', "Data desa $qr_code->name berhasil dihapus!");
+    }
+
+    public function generate($id)
+    {
+        $visit = VisitType::find($id);
+        return view('qrcode.generate', ['title' => 'Download Kode Qr', 'user' => Auth::user(),'qrcode' => $visit]);
     }
 }

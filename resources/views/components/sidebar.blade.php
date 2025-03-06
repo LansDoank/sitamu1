@@ -14,7 +14,7 @@
     <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }} nav-item">
         <a class="nav-link" href="/admin/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dasbor</span></a>
+            <span>Dashboard</span></a>
     </li>
 
     <!-- Divider -->
@@ -41,7 +41,7 @@
             </div>
         </a>
     </li>
-    @if ($user == '1')
+    @if ($is_admin)
         <li class="{{ request()->is('admin/receptionist') ? 'active' : '' }} nav-item">
             <a class="nav-link" href="/admin/receptionist">
                 <div class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">

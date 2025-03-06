@@ -78,7 +78,7 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Keluar
                                 </a>
                             </div>
                         </li>
@@ -104,17 +104,20 @@
                             {{ session('visitor_success') }}</div>
                     @endif
                     @if ($user->role_id == '1')
-                        <div class="flex mb-3 ">
+                        <div class="flex mb-3 justify-between flex-wrap gap-3">
                             <a href="/form/desa"
-                                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
+                                class="bg-klipaa w-full md:w-auto font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
                                 Tambah Data Tamu</a>
-                        </div>                        
+                                <a href="/generate/visitor" class="bg-blue-600 w-full md:w-auto py-3 md:py-2 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat Laporan</a>
+                        </div>
                     @else
-                    <div class="flex mb-3 ">
-                            <a href="/admin/visitor/add?village={{$user->village_code . '&slug='. $slug}}"
-                            class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
-                            Buat Data Tamu</a>
-                    </div>                        
+                        <div class="flex mb-3 justify-between">
+                            <a href="/admin/visitor/add?village={{ $user->village_code . '&slug=' . $slug }}"
+                                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
+                                Buat Data Tamu</a>
+                                <a href="/generate/visitor" class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat Laporan</a>
+
+                        </div>
                     @endif
 
                     <!-- DataTales Example -->
@@ -152,7 +155,7 @@
                                                 </td>
                                                 <td>{{ Str::limit($visitor->fullname, 10) }}</td>
                                                 <td>{{ $visitor->institution }}</td>
-                                                <td>{{ Str::limit($visitor->telephone,15) }}</td>
+                                                <td>{{ Str::limit($visitor->telephone, 15) }}</td>
                                                 <td>{{ $visitor->check_in }}</td>
                                                 <td>{{ $visitor->check_out }}</td>
                                                 <td class="flex">
@@ -212,7 +215,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Keluar</a>
                 </div>
             </div>
         </div>
