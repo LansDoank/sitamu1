@@ -69,7 +69,7 @@ class AdminController extends Controller
     public function visitors()
     {
         $user = Auth::user();
-        if(Auth::user()->role_id == '1') {
+        if($user->role_id == '1') {
             $visitor = Visitor::all();
         } else {
             $visitor = Visitor::where('village_code',$user->village_code)->get();

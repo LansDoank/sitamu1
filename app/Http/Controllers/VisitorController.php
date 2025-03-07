@@ -246,6 +246,13 @@ class VisitorController extends Controller
         if ($user->role_id == 3) {
             return redirect()->route('index');
         }
-        return view('visitor.generate', ['title' => 'Buat Laporan Tamu','visitors' => Visitor::all()]);
+
+        if($user->role_id == '1') {
+            $visitor = Visitor::all();
+        } else {
+            $visitor = Visitor::where('village_code',$user->village_code)->get();
+        }
+
+        return view('visitor.generate', ['title' => 'Buat Laporan Tamu','visitors' => $visitor]);
     }
 }
