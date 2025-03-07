@@ -74,14 +74,15 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('storage/' . $photo) }}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Keluar
                                 </a>
                             </div>
                         </li>
@@ -115,25 +116,29 @@
                                 placeholder="john123" value="{{ $users->username }}" disabled>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="province" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Provinsi</label>
+                            <label for="province"
+                                class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Provinsi</label>
                             <input type="text" name="province" id="province"
                                 class="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="john123" value="{{ $users->province->name }}" disabled>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="district" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Kabupaten</label>
+                            <label for="district"
+                                class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Kabupaten</label>
                             <input type="text" name="district" id="district"
                                 class="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="john123" value="{{ $users->district->name }}" disabled>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="sub_district" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                            <label for="sub_district"
+                                class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Kecamatan</label>
                             <input type="text" name="sub_district" id="sub_district"
                                 class="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="john123" value="{{ $users->sub_district->name }}" disabled>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="village" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Desa</label>
+                            <label for="village"
+                                class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Desa</label>
                             <input type="text" name="village" id="village"
                                 class="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="john123" value="{{ $users->address->name }}" disabled>
@@ -142,8 +147,8 @@
                             <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
                             </label>
                             <div class="w-full flex justify-center">
-                                <img class="w-full h-full object-cover max-w-[300px]" src="{{ asset('storage/' . $users->photo) }}"
-                                    alt="">
+                                <img class="w-full h-full object-cover max-w-[300px]"
+                                    src="{{ asset('storage/' . $users->photo) }}" alt="">
                             </div>
                         </div>
                     </form>
@@ -185,7 +190,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Keluar</a>
                 </div>
             </div>
         </div>

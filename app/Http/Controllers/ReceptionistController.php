@@ -24,10 +24,13 @@ class ReceptionistController extends Controller
 
     public function addReceptionist()
     {
-        if (Auth::user()->role_id == '2') {
+
+        $user = Auth::user();
+        $is_admin = $user->role_id == 1 ? true : false;
+        if ($user->role_id == '2') {
             return redirect()->route('admin.dashboard');
         }
-        return view('receptionist.add', ['title' => 'Add Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('receptionist.add', ['title' => 'Add Receptionist','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
 
@@ -131,19 +134,24 @@ class ReceptionistController extends Controller
 
     public function preview($id) {
         $users = User::find($id);
-        $user = Auth::user();
 
-        return view('receptionist.preview',['users' => $users,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
+        $user = Auth::user();
+        $is_admin = $user->role_id == 1 ? true : false;
+
+        return view('receptionist.preview',['users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
     }
 
 
     public function show($id)
     {
-        if (Auth::user()->role_id == '2') {
+
+        $user = Auth::user();
+        $is_admin = $user->role_id == 1 ? true : false;
+        if ($user->role_id == '2') {
             return redirect()->route('admin.dashboard');
         }
         $receptionist = User::find($id);
-        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)

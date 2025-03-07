@@ -71,7 +71,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('storage/' . $photo) }}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -108,14 +109,24 @@
                             <a href="/form/desa"
                                 class="bg-klipaa w-full md:w-auto font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
                                 Tambah Data Tamu</a>
-                                <a href="/generate/visitor" class="bg-blue-600 w-full md:w-auto py-3 md:py-2 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat Laporan</a>
+                                <div class="flex gap-3 flex-wrap w-full md:w-auto">
+                                    <a href="/generate/visitor"
+                                        class="bg-blue-600 w-full md:w-auto text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat
+                                        Laporan</a>
+                                    <button onclick="downloadExcel()" class="w-full md:w-auto bg-green-600 text-white font-medium rounded px-4 py-2">Download Excel</button>
+                                </div>
                         </div>
                     @else
                         <div class="flex mb-3 justify-between">
                             <a href="/admin/visitor/add?village={{ $user->village_code . '&slug=' . $slug }}"
                                 class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
                                 Buat Data Tamu</a>
-                                <a href="/generate/visitor" class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat Laporan</a>
+                            <div class="flex gap-3 flex-wrap">
+                                <a href="/generate/visitor"
+                                    class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat
+                                    Laporan</a>
+                                <button onclick="downloadExcel()" class="bg-green-600 w-full md:w-auto text-white font-medium rounded px-5 py-2">Download Excel</button>
+                            </div>
 
                         </div>
                     @endif
@@ -242,6 +253,29 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
+    <script>
+        function downloadExcel() {
+            let table = document.getElementById("dataTable");
+            let rows = table.querySelectorAll("tr");
+            let csvContent = "";
+
+            rows.forEach(row => {
+                let cols = row.querySelectorAll("td, th");
+                let rowData = [];
+                cols.forEach(col => rowData.push(col.innerText));
+                csvContent += rowData.join(",") + "\n";
+            });
+
+            let blob = new Blob([csvContent], {
+                type: "text/csv"
+            });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement("a");
+            a.href = url;
+            a.download = "data.csv";
+            a.click();
+        }
+    </script>
 
 </body>
 

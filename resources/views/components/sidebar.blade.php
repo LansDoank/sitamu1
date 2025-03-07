@@ -41,7 +41,7 @@
             </div>
         </a>
     </li>
-    @if ($is_admin)
+    @if ($user == '1')
         <li class="{{ request()->is('admin/receptionist') ? 'active' : '' }} nav-item">
             <a class="nav-link" href="/admin/receptionist">
                 <div class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">

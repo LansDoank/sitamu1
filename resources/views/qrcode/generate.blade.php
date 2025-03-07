@@ -5,8 +5,7 @@
 
     <div class="container mx-auto flex justify-center items-center h-screen">
         <div class="row flex justify-center flex-col items-center">
-            <h1 class="font-semibold text-3xl ">Download Kode Qr</h1>
-            <p class="my-3">{{$qrcode->village->name}}</p>
+            <h1 class="font-semibold text-3xl mb-3">Kode Qr {{$qrcode->village->name}}</h1>
             {{QrCode::generate("https://tamudesa.id/$qrcode->village_code/" . $qrcode->village->name)}}
         </div>
     </div>

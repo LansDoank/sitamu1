@@ -64,8 +64,10 @@ class VisitorController extends Controller
 
     public function preview($id)
     {
+        $user = Auth::user();
+        $is_admin = $user->role_id == 1 ? true : false;
         $visitor = Visitor::find($id);
-        return view('visitor.preview', ['user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
+        return view('visitor.preview', ['user' => Auth::user(), 'is_admin' => $is_admin,'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
     }
 
     public function addVisitor(Request $request)
@@ -118,6 +120,8 @@ class VisitorController extends Controller
 
     public function add(Request $request)
     {
+        $user = Auth::user();
+        $is_admin = $user->role_id == 1 ? true : false;
         $code = str_split($request->village);
         $province_code = $code[0] . $code[1];
         $district_code = $code[0] . $code[1] . $code[2] . $code[3];
@@ -125,7 +129,7 @@ class VisitorController extends Controller
         $village_code = "$code[0]$code[1]$code[2]$code[3]$code[4]$code[5]$code[6]$code[7]$code[8]$code[9]";
 
         $village = VisitType::where('village_code', $village_code)->first()->id;
-        return view('visitor.add', ['title' => 'Visitor Form', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code,'visit_type' => $village]);
+        return view('visitor.add', ['title' => 'Visitor Form','is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code,'visit_type' => $village]);
     }
 
     public function create(Request $request)
@@ -173,7 +177,10 @@ class VisitorController extends Controller
 
     public function edit($id)
     {
-        return view('visitor.edit', ['title' => 'Edit Data Tamu', 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => Visitor::find($id), 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+        $user = Auth::user();
+        $is_admin = $user->role_id == 1 ? true : false;
+
+        return view('visitor.edit', ['title' => 'Edit Data Tamu','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => Visitor::find($id), 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)

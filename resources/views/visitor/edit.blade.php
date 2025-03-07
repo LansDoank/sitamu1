@@ -71,17 +71,17 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('storage/' . $photo) }}">
+                                <img class="img-profile rounded-circle" src="{{$is_admin ? "/img/profile.png" : asset("storage/$user->photo")}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Keluar
                                 </a>
                             </div>
                         </li>
@@ -157,7 +157,7 @@
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="province" class="mb-2">Provinsi</label>
+                                    <label for="province" class="mb-2">Provinsi <span class="text-sm">{{"(" . $oldVisit->province->name . ")"}}</span></label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="province" id="province" required>
                                         <option disabled selected>Pilih Provinsi</option>
@@ -170,7 +170,7 @@
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="district" class="mb-2">Kabupaten</label>
+                                    <label for="district" class="mb-2">Kabupaten <span class="text-sm">{{"(" . $oldVisit->district->name . ")"}}</span></label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="district" id="district" required>
                                         <option disabled selected>Pilih Kabupaten</option>
@@ -179,7 +179,7 @@
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="sub_district" class="mb-2">Kecamatan</label>
+                                    <label for="sub_district" class="mb-2">Kecamatan <span class="text-sm">{{"(" . $oldVisit->subdistrict->name . ")"}}</span></label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="sub_district" id="sub_district" required>
                                         <option disabled selected>Pilih Kecamatan</option>
@@ -188,7 +188,7 @@
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="village" class="mb-2">Desa</label>
+                                    <label for="village" class="mb-2">Desa <span class="text-sm">{{"(" . $oldVisit->village->name . ")"}}</span></label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="village" id="village" required>
                                         <option disabled selected>Pilih Desa</option>
@@ -250,8 +250,9 @@
                                     <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
                                         <div
                                             class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                            <img src="/img/input_photo.png" alt="">
+                                            <img class="max-w-[300px]" src="{{asset("storage/$oldVisit->visitor_photo")}}" alt="">
                                         </div>
+
                                     </label>
                                     <input class="hidden" type="file" name="visitor_photo" id="visitor_photo">
                                 </div>
@@ -299,7 +300,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Keluar</a>
                 </div>
             </div>
         </div>
