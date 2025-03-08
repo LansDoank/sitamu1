@@ -119,7 +119,7 @@ class ReceptionistController extends Controller
 
         $slug = Str::slug(Village::where('code', $request->village)->first()->name);
         $village = new VisitType();
-        $village->qr_code = "127.0.0.1:8000/form/$request->village/$slug";
+        $village->qr_code = "https://tamudesa.id/form/$request->village/$slug";
         $villageName = Village::where('code', $request->village)->first();
         $village->name = $villageName->name;
         $village->slug  = Str::slug($villageName->name);
