@@ -116,6 +116,7 @@
                                     <button onclick="downloadExcel()" class="w-full md:w-auto bg-green-700 text-white font-medium rounded px-4 py-2">Download Excel</button>
                                 </div>
                         </div>
+                        {{-- ad --}}
                     @else
                         <div class="flex mb-3 justify-between">
                             <a href="/admin/visitor/add?village={{ $user->village_code . '&slug=' . $slug }}"
