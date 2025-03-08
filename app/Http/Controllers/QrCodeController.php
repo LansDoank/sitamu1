@@ -19,7 +19,7 @@ class QrCodeController extends Controller
     {
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
-        return view('qrcode.add', ['user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('qrcode.add', ['user' => Auth::user(), 'is_admin' => $is_admin, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
     public function create(Request $request)
@@ -61,7 +61,7 @@ class QrCodeController extends Controller
             $visitor = Visitor::where('village_code', $user->village_code);
         }
         $visit = VisitType::find($id);
-        return view('qrCode.edit', ['title' => 'Edit Kode Qr', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('qrcode.edit', ['title' => 'Edit Kode Qr', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
     public function update(Request $request)
@@ -97,6 +97,7 @@ class QrCodeController extends Controller
                 'sub_district_code' => $request->sub_district,
                 'village_code' => $request->village
             ]);
+            return redirect()->route('admin.qrCode')->with('qrcode_success', 'Data kode qr berhasil diperbaharui!');
         } else {
             $visit->update([
                 'province_code' => $request->old_province,
@@ -104,9 +105,8 @@ class QrCodeController extends Controller
                 'sub_district_code' => $request->old_sub_district,
                 'village_code' => $request->old_village
             ]);
+            return redirect()->route('admin.qrCode')->with('qrcode_error', 'Mohon isi semua form alamat!');
         }
-
-        return redirect()->route('admin.qrCode')->with('qrcode_success', 'Data kode qr berhasil diperbaharui!');
     }
 
     public function delete($id)
@@ -122,6 +122,6 @@ class QrCodeController extends Controller
     public function generate($id)
     {
         $visit = VisitType::find($id);
-        return view('qrcode.generate', ['title' => 'Download Kode Qr', 'user' => Auth::user(),'qrcode' => $visit]);
+        return view('qrcode.generate', ['title' => 'Download Kode Qr', 'user' => Auth::user(), 'qrcode' => $visit]);
     }
 }

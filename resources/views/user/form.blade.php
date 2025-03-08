@@ -139,7 +139,7 @@
                             <label for="visitor_photo" id="photo" class="mb-2 w-full text-sm md:text-base">Foto Wajah
                                 <div
                                     class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                    <img src="/img/input_photo.png" alt="">
+                                    <img class="w-[150px] md:w-auto" src="/img/input_photo.png" alt="">
                                 </div>
                             </label>
                             <input class="hidden" type="file" value="{{old('visitor_photo')}}" name="visitor_photo" id="visitor_photo">

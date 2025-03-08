@@ -66,11 +66,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-
-
-
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -124,7 +119,7 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="province" id="province">
-                                <option disabled selected>Pilih Provinsi</option>
+                                <option disabled selected {{$oldVisit->province_code == $oldVisit->province->code ? 'selected' : ''}}>{{$oldVisit->province->name}}</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->code }}">{{ $province->name }}</option>
                                 @endforeach
@@ -135,21 +130,21 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option disabled selected>Pilih Kabupaten</option>
+                                <option disabled selected {{$oldVisit->district_code == $oldVisit->district->code ? 'selected' : ''}}>{{$oldVisit->district->name}}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2">Kecamatan</label>
                             <select class="form-input bg-gray-50 border border-gray-300 rounded-lg text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option disabled selected>Pilih Kecamatan</option>
+                                <option disabled selected {{$oldVisit->subdistrict_code == $oldVisit->subdistrict->code ? 'selected' : ''}}>{{$oldVisit->subdistrict->name}}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2">Desa</label>
                             <select class="form-input bg-gray-50 border border-gray-300 rounded-lg text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option disabled selected>Pilih Desa</option>
+                                <option disabled selected>{{$oldVisit->village->name}}</option>
                             </select>
                         </div>
                         <button type="submit"
