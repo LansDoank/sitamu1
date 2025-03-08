@@ -194,6 +194,7 @@ class VisitorController extends Controller
             'objective' => 'required',
         ]);
 
+
         $visitor = Visitor::find($request->id);
         $visitor->update([
             'fullname' => $request->fullname,

@@ -70,10 +70,11 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{$is_admin ? "/img/profile.png" : asset("storage/$user->photo")}}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -128,55 +129,66 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                 <input type="password" name="password" id="password" placeholder="••••••••"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                 autocomplete="off">
+                                    autocomplete="off">
                             </div>
-                            <svg onclick="seePassword()" id="eye" class="cursor-pointer absolute right-4 top-11"
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <svg onclick="seePassword()" id="eye"
+                                class="cursor-pointer absolute right-4 top-11" xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi bi-eye-fill"
+                                viewBox="0 0 16 16">
                                 <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
                                 <path
                                     d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
                             </svg>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="province" class="mb-2">Provinsi <span class="text-sm">{{"(" . $oldReceptionist->province->name . ")"}}</span></label>
+                            <label for="province" class="mb-2">Provinsi</label>
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
-                                name="province" id="province">
+                                name="province" id="province" value="{{ $oldReceptionist->province_code }}">
                                 <option disabled selected>Pilih Provinsi</option>
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->code }}" >
+                                    <option value="{{ $province->code }}"
+                                        {{ $oldReceptionist->province_code == $province->code ? 'selected' : '' }}>
                                         {{ $province->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="district" class="mb-2">Kabupaten <span class="text-sm">{{"(" . $oldReceptionist->district->name . ")"}}</span></label>
+                            <label for="district" class="mb-2">Kabupaten</label>
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option disabled selected>Pilih Kabupaten</option>
+                                <option disabled selected
+                                    {{ $oldReceptionist->district_code == $oldReceptionist->district->code ? 'selected' : '' }}>
+                                    {{ $oldReceptionist->district->name }}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="sub_district" class="mb-2">Kecamatan <span class="text-sm">{{"(" . $oldReceptionist->sub_district->name . ")"}}</span></label>
-                            <select class="form-input bg-gray-50 border rounded-lg border-gray-300 text-gray-700 px-2 h-10 w-full"
+                            <label for="sub_district" class="mb-2">Kecamatan</label>
+                            <select
+                                class="form-input bg-gray-50 border rounded-lg border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option disabled selected>Pilih Kecamatan</option>
+                                <option disabled selected
+                                    {{ $oldReceptionist->sub_district_code == $oldReceptionist->sub_district->code ? 'selected' : '' }}>
+                                    {{ $oldReceptionist->sub_district->name }}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
-                            <label for="village" class="mb-2">Desa <span class="text-sm">{{"(" . $oldReceptionist->address->name . ")"}}</span></label>
-                            <select class="form-input bg-gray-50 border rounded-lg border-gray-300 text-gray-700 px-2 h-10 w-full"
+                            <label for="village" class="mb-2">Desa</span></label>
+                            <select
+                                class="form-input bg-gray-50 border rounded-lg border-gray-300 text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option disabled selected>Pilih Desa</option>
+                                <option disabled selected
+                                    {{ $oldReceptionist->village_code == $oldReceptionist->address->code ? 'selected' : '' }}>
+                                    {{ $oldReceptionist->address->name }}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start w-full">
                             <label for="image" id="photo" class="mb-2 w-full">Foto
                                 <div
                                     class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                    <img src="/img/input_photo.png" alt="">
+                                    <img class="max-w-[300px]" src="{{ asset("storage/$oldReceptionist->photo") }}"
+                                        alt="">
                                 </div>
                             </label>
                             <input class="hidden" type="file" name="image" id="image">
@@ -326,7 +338,6 @@
 
             districtSelect.addEventListener('change', function() {
                 const districtCode = this.value;
-
                 if (districtCode) {
                     fetch(`/api/sub-districts/${districtCode}`)
                         .then(response => response.json())

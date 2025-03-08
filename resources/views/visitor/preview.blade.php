@@ -101,7 +101,6 @@
                             <img class="w-10 me-2" src="/img/logo.png" alt="">
                             <h5 class="text-klipaa font-semibold text-2xl mb-0">TamuDesa</h5>
                         </div>
-                        <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silakan isi data buku tamu dengan benar.</p>
                     </div>
                     <div class="form-body">
                         

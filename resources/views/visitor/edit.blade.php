@@ -116,6 +116,7 @@
                         <input type="hidden" name="old_village" value="{{ $oldVisit->village_code }}">
                         <input type="hidden" id="old_institution" name="old_institution" value="{{$oldVisit->institution}}">
                         <input type="hidden" id="old_objective" name="old_objective" value="{{$oldVisit->objective}}">
+                        <input type="hidden" id="old_ini" name="old_ini" value="{{$oldVisit->i_n_i}}">
                         @if ($errors->any())
                             <div
                                 class="bg-red-100 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
@@ -135,11 +136,11 @@
                                         class="instance form-input text-gray-600 border border-gray-200 px-2 h-10 w-full md:w-1/2"
                                         name="institution" id="institution" required>
                                         <option disabled>Pilih Instansi</option>
+                                        <option value="Lainnya" @selected('Lainnya' != $oldVisit->institution)>Lainnya</option>
                                         <option value="Supra Desa" @selected('Supra Desa' == $oldVisit->institution)>Supra desa</option>
                                         <option value="APH" @selected('APH' == $oldVisit->institution)>APH</option>
                                         <option value="Warga" @selected('Warga' == $oldVisit->institution)>Warga</option>
                                         <option value="Media" @selected('Media' == $oldVisit->institution)>Media</option>
-                                        <option value="Lainnya" @selected('Lainnya' == 'Lainnya')>Lainnya</option>
                                     </select>
                                 </div>
                             </li>
@@ -157,10 +158,10 @@
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="province" class="mb-2">Provinsi <span class="text-sm">{{"(" . $oldVisit->province->name . ")"}}</span></label>
+                                    <label for="province" class="mb-2">Provinsi</label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="province" id="province" required>
-                                        <option disabled selected>Pilih Provinsi</option>
+                                        <option disabled selected {{$oldVisit->province_code == $oldVisit->province->code ? 'selected' : ''}}>{{$oldVisit->province->name}}</option>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->code }}">
                                                 {{ $province->name }}</option>
@@ -170,28 +171,28 @@
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="district" class="mb-2">Kabupaten <span class="text-sm">{{"(" . $oldVisit->district->name . ")"}}</span></label>
+                                    <label for="district" class="mb-2">Kabupaten</label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="district" id="district" required>
-                                        <option disabled selected>Pilih Kabupaten</option>
+                                        <option disabled selected {{$oldVisit->district_code == $oldVisit->district->code ? 'selected' : ''}} >{{$oldVisit->district->name}}</option>
                                     </select>
                                 </div>
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="sub_district" class="mb-2">Kecamatan <span class="text-sm">{{"(" . $oldVisit->subdistrict->name . ")"}}</span></label>
+                                    <label for="sub_district" class="mb-2">Kecamatan</label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="sub_district" id="sub_district" required>
-                                        <option disabled selected>Pilih Kecamatan</option>
+                                        <option disabled selected {{$oldVisit->sub_district_code == $oldVisit->subdistrict->code ? 'selected' : ''}}>{{$oldVisit->subdistrict->name}}</option>
                                     </select>
                                 </div>
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="village" class="mb-2">Desa <span class="text-sm">{{"(" . $oldVisit->village->name . ")"}}</span></label>
+                                    <label for="village" class="mb-2">Desa</label>
                                     <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
                                         name="village" id="village" required>
-                                        <option disabled selected>Pilih Desa</option>
+                                        <option disabled selected {{$oldVisit->village_code == $oldVisit->village->code ? 'selected' : ''}}>{{$oldVisit->village->name}}</option>
                                     </select>
                                 </div>
                             </li>
@@ -217,13 +218,13 @@
                                     <select class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="objective" id="objective" required>
                                         <option disabled>Pilih Tujuan Anda</option>
+                                        <option value="Lainnya" @selected('Lainnya' != $oldVisit->objective)>Lainnya</option>
                                         <option value="Koordinasi" @selected('Koordinasi' == $oldVisit->objective)>Koordinasi</option>
                                         <option value="Cari Informasi" @selected('Cari Informasi' == $oldVisit->objective)>Cari Informasi
                                         </option>
                                         <option value="Pembinaan" @selected('Pembinaan' == $oldVisit->objective)>Pembinaan</option>
                                         <option value="Studi Banding" @selected('Studi Banding' == $oldVisit->objective)>Studi Banding
                                         </option>
-                                        <option value="Lainnya" @selected('Lainnya' == 'Lainnya')>Lainnya</option>
                                     </select>
                                 </div>
                             </li>
@@ -252,7 +253,6 @@
                                             class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
                                             <img class="max-w-[300px]" src="{{asset("storage/$oldVisit->visitor_photo")}}" alt="">
                                         </div>
-
                                     </label>
                                     <input class="hidden" type="file" name="visitor_photo" id="visitor_photo">
                                 </div>
@@ -352,13 +352,13 @@
         const institutionTextArea = document.getElementById("institution-textarea");
         const oldInstitution = document.getElementById("old_institution");
 
+        if(institutionInput.value == 'Lainnya') {
+            institutionInput.removeAttribute("name");
+            institutionTextArea.setAttribute("name", "institution");
+            institutionTextArea.classList.remove("hidden");
+            institutionTextArea.value = oldInstitution.value;
+        }
         document.addEventListener('DOMContentLoaded',function(){
-            if(institutionInput.value == 'Lainnya') {
-                institutionInput.removeAttribute("name");
-                institutionTextArea.setAttribute("name", "institution");
-                institutionTextArea.classList.remove("hidden");
-                institutionTextArea.value = oldInstitution.value;
-            }
         })
 
         institutionInput.addEventListener("change", function() {
@@ -397,6 +397,13 @@
                 objective.setAttribute("name", "objective");
             }
         });
+
+        const iniInput = document.getElementById('i_n_i');
+        const oldIni = document.getElementById('old_ini');
+
+        document.addEventListener('DOMContentLoaded',function() {
+            iniInput.value = oldIni.value;
+        })
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

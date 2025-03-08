@@ -111,7 +111,7 @@
                                 Tambah Data Tamu</a>
                                 <div class="flex gap-3 flex-wrap w-full md:w-auto">
                                     <a href="/generate/visitor"
-                                        class="bg-blue-600 w-full md:w-auto text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat
+                                        class="bg-blue-600 w-full md:w-auto text-white rounded px-4 text-center flex text-decoration-none items-center justify-center font-medium py-2">Buat
                                         Laporan</a>
                                     <button onclick="downloadExcel()" class="w-full md:w-auto bg-green-600 text-white font-medium rounded px-4 py-2">Download Excel</button>
                                 </div>
@@ -123,7 +123,7 @@
                                 Buat Data Tamu</a>
                             <div class="flex gap-3 flex-wrap">
                                 <a href="/generate/visitor"
-                                    class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center py-2">Buat
+                                    class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center font-medium py-2">Buat
                                     Laporan</a>
                                 <button onclick="downloadExcel()" class="bg-green-600 w-full md:w-auto text-white font-medium rounded px-4 py-2">Download Excel</button>
                             </div>

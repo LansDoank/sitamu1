@@ -128,7 +128,7 @@
                                 <div class="flex md:ps-3 flex-col items-start w-full md:w-1/2">
                                     <label for="institution" class="mb-2">Instansi</label>
                                     <select
-                                        class="instance form-input text-gray-700 border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                                        class="instance form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full md:w-1/2"
                                         name="institution" id="institution">
                                         <option disabled selected>Pilih Instansi</option>
                                         <option value="Supra Desa">Supra desa</option>
@@ -154,7 +154,7 @@
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="province" class="mb-2">Provinsi</label>
-                                    <select class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="province" id="province">
                                         <option disabled selected>Pilih Provinsi</option>
                                         @foreach ($provinces as $province)
@@ -166,7 +166,7 @@
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="district" class="mb-2">Kabupaten</label>
-                                    <select class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="district" id="district">
                                         <option disabled selected>Pilih Kabupaten</option>
                                     </select>
@@ -175,7 +175,7 @@
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="sub_district" class="mb-2">Kecamatan</label>
-                                    <select class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="sub_district" id="sub_district">
                                         <option disabled selected>Pilih Kecamatan</option>
                                     </select>
@@ -184,7 +184,7 @@
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="village" class="mb-2">Desa</label>
-                                    <select class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="village" id="village">
                                         <option disabled selected>Pilih Desa</option>
                                     </select>
@@ -195,19 +195,19 @@
                                     <div class="flex flex-col items-start w-full md:w-1/2">
                                         <label for="check_in" class="mb-2">Tanggal Datang</label>
                                         <input type="datetime-local" name="check_in" id="check_in"
-                                            class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full  md:`w-1/2">
+                                            class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full  md:`w-1/2">
                                     </div>
                                     <div class="flex flex-col items-start w-full md:w-1/2 md:ps-3">
                                         <label for="check_out" class="mb-2">Tanggal Pulang</label>
                                         <input type="datetime-local" name="check_out" id="check_out"
-                                            class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full  md:`w-1/2">
+                                            class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full  md:`w-1/2">
                                     </div>
                                 </div>
                             </li>
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="objective" class="mb-2">Tujuan</label>
-                                    <select class="form-input text-gray-700 border border-gray-200 px-2 h-10 w-full"
+                                    <select class="form-input text-gray-700 rounded-lg border border-gray-200 px-2 h-10 w-full"
                                         name="objective" id="objective">
                                         <option>Pilih Tujuan Anda</option>
                                         <option value="Koordinasi">Koordinasi</option>
@@ -219,19 +219,19 @@
                                 </div>
                             </li>
                             <li class="my-2 md:my-3">
-                                <textarea class="hidden w-full border border-gray-200 px-3 py-2" id="objective_textarea"
+                                <textarea class="hidden w-full border rounded-lg border-gray-200 px-3 py-2" id="objective_textarea"
                                     placeholder="Sebutkan Tujuan Anda"></textarea>
                             </li>
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
                                     <label for="i_n_i" class="mb-2">Keterangan</label>
-                                    <textarea class="form-input rounded text-gray-700 border border-gray-200 px-2 h-10 w-full py-2 min-h-[150px]"
+                                    <textarea class="form-input rounded-lg text-gray-700 border border-gray-200 px-2 h-10 w-full py-2 min-h-[150px]"
                                         name="i_n_i" id="i_n_i" placeholder="Masukan Keterangan Disini"></textarea>
                                 </div>
                             </li>
                             <li class="my-2 md:my-3 ">
                                 <div class="flex flex-col items-start w-full">
-                                    <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
+                                    <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto Wajah
                                         <div
                                             class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
                                             <img src="/img/input_photo.png" alt="">
@@ -323,7 +323,7 @@
                         inputPhoto.innerHTML = `
                             Foto
                             <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                <img class="w-full h-full max-w-[25     0px] object-cover" src="${e.target.result}" alt="">
+                                <img class="w-full h-full max-w-[250px] object-cover" src="${e.target.result}" alt="">
                             </div>`;
                     };
                     reader.readAsDataURL(file);
@@ -335,44 +335,30 @@
 
             institutionInput.addEventListener("change", function() {
                 if (institutionInput.value === "Lainnya") {
+                    institutionInput.removeAttribute("name");
+                    institutionTextArea.setAttribute("name", "institution");
                     institutionTextArea.classList.remove("hidden");
-                    institutionTextArea.removeAttribute("disabled");
                 } else {
+                    institutionTextArea.removeAttribute("name");
                     institutionTextArea.classList.add("hidden");
-                    institutionTextArea.setAttribute("disabled", "institution");
+                    institutionInput.setAttribute("name", "institution");
                 }
             });
-            if (institutionInput.value === "Lainnya") {
-                institutionInput.removeAttribute("name");
-                institutionTextArea.setAttribute("name", "institution");
-                institutionTextArea.classList.remove("hidden");
-            } else {
-                institutionTextArea.removeAttribute("name");
-                institutionTextArea.classList.add("hidden");
-                institutionInput.setAttribute("name", "institution");
-            }
 
             const objective = document.getElementById("objective");
             const objectiveArea = document.getElementById("objective_textarea");
 
             objective.addEventListener("change", function() {
                 if (objective.value === "Lainnya") {
+                    objective.removeAttribute("name");
+                    objectiveArea.setAttribute("name", "objective");
                     objectiveArea.classList.remove("hidden");
-                    objectiveArea.removeAttribute("disabled");
                 } else {
+                    objectiveArea.removeAttribute("name");
                     objectiveArea.classList.add("hidden");
-                    objectiveArea.setAttribute("disabled", "objective");
+                    objective.setAttribute("name", "objective");
                 }
             });
-            if (objective.value === "Lainnya") {
-                objective.removeAttribute("name");
-                objectiveArea.setAttribute("name", "objective");
-                objectiveArea.classList.remove("hidden");
-            } else {
-                objectiveArea.removeAttribute("name");
-                objectiveArea.classList.add("hidden");
-                objective.setAttribute("name", "objective");
-            }
         });
     </script>
     <script>
