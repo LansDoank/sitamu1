@@ -82,6 +82,8 @@ class QrCodeController extends Controller
             $village_name = $request->old_name;
         }
 
+        // fungsi update
+
         $visit->update([
             'qr_code' => "https://tamudesa.id/form/$request->village/$slug",
             'name' => $village_name,
