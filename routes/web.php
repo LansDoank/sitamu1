@@ -22,9 +22,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/admin/visitor', [AdminController::class, 'visitors'])->name('admin.visitors');
+    Route::get('/admin/visitor', [AdminController::class, 'choose'])->name('admin.visitors.choose');
 
-    Route::get('/admin/visitor/add', [VisitorController::class, 'add'])->name('visitor.add');
+    Route::get('/admin/visitor/{id}',[VisitorController::class,'visitors'])->name('admin.visitors');
+
+    Route::get('/admin/visitor/add/{code}', [VisitorController::class, 'add'])->name('visitor.add');
 
     Route::post('/admin/visitor/create', [VisitorController::class, 'create'])->name('visitor.create');
 
@@ -36,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/visitor/delete/{id}', [VisitorController::class, 'delete'])->name('visitor.delete');
 
-    Route::get('generate/visitor',[VisitorController::class, 'generate'])->name('visitor.generate')->middleware('auth');
+    Route::get('/generate/visitor/{code}',[VisitorController::class, 'generate'])->name('visitor.generate')->middleware('auth');
 
     Route::get('/admin/receptionist', [AdminController::class, 'receptionist'])->name('admin.receptionists');
 

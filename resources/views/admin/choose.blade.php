@@ -58,17 +58,9 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    @if ($is_admin)
-                    <div>
-                        <a class="text-decoration-none" href="/admin/visitor">
-                            <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Tamu</h1>
-                        </a>
-                    </div>
-                    @else
                     <div>
                         <h1 class="text-gray-600 text-xl md:text-2xl mb-0">Tamu</h1>
                     </div>
-                    @endif
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -101,7 +93,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="mb-2 text-2xl md:text-3xl text-gray-800">Tabel Tamu</h1>
+                    <h1 class="mb-2 text-2xl md:text-3xl text-gray-800">List Data Desa Yang Terdaftar</h1>
                     @if (session('visitor_error'))
                         <div
                             class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
@@ -112,37 +104,11 @@
                             class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
                             {{ session('visitor_success') }}</div>
                     @endif
-                    @if ($user->role_id == '1')
-                        <div class="flex mb-3 justify-between flex-wrap gap-3">
-                            <a href="/admin/visitor/add/{{$code}}"
-                                class="bg-klipaa w-full md:w-auto font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
-                                Tambah Data Tamu</a>
-                                <div class="flex gap-3 flex-wrap w-full md:w-auto">
-                                    <a href="/generate/visitor/{{$code}}"
-                                        class="bg-blue-600 w-full md:w-auto text-white rounded px-4 text-center flex text-decoration-none items-center justify-center font-medium py-2">Buat
-                                        Laporan</a>
-                                    <button onclick="downloadExcel()" class="w-full md:w-auto bg-green-700 text-white font-medium rounded px-4 py-2">Download Excel</button>
-                                </div>
-                        </div>
-                    @else
-                        <div class="flex mb-3 justify-between">
-                            <a href="/admin/visitor/add/{{ $user->village_code}}"
-                                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
-                                Buat Data Tamu</a>
-                            <div class="flex gap-3 flex-wrap">
-                                <a href="/generate/visitor/{{$code}}"
-                                    class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center justify-center font-medium py-2">Buat
-                                    Laporan</a>
-                                <button onclick="downloadExcel()" class="bg-green-700 w-full md:w-auto text-white font-medium rounded px-4 py-2">Download Excel</button>
-                            </div>
-
-                        </div>
-                    @endif
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Tamu</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Desa</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -150,42 +116,26 @@
                                     <thead>
                                         <tr>
                                             <th class="col-1">No</th>
-                                            <th class="col-1">Foto</th>
-                                            <th class="col-1">Nama</th>
-                                            <th class="col-1">Instansi</th>
-                                            <th class="col-1">No. Telp</th>
-                                            <th class="col-1">Check-in</th>
-                                            <th class="col-1">Check-out</th>
+                                            <th class="col-2">Provinsi</th>
+                                            <th class="col-2">Kabupaten</th>
+                                            <th class="col-2">Kecamatan</th>
+                                            <th class="col-2">Nama Desa</th>
                                             <th class="col-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1; ?>
-                                        @foreach ($visitors as $visitor)
+                                        @foreach ($villages as $village)
                                             <tr>
                                                 <td>{{ $no }}</td>
-                                                <td class="">
-                                                    <a href="/admin/visitor/preview/{{ $visitor->id }}">
-                                                        <img class="mx-auto"
-                                                            style="width: 50px; height: 50px; object-position: center; object-fit: cover;"
-                                                            src="{{ asset("storage/$visitor->visitor_photo") }}"
-                                                            alt="">
-                                                    </a>
-                                                </td>
-                                                <td>{{ Str::limit($visitor->fullname, 10) }}</td>
-                                                <td>{{ $visitor->institution }}</td>
-                                                <td>{{ Str::limit($visitor->telephone, 15) }}</td>
-                                                <td>{{ $visitor->check_in }}</td>
-                                                <td>{{ $visitor->check_out }}</td>
+                                                <td>{{$village->province->name}}</td>
+                                                <td>{{$village->district->name}}</td>
+                                                <td>{{$village->subdistrict->name}}</td>
+                                                <td>{{$village->name}}</td>
                                                 <td class="flex">
-                                                    <a class="rounded text-white w-1/2 h-10 text-center flex items-center justify-center text-decoration-none "
-                                                        href="/admin/visitor/edit/{{ $visitor->id }}">
-                                                        <img class="w-5" src="/img/edit.png" alt="">
-                                                    </a>
-                                                    <a class="rounded text-white w-1/2 h-10 text-center justify-center flex items-center text-decoration-none "
-                                                        onclick="return confirm('Yakin?')"
-                                                        href="/admin/visitor/delete/{{ $visitor->id }}">
-                                                        <img class="w-5" src="/img/trashcan.png" alt="">
+                                                    <a class="rounded bg-blue-600 text-white px-5 h-10 text-center flex items-center justify-center text-decoration-none "
+                                                        href="/admin/visitor/{{$village->village_code }}">
+                                                        Detail
                                                     </a>
                                                 </td>
                                             </tr>

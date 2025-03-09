@@ -116,6 +116,11 @@
                             class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
                             Mohon isi semua form!</div>
                     @endif
+                    @if (session('visitor_success'))
+                        <div
+                            class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
+                            {{session('visitor_success')}}</div>
+                    @endif
                     <div class="form-body">
                         <ul class="md:my-5">
                             <li class="flex flex-wrap md:flex-nowrap gap-3 md:gap-0 md:my-3">
@@ -224,7 +229,7 @@
                             </li>
                             <li class="my-2 md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label for="i_n_i" class="mb-2">Keterangan</label>
+                                    <label for="i_n_i" class="mb-2">Keterangan <span class="text-gray-500">(Opsional)</span></label>
                                     <textarea class="form-input rounded-lg text-gray-700 border border-gray-200 px-2 h-10 w-full py-2 min-h-[150px]"
                                         name="i_n_i" id="i_n_i" placeholder="Masukan Keterangan Disini"></textarea>
                                 </div>

@@ -129,7 +129,7 @@
                     </li>
                     <li class="my-3">
                         <div class="flex flex-col items-start">
-                            <label for="i_n_i" class="mb-2 text-sm md:text-base">Keterangan <span class="text-gray-500">(Optional)</span></label>
+                            <label for="i_n_i" class="mb-2 text-sm md:text-base">Keterangan <span class="text-gray-500">(Opsional)</span></label>
                             <textarea class="form-input rounded text-gray-500 border border-gray-200 px-2 h-10 w-full py-2 min-h-[150px]"
                                 name="i_n_i" id="i_n_i" value="{{old('i_n_i')}}" placeholder="Masukan Keterangan Disini"></textarea>
                         </div>

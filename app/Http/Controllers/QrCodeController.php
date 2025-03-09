@@ -121,7 +121,12 @@ class QrCodeController extends Controller
 
     public function generate($id)
     {
+        $user = Auth::user();
         $visit = VisitType::find($id);
-        return view('qrcode.generate', ['title' => 'Download Kode Qr', 'user' => Auth::user(), 'qrcode' => $visit]);
+        if($user->role_id == '1' || $user->village_code == $visit->village_code) {
+            $title = 'Download QR Code Desa ' . $visit->village->name . ',' . 'Kecamatan ' . $visit->subdistrict->name . ',' . $visit->district->name;
+            return view('qrcode.generate', ['title' => $title, 'user' => Auth::user(), 'qrcode' => $visit]);
+        }
+        return redirect('/admin/qr_code');
     }
 }

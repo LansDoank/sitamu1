@@ -66,23 +66,21 @@ class AdminController extends Controller
         );
     }
 
-    public function visitors()
+    public function choose()
     {
         $user = Auth::user();
-        if($user->role_id == '1') {
-            $visitor = Visitor::all();
-        } else {
-            $visitor = Visitor::where('village_code',$user->village_code)->get();
-        }
-        $village_code = $user->village_code;
-        $slug = Str::slug(Village::where('code',$village_code)->first()->name);
+    
         $is_admin = $user->role_id == 1 ? true : false;
+        $village = VisitType::all();
+        if($is_admin) {
+            return view(
+                'admin.choose',
+                    ['villages' => $village, 'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->username,'photo' => Auth::user()->photo,]
+            );
 
-
-        return view(
-            'admin.visitor',
-                ['visitors' => $visitor, 'user' => Auth::user(),'is_admin' => $is_admin,'village_code' => $user->village_code,'slug' => $slug,'username' => Auth::user()->username,'photo' => Auth::user()->photo,]
-        );
+        } else {
+            return redirect("/admin/visitor/$user->village_code");
+        }
     }
 
     public function receptionist()
@@ -106,11 +104,13 @@ class AdminController extends Controller
         $user = Auth::user();
         if($user->role_id == '1') {
             $admin = true;
+            $qrcode = VisitType::all();
         } else {
             $admin = false;
+            $qrcode = VisitType::where('village_code',$user->village_code)->get();
         }
         $is_admin = $user->role_id == 1 ? true : false;
 
-        return view('admin.qrCode', ['admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => VisitType::all()]);
+        return view('admin.qrCode', ['admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
     }
 }

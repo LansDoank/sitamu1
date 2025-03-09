@@ -138,6 +138,10 @@ class ReceptionistController extends Controller
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
 
+        if ($user->role_id == '2') {
+            return redirect()->route('admin.dashboard');
+        }
+
         return view('receptionist.preview',['users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
     }
 
@@ -203,6 +207,10 @@ class ReceptionistController extends Controller
 
     public function delete($id)
     {
+        $user = Auth::user();
+        if ($user->role_id == '2') {
+            return redirect()->route('admin.dashboard');
+        }
         User::find($id)->delete();
         return redirect()->route('admin.receptionists')->with('receptionist_success', 'Data resepsionis berhasil dihapus!');
     }
