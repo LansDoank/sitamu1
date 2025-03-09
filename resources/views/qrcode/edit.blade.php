@@ -41,6 +41,7 @@
         <!-- Sidebar -->
         <x-sidebar>
             <x-slot:user>{{$user->role_id}}</x-slot:user>
+            <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -59,8 +60,8 @@
                     </button>
 
                     <div>
-                        <a class="text-decoration-none" href="/admin/qr_code">
-                            <h1 class="text-gray-600 text-sm md:text-2xl ">&laquo; Edit Kode Qr</h1>
+                        <a class="text-decoration-none" href="/admin/qr_code/edit/{{$isreceptionist}}">
+                            <h1 class="text-gray-600 text-sm md:text-2xl ">Edit Kode Qr</h1>
                         </a>
                     </div>
 

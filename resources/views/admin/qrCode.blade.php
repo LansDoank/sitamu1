@@ -42,6 +42,8 @@
         <!-- Sidebar -->
         <x-sidebar>
             <x-slot:user>{{ $user->role_id }}</x-slot:user>
+            <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
+
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -93,7 +95,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 text-xl">Tabel Kode Qr</h1>
+                    <h1 class=" mb-2 text-gray-800 text-xl">Tabel Kode Qr</h1>
                     @if (session('qrcode_error'))
                         <div
                             class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">

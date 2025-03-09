@@ -30,7 +30,11 @@ class ReceptionistController extends Controller
         if ($user->role_id == '2') {
             return redirect()->route('admin.dashboard');
         }
-        return view('receptionist.add', ['title' => 'Add Receptionist','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
+
+        return view('receptionist.add', ['isreceptionist' => $visit,'title' => 'Add Receptionist','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
 
@@ -142,7 +146,10 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return view('receptionist.preview',['users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
+
+        return view('receptionist.preview',['isreceptionist' => $visit,'users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
     }
 
 
@@ -155,7 +162,10 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
         $receptionist = User::find($id);
-        return view('receptionist.edit', ['title' => 'Edit Receptionist', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
+
+        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Edit Receptionist', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)
@@ -211,6 +221,7 @@ class ReceptionistController extends Controller
         if ($user->role_id == '2') {
             return redirect()->route('admin.dashboard');
         }
+        
         User::find($id)->delete();
         return redirect()->route('admin.receptionists')->with('receptionist_success', 'Data resepsionis berhasil dihapus!');
     }

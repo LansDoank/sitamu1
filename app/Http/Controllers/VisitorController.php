@@ -54,10 +54,12 @@ class VisitorController extends Controller
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
+            $visit = VisitType::where('village_code', $user->village_code)->first()->id;
+
 
             return view(
                 'admin.visitor',
-                ['visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
+                ['isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
             );
         } else if ($code == $user->village_code) {
             $visitor = Visitor::where('village_code', $code)->get();
@@ -65,9 +67,12 @@ class VisitorController extends Controller
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
+
             return view(
                 'admin.visitor',
-                ['visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
+                ['isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
             );
         } else {
             return redirect('/admin/visitor/' . $user->village_code);
@@ -78,6 +83,7 @@ class VisitorController extends Controller
 
     public function show($code, $slug)
     {
+        $user = Auth::user();
         // $id = $code;
         $code = str_split($code);
         $provinceCode = $code[0] . $code[1];
@@ -87,8 +93,11 @@ class VisitorController extends Controller
 
         $village = VisitType::where('village_code', $villageCode);
         $village = $village->where('slug', $slug)->first();
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
 
         return view('user.form', [
+            'isreceptionist' => $visit,
             'title' => "Form Tamu - $village->name",
             'visit' => $village,
             'provinces' => Province::orderBy('name', 'asc')->get(),
@@ -100,12 +109,14 @@ class VisitorController extends Controller
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
         $visitor = Visitor::find($id);
-        if($user->role_id = 2) {
-            if($user->village_code != $visitor->village_code) {
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
+        if ($user->role_id = 2) {
+            if ($user->village_code != $visitor->village_code) {
                 return redirect("/admin/visitor/$user->village_code");
             }
         }
-        return view('visitor.preview', ['user' => Auth::user(), 'is_admin' => $is_admin, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
+        return view('visitor.preview', ['isreceptionist' => $visit, 'user' => Auth::user(), 'is_admin' => $is_admin, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
     }
 
     public function addVisitor(Request $request)
@@ -165,9 +176,9 @@ class VisitorController extends Controller
         $district_code = $code[0] . $code[1] . $code[2] . $code[3];
         $sub_district_code = $code[0] . $code[1] . $code[2] . $code[3] . $code[4] . $code[5];
         $village_code = "$code[0]$code[1]$code[2]$code[3]$code[4]$code[5]$code[6]$code[7]$code[8]$code[9]";
-
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
         $village = VisitType::where('village_code', $village_code)->first()->id;
-        return view('visitor.add', ['title' => 'Visitor Form', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code, 'visit_type' => $village]);
+        return view('visitor.add', ['isreceptionist' => $visit, 'title' => 'Visitor Form', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code, 'visit_type' => $village]);
     }
 
     public function create(Request $request)
@@ -222,9 +233,11 @@ class VisitorController extends Controller
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
         $visitor = Visitor::find($id);
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
 
         if ($is_admin || $user->village_code == $visitor->village_code) {
-            return view('visitor.edit', ['title' => 'Edit Data Tamu', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visitor, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+            return view('visitor.edit', ['isreceptionist' => $visit,  'title' => 'Edit Data Tamu', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visitor, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
         }
 
         return redirect("/admin/visitor/$user->village_code");

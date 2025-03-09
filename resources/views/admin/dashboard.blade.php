@@ -23,6 +23,7 @@
     <link rel="icon" href="/img/logo.png">
 
     <style>
+
         @media screen and (max-width:576px) {
             #brand {
                 display: none;
@@ -37,7 +38,8 @@
     <div id="wrapper" class="flex justify-between">
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$is_admin}}</x-slot:user>
+            <x-slot:user>{{ $is_admin }}</x-slot:user>
+            <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -69,7 +71,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{$is_admin ? "/img/profile.png" : asset("storage/$user->photo")}}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -180,15 +183,15 @@
 
                     <!-- Content Row -->
 
-                    <div class="row">
+                    <div class="row gap-0 m-0">
 
                         <!-- Area Chart -->
-                        <div class="w-full">
-                            <div class="card shadow mb-4">
+                        <div class="col-6">
+                            <div class="card  shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pratinjau</h6>
+                                    class="card-header w-full py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class=" font-weight-bold text-primary">Pratinjau</h6>
                                 </div>
 
                                 <!-- Card Body -->
@@ -200,8 +203,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full">
-                            <div class="card shadow mb-4">
+                        <div class="col-6">
+                            <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -218,8 +221,8 @@
                         </div>
 
                         <!-- Pie Chart -->
-                        <div class="w-full">
-                            <div class="card shadow mb-4">
+                        <div class="col-6">
+                            <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -228,33 +231,33 @@
                                 <!-- Card Body -->
                                 <div
                                     class="card-body w-full flex flex-col-reverse md:flex-row flex-wrap md:flex-nowrap">
-                                    <div class="w-full md:w-1/2 flex flex-col justify-center p-2">
+                                    <div class="w-full lg:w-1/2 flex flex-col justify-center p-2">
                                         <ul class="text-decoration-none list-none">
-                                            <li class="flex my-3 text-sm md:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
                                                 Studi Banding
                                                 <div class="md:mx-5 flex">
                                                     {{ $studi_banding }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
                                                 Cari Informasi
                                                 <div class="md:mx-5 flex">
                                                     {{ $cari_informasi }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
                                                 Pembinaan
                                                 <div class="md:mx-5 flex">
                                                     {{ $pembinaan }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
                                                 Koordinasi
                                                 <div class="md:mx-5 flex">
                                                     {{ $koordinasi }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
                                                 Lainnya
                                                 <div class="md:mx-5 flex">
                                                     {{ $lainnya }}
@@ -262,27 +265,29 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="flex justify-center items-center md:px-24 md:py-10 w-full md:w-1/2">
-                                        <canvas id="pie-chart" class="w-full md:w-1/2"></canvas>
+                                    <div class="flex justify-center items-center w-full lg:w-1/2">
+                                        <canvas id="pie-chart" class="w-full"></canvas>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
 
-                        {{-- Geographical Chart --}}
-                        <div class="w-full">
-                            <div
-                                class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Grafik Geografis</h6>
+                        @if ($is_admin)
+                            {{-- Geographical Chart --}}
+                            <div class="col-6 p-0 m-0 g-0">
+                                <div
+                                    class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Geografis</h6>
+                                </div>
+                                <div class="flex">
+                                    <div id="geochart" style="width: 100%;"></div>
+                                </div>
                             </div>
-                            <div class="flex">
-                                <div id="geochart" style="width: 100%;"></div>
-                            </div>
-                        </div>
+                        @endif
 
-                        <div class="w-full">
-                            <div class="card shadow mb-4">
+                        <div class="col-6">
+                            <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -309,7 +314,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class="sticky-footer footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; TamuDesa 2025</span>

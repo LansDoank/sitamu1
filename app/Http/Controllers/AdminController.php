@@ -46,12 +46,16 @@ class AdminController extends Controller
         $pembinaan = (clone $visitor)->where('objective','Pembinaan')->count();
         $koordinasi = (clone $visitor)->where('objective','Koordinasi')->count();
         $lainnya = (clone $visitor)->whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
+
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
         return view(
             'admin.dashboard',
             [
                 'user' => Auth::user(),
                 'username' => Auth::user()->username,
                 'photo' => Auth::user()->photo,
+                'isreceptionist' => $visit,
                 'is_admin' => $is_admin,
                 'guestDaily' => $guestDaily,
                 'guestWeekly' => $guestWeekly,
@@ -72,10 +76,12 @@ class AdminController extends Controller
     
         $is_admin = $user->role_id == 1 ? true : false;
         $village = VisitType::all();
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+
         if($is_admin) {
             return view(
                 'admin.choose',
-                    ['villages' => $village, 'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->username,'photo' => Auth::user()->photo,]
+                    ['isreceptionist' => $visit, 'villages' => $village, 'qrcode' => $visit,'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->username,'photo' => Auth::user()->photo,]
             );
 
         } else {
@@ -91,8 +97,10 @@ class AdminController extends Controller
         }
         $receptionists = User::where('role_id', '2')->get();
         $is_admin = $user->role_id == 1 ? true : false;
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
 
-        return view('admin.receptionists', ['user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->username,'photo' => Auth::user()->photo, 'receptionists' => $receptionists]);
+
+        return view('admin.receptionists', ['isreceptionist' => $visit,'user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->username,'photo' => Auth::user()->photo, 'receptionists' => $receptionists]);
     }
 
     public function masterData(){
@@ -110,7 +118,9 @@ class AdminController extends Controller
             $qrcode = VisitType::where('village_code',$user->village_code)->get();
         }
         $is_admin = $user->role_id == 1 ? true : false;
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
 
-        return view('admin.qrCode', ['admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
+
+        return view('admin.qrCode', ['isreceptionist' => $visit,'admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
     }
 }
