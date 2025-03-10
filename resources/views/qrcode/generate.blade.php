@@ -2,7 +2,7 @@
     <x-slot:title>
         {{$title}}
     </x-slot:title>
-
+    {{-- qrcode --}}
     <div class="container mx-auto flex justify-center items-center h-screen">
         <div class="row flex justify-center flex-col items-center justify-center">
             <h1 class="font-semibold text-3xl md:text-5xl mb-4">tamudesa.id</h1>
