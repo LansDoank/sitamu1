@@ -25,7 +25,50 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="icon" href="/img/logo.png">
     <style>
+        .sidebar {
+            width: 20% !important;
+        }
+
+        .sidebar-unactive {
+            padding-left: 20%;
+        }
+
+        .footer {
+            margin-left: 20%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 25% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 25%;
+            }
+
+            #pie-chart {
+                width: 500px;
+            }
+        }
+
         @media screen and (max-width:576px) {
+
+            .sidebar {
+                width: 30% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 30%;
+            }
+
+            .footer {
+                margin-left: 0%;
+            }
+
+            .nav-link {
+                width: 6rem !important;
+            }
+
             #brand {
                 display: none;
             }
@@ -40,8 +83,8 @@
 
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$user->role_id}}</x-slot:user>
-            <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
+            <x-slot:user>{{ $user->role_id }}</x-slot:user>
+            <x-slot:qrcode>{{ $isreceptionist }}</x-slot:qrcode>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -49,7 +92,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="sidebar-unactive">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
@@ -60,8 +103,8 @@
                     </button>
 
                     <div>
-                        <a class="text-decoration-none" href="/admin/qr_code/edit/{{$isreceptionist}}">
-                            <h1 class="text-gray-600 text-sm md:text-2xl ">Edit Kode Qr</h1>
+                        <a class="text-decoration-none" href="/admin/qr_code/edit/{{ $isreceptionist }}">
+                            <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Edit Kode Qr</h1>
                         </a>
                     </div>
 
@@ -71,10 +114,11 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{$is_admin ? "/img/profile.png" : asset("storage/$user->photo")}}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -112,15 +156,19 @@
                         <input type="hidden" name="old_village" value="{{ $oldVisit->village_code }}">
                         <div class="w-full flex items-center flex-col">
                             <label class="text-lg" for="qr_code">Kode Qr</label>
-                            {{QrCode::generate($oldVisit->qr_code)}}
-                            <a href="/generate/qrcode/{{$oldVisit->id}}" class="bg-blue-600 text-white rounded px-4 my-3 text-center flex items-center justify-center text-decoration-none py-2">Download Kode Qr</a>
+                            {{ QrCode::generate($oldVisit->qr_code) }}
+                            <a href="/generate/qrcode/{{ $oldVisit->id }}"
+                                class="bg-blue-600 text-white rounded px-4 my-3 text-center flex items-center justify-center text-decoration-none py-2">Download
+                                Kode Qr</a>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="province" class="mb-2">Provinsi</label>
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="province" id="province">
-                                <option disabled selected {{$oldVisit->province_code == $oldVisit->province->code ? 'selected' : ''}}>{{$oldVisit->province->name}}</option>
+                                <option disabled selected
+                                    {{ $oldVisit->province_code == $oldVisit->province->code ? 'selected' : '' }}>
+                                    {{ $oldVisit->province->name }}</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->code }}">{{ $province->name }}</option>
                                 @endforeach
@@ -131,21 +179,27 @@
                             <select
                                 class="form-input bg-gray-50 border border-gray-300 text-gray-700 rounded-lg px-2 h-10 w-full"
                                 name="district" id="district">
-                                <option disabled selected {{$oldVisit->district_code == $oldVisit->district->code ? 'selected' : ''}}>{{$oldVisit->district->name}}</option>
+                                <option disabled selected
+                                    {{ $oldVisit->district_code == $oldVisit->district->code ? 'selected' : '' }}>
+                                    {{ $oldVisit->district->name }}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="sub_district" class="mb-2">Kecamatan</label>
-                            <select class="form-input bg-gray-50 border border-gray-300 rounded-lg text-gray-700 px-2 h-10 w-full"
+                            <select
+                                class="form-input bg-gray-50 border border-gray-300 rounded-lg text-gray-700 px-2 h-10 w-full"
                                 name="sub_district" id="sub_district">
-                                <option disabled selected {{$oldVisit->subdistrict_code == $oldVisit->subdistrict->code ? 'selected' : ''}}>{{$oldVisit->subdistrict->name}}</option>
+                                <option disabled selected
+                                    {{ $oldVisit->subdistrict_code == $oldVisit->subdistrict->code ? 'selected' : '' }}>
+                                    {{ $oldVisit->subdistrict->name }}</option>
                             </select>
                         </div>
                         <div class="flex flex-col items-start">
                             <label for="village" class="mb-2">Desa</label>
-                            <select class="form-input bg-gray-50 border border-gray-300 rounded-lg text-gray-700 px-2 h-10 w-full"
+                            <select
+                                class="form-input bg-gray-50 border border-gray-300 rounded-lg text-gray-700 px-2 h-10 w-full"
                                 name="village" id="village">
-                                <option disabled selected>{{$oldVisit->village->name}}</option>
+                                <option disabled selected>{{ $oldVisit->village->name }}</option>
                             </select>
                         </div>
                         <button type="submit"
@@ -267,6 +321,21 @@
         });
     </script>
     <script>
+        const toggleSidebar = document.getElementById('sidebarToggleTop');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.getElementById('content');
+
+        document.addEventListener('DOMContentLoaded', function() {})
+
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('sidebar-unactive');
+        });
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const provinceSelect = document.getElementById('province');
             const districtSelect = document.getElementById('district');
@@ -280,7 +349,8 @@
                     fetch(`/api/districts/${provinceCode}`)
                         .then(response => response.json())
                         .then(data => {
-                            districtSelect.innerHTML = '<option disabled selected>Pilih Kabupaten</option>';
+                            districtSelect.innerHTML =
+                                '<option disabled selected>Pilih Kabupaten</option>';
                             data.forEach(district => {
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;

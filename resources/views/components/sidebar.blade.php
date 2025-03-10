@@ -1,9 +1,9 @@
-<ul class="navbar-nav bg-klipaa  sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-klipaa fixed z-50 sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="text-white font-semibold flex items-center justify-center py-2 text-decoration-none"
         href="/admin/dashboard">
-        <img class="w-12 me-1" src="/img/logo.png" alt="">
-        <p id="brand" class="text-xl font-semibold m-0 mb-0">
+        <img class="w-12 md:w-10 lg:w-12 me-1" src="/img/logo.png" alt="">
+        <p id="brand" class="md:text-lg lg:text-xl font-semibold m-0 mb-0">
             TamuDesa
         </p>
     </a>

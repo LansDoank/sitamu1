@@ -26,7 +26,50 @@
 
     <link rel="icon" href="/img/logo.png">
     <style>
-        @media screen and (max-width:576px){
+        .sidebar {
+            width: 20% !important;
+        }
+
+        .sidebar-unactive {
+            padding-left: 20%;
+        }
+
+        .footer {
+            margin-left: 20%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 25% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 25%;
+            }
+
+            #pie-chart {
+                width: 500px;
+            }
+        }
+
+        @media screen and (max-width:576px) {
+
+            .sidebar {
+                width: 30% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 30%;
+            }
+
+            .footer {
+                margin-left: 0%;
+            }
+
+            .nav-link {
+                width: 6rem !important;
+            }
+
             #brand {
                 display: none;
             }
@@ -51,7 +94,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="sidebar-unactive">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
@@ -63,7 +106,7 @@
 
                     <div>
                         <a class="text-decoration-none" href="/admin/qr_code">
-                            <h1 class="text-gray-600 text-2xl ">&laquo; Tambah Data Kode Qr</h1>
+                            <h1 class="text-gray-600 text-sm w-24 md:w-auto md:text-2xl mb-0">&laquo; Tambah Kode Qr</h1>
                         </a>
                     </div>
 
@@ -256,6 +299,21 @@
                     reader.readAsDataURL(file);
                 }
             });
+        });
+    </script>
+    <script>
+        const toggleSidebar = document.getElementById('sidebarToggleTop');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.getElementById('content');
+
+        document.addEventListener('DOMContentLoaded', function() {})
+
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('sidebar-unactive');
         });
     </script>
         <script>

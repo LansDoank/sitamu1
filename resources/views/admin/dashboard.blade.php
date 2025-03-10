@@ -23,8 +23,50 @@
     <link rel="icon" href="/img/logo.png">
 
     <style>
+        .sidebar {
+            width: 20% !important;
+        }
+
+        .sidebar-unactive {
+            padding-left: 20%;
+        }
+
+        .footer {
+            margin-left: 20%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 25% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 25%;
+            }
+
+            #pie-chart {
+                width: 500px;
+            }
+        }
 
         @media screen and (max-width:576px) {
+
+            .sidebar {
+                width:30% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 30%;
+            }
+
+            .footer {
+                margin-left: 0%;
+            }
+
+            .nav-link {
+                width: 6rem !important;
+            }
+
             #brand {
                 display: none;
             }
@@ -39,7 +81,7 @@
         <!-- Sidebar -->
         <x-sidebar>
             <x-slot:user>{{ $is_admin }}</x-slot:user>
-            <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
+            <x-slot:qrcode>{{ $isreceptionist }}</x-slot:qrcode>
         </x-sidebar>
         <!-- End of Sidebar -->
 
@@ -47,7 +89,7 @@
         <div id="content-wrapper" class="d-flex flex-column w-[500px]">
 
             <!-- Main Content -->
-            <div id="content" class="">
+            <div id="content" class="sidebar-unactive">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -183,11 +225,11 @@
 
                     <!-- Content Row -->
 
-                    <div class="row gap-0 m-0">
+                    <div class="row m-0">
 
                         <!-- Area Chart -->
-                        <div class="col-6">
-                            <div class="card  shadow mb-4 p-0 m-0 g-0">
+                        <div class="w-full md:w-1/2 md:px-2">
+                            <div class="w-full shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header w-full py-3 d-flex flex-row align-items-center justify-content-between">
@@ -195,7 +237,7 @@
                                 </div>
 
                                 <!-- Card Body -->
-                                <div class="card-body w-full">
+                                <div class="card-body w-full bg-white">
                                     <div class="w-full">
                                         <canvas id="line-chart" class="w-full"
                                             style="width: 100% !important;"></canvas>
@@ -203,8 +245,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="card shadow mb-4 p-0 m-0 g-0">
+                        <div class="w-full md:w-1/2 md:px-2">
+                            <div class="card w-full shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -221,7 +263,7 @@
                         </div>
 
                         <!-- Pie Chart -->
-                        <div class="col-6">
+                        <div class="w-full p-0">
                             <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -231,8 +273,8 @@
                                 <!-- Card Body -->
                                 <div
                                     class="card-body w-full flex flex-col-reverse md:flex-row flex-wrap md:flex-nowrap">
-                                    <div class="w-full lg:w-1/2 flex flex-col justify-center p-2">
-                                        <ul class="text-decoration-none list-none">
+                                    <div class="flex md:w-1/2 flex-col justify-center p-2">
+                                        <ul class="text-decoration-none list-none mb-0">
                                             <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
                                                 Studi Banding
                                                 <div class="md:mx-5 flex">
@@ -257,7 +299,7 @@
                                                     {{ $koordinasi }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
+                                            <li class="flex my-3 mb-0 text-sm md:text-sm lg:text-xl justify-between">
                                                 Lainnya
                                                 <div class="md:mx-5 flex">
                                                     {{ $lainnya }}
@@ -265,7 +307,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="flex justify-center items-center w-full lg:w-1/2">
+                                    <div class="flex w-full md:w-1/2 justify-center items-center md:w-1/2 lg:px-24">
                                         <canvas id="pie-chart" class="w-full"></canvas>
                                     </div>
 
@@ -273,20 +315,9 @@
                             </div>
                         </div>
 
-                        @if ($is_admin)
-                            {{-- Geographical Chart --}}
-                            <div class="col-6 p-0 m-0 g-0">
-                                <div
-                                    class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Geografis</h6>
-                                </div>
-                                <div class="flex">
-                                    <div id="geochart" style="width: 100%;"></div>
-                                </div>
-                            </div>
-                        @endif
+                        
 
-                        <div class="col-6">
+                        <div class="col-12 p-0">
                             <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -304,6 +335,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if ($is_admin)
+                            {{-- Geographical Chart --}}
+                            <div class="col-12 mb-4 p-0">
+                                <div
+                                    class="card-header border py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Geografis</h6>
+                                </div>
+                                <div class="flex">
+                                    <div id="geochart" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
 
 
@@ -353,6 +397,7 @@
         </div>
     </div>
 
+
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -370,6 +415,21 @@
     <script src="/js/demo/chart-pie-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        const toggleSidebar = document.getElementById('sidebarToggleTop');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.getElementById('content');
+
+        document.addEventListener('DOMContentLoaded', function() {})
+
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('sidebar-unactive');
+        });
+    </script>
     {{-- Chart --}}
     <script>
         fetch('/chart/line')

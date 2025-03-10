@@ -25,7 +25,50 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="icon" href="/img/logo.png">
     <style>
-        @media screen and (max-width:576px){
+        .sidebar {
+            width: 20% !important;
+        }
+
+        .sidebar-unactive {
+            padding-left: 20%;
+        }
+
+        .footer {
+            margin-left: 20%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 25% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 25%;
+            }
+
+            #pie-chart {
+                width: 500px;
+            }
+        }
+
+        @media screen and (max-width:576px) {
+
+            .sidebar {
+                width:30% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 30%;
+            }
+
+            .footer {
+                margin-left: 0%;
+            }
+
+            .nav-link {
+                width: 6rem !important;
+            }
+
             #brand {
                 display: none;
             }
@@ -40,8 +83,8 @@
 
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{$user->role_id}}</x-slot:user>
-            <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
+            <x-slot:user>{{ $user->role_id }}</x-slot:user>
+            <x-slot:qrcode>{{ $isreceptionist }}</x-slot:qrcode>
 
         </x-sidebar>
         <!-- End of Sidebar -->
@@ -50,7 +93,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="sidebar-unactive">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
@@ -61,7 +104,7 @@
                     </button>
 
                     <div>
-                        <a class="text-decoration-none" href="/admin/visitor/{{$user->village_code}}">
+                        <a class="text-decoration-none" href="/admin/visitor/{{ $user->village_code }}">
                             <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Pratinjau Data Tamu</h1>
                         </a>
                     </div>
@@ -73,10 +116,11 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                                <img class="img-profile rounded-circle" src="{{$is_admin ? "/img/profile.png" : asset("storage/$user->photo")}}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -105,7 +149,7 @@
                         </div>
                     </div>
                     <div class="form-body">
-                        
+
                         <ul class="md:my-5">
                             <li class="flex flex-wrap md:flex-nowrap gap-3 md:gap-0 md:my-3">
                                 <div class="flex flex-col items-start w-full md:w-1/2">
@@ -138,7 +182,8 @@
                                     <label for="province" class="mb-2">Provinsi</label>
                                     <input type="text" name="province" id="province"
                                         class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                                        placeholder="Masukkan telepon anda" value="{{ $visitor->province->name }}" disabled>
+                                        placeholder="Masukkan telepon anda" value="{{ $visitor->province->name }}"
+                                        disabled>
                                 </div>
                             </li>
                             <li class="md:my-3">
@@ -146,7 +191,8 @@
                                     <label for="district" class="mb-2">Kabupaten</label>
                                     <input type="text" name="district" id="district"
                                         class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                                        placeholder="Masukkan kabupaten anda" value="{{ $visitor->district->name }}" disabled>
+                                        placeholder="Masukkan kabupaten anda" value="{{ $visitor->district->name }}"
+                                        disabled>
                                 </div>
                             </li>
                             <li class="md:my-3">
@@ -154,7 +200,8 @@
                                     <label for="sub_district" class="mb-2">Kecamatan</label>
                                     <input type="text" name="sub_district" id="sub_district"
                                         class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                                        placeholder="Masukkan kecamatan anda" value="{{ $visitor->subdistrict->name }}" disabled>
+                                        placeholder="Masukkan kecamatan anda"
+                                        value="{{ $visitor->subdistrict->name }}" disabled>
                                 </div>
                             </li>
                             <li class="md:my-3">
@@ -162,7 +209,8 @@
                                     <label for="village" class="mb-2">Desa</label>
                                     <input type="text" name="village" id="village"
                                         class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                                        placeholder="Masukkan desa anda" value="{{ $visitor->village->name }}" disabled>
+                                        placeholder="Masukkan desa anda" value="{{ $visitor->village->name }}"
+                                        disabled>
                                 </div>
                             </li>
                             <li class="md:my-3">
@@ -185,14 +233,16 @@
                                 <div class="flex flex-col items-start">
                                     <label for="objective" class="mb-2">Tujuan</label>
                                     <input type="text" name="objective" id="objective"
-                                    class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                                    placeholder="Masukkan telepon anda" value="{{ $visitor->objective }}" disabled>
+                                        class="form-input border border-gray-200 rounded w-full h-10 px-3" required
+                                        placeholder="Masukkan telepon anda" value="{{ $visitor->objective }}"
+                                        disabled>
                                 </div>
                             </li>
                             <li class="md:my-3">
                                 <div class="flex flex-col items-start">
-                                    <label class="mb-2">Lokasi  Tujuan</label>
-                                    <input type="text" disabled value="{{ $visitor->visitType->name }}" class="form-input border border-gray-200 rounded w-full h-10 px-3">
+                                    <label class="mb-2">Lokasi Tujuan</label>
+                                    <input type="text" disabled value="{{ $visitor->visitType->name }}"
+                                        class="form-input border border-gray-200 rounded w-full h-10 px-3">
                                 </div>
                             </li>
                             <li class="md:my-3">
@@ -212,7 +262,8 @@
                                     <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
                                     </label>
                                     <div class="w-full flex justify-center">
-                                        <img class="w-full max-w-[300px] h-full object-cover" src="{{asset('storage/' . $visitor->visitor_photo)}}" alt="">
+                                        <img class="w-full max-w-[300px] h-full object-cover"
+                                            src="{{ asset('storage/' . $visitor->visitor_photo) }}" alt="">
                                     </div>
                                 </div>
                             </li>
@@ -331,6 +382,22 @@
                 objectiveArea.classList.add("hidden");
                 objective.setAttribute("name", "objective");
             }
+        });
+    </script>
+
+    <script>
+        const toggleSidebar = document.getElementById('sidebarToggleTop');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.getElementById('content');
+
+        document.addEventListener('DOMContentLoaded', function() {})
+
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('sidebar-unactive');
         });
     </script>
     <script>

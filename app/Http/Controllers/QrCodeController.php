@@ -69,11 +69,6 @@ class QrCodeController extends Controller
         }
         $visit = VisitType::find($id);
 
-        if($visit->village_code != $user->village_code) {
-            return redirect("/generate/qrcode/$visits");
-        }
-
-
         return view('qrcode.edit', ['isreceptionist' => $visits,'title' => 'Edit Kode Qr', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 

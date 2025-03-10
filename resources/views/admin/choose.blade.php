@@ -25,7 +25,50 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="icon" href="/img/logo.png">
     <style>
+        .sidebar {
+            width: 20% !important;
+        }
+
+        .sidebar-unactive {
+            padding-left: 20%;
+        }
+
+        .footer {
+            margin-left: 20%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 25% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 25%;
+            }
+
+            #pie-chart {
+                width: 500px;
+            }
+        }
+
         @media screen and (max-width:576px) {
+
+            .sidebar {
+                width:30% !important;
+            }
+
+            .sidebar-unactive {
+                padding-left: 30%;
+            }
+
+            .footer {
+                margin-left: 0%;
+            }
+
+            .nav-link {
+                width: 6rem !important;
+            }
+
             #brand {
                 display: none;
             }
@@ -50,7 +93,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" class="sidebar-unactive">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -95,7 +138,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="mb-2 text-2xl md:text-3xl text-gray-800">List Data Desa Yang Terdaftar</h1>
+                    <h1 class="mb-2 text-xl md:text-3xl text-gray-800">List Data Desa Yang Terdaftar</h1>
                     @if (session('visitor_error'))
                         <div
                             class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
@@ -213,6 +256,21 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
+    <script>
+        const toggleSidebar = document.getElementById('sidebarToggleTop');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.getElementById('content');
+
+        document.addEventListener('DOMContentLoaded', function() {})
+
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('sidebar-unactive');
+        });
+    </script>
     <script>
         function downloadExcel() {
             let table = document.getElementById("dataTable");

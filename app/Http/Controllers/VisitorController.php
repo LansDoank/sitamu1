@@ -111,7 +111,7 @@ class VisitorController extends Controller
         $visitor = Visitor::find($id);
         $visit = VisitType::where('village_code',$user->village_code)->first()->id;
 
-        if ($user->role_id = 2) {
+        if ($user->role_id == '2') {
             if ($user->village_code != $visitor->village_code) {
                 return redirect("/admin/visitor/$user->village_code");
             }
