@@ -416,7 +416,218 @@
             });
         });
     </script>
+    {{-- Chart --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        fetch('/chart/line')
+            .then((res) => res.json())
+            .then((data) => {
+                const labels = data.map(item => {
+                    const months = [
+                        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                    ];
+                    return months[item.month - 1]; // Ubah angka bulan menjadi nama bulan
+                });
 
+                const values = data.map(item => item.total);
+
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Jumlah Visitor per Bulan',
+                            data: values,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderWidth: 2,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }).catch(error => console.error("Error fetching data:", error));
+    </script>
+    <script>
+        fetch('/chart/candle')
+            .then((res) => res.json())
+            .then((data) => {
+                const labels = ['Supra Desa', 'APH', 'Warga', 'Media', 'Lainnya']
+                new Chart('overview', {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Jumlah Visitor per Instansi',
+                            data: data,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderWidth: 2,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }).catch(error => console.error("Error fetching data:", error));
+    </script>
+    <script>
+        fetch('/chart/doughnut')
+            .then((res) => res.json())
+            .then((data) => {
+                const labels = ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi', 'Lainnya']
+                new Chart('pie-chart', {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Jumlah Visitor per Instansi',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(181, 78, 225, 1)',
+                                'rgba(225, 80, 80, 1)',
+                                'rgba(255, 162, 70, 1)',
+                                'rgba(246, 194, 62, 1)',
+                                'rgba(95, 230, 68, 1)',
+                            ]
+                        }]
+                    }
+                });
+            }).catch(error => console.error("Error fetching data:", error));
+    </script>
+    <script>
+        fetch('/chart/geographical')
+            .then((res) => res.json())
+            .then((data) => {
+
+                google.charts.load('current', {
+                    'packages': ['geochart'],
+                    'mapsApiKey': 'YOUR_GOOGLE_MAPS_API_KEY' // Opsional
+                });
+                google.charts.setOnLoadCallback(() => drawRegionsMap(data));
+            });
+
+        function drawRegionsMap(apiData) {
+            // Mapping kode provinsi dari angka ke ISO 3166-2:ID
+            const provinceMapping = {
+                "11": "ID-AC", // Aceh
+                "12": "ID-SU", // Sumatera Utara
+                "13": "ID-SB", // Sumatera Barat
+                "14": "ID-RI", // Riau
+                "15": "ID-JA", // Jambi
+                "16": "ID-SS", // Sumatera Selatan
+                "17": "ID-BE", // Bengkulu
+                "18": "ID-LA", // Lampung
+                "19": "ID-BB", // Kepulauan Bangka Belitung
+                "21": "ID-KR", // Kepulauan Riau
+                "31": "ID-JK", // DKI Jakarta
+                "32": "ID-JB", // Jawa Barat
+                "33": "ID-JT", // Jawa Tengah
+                "34": "ID-YO", // DI Yogyakarta
+                "35": "ID-JI", // Jawa Timur
+                "36": "ID-BT", // Banten
+                "51": "ID-BA", // Bali
+                "52": "ID-NB", // Nusa Tenggara Barat
+                "53": "ID-NT", // Nusa Tenggara Timur
+                "61": "ID-KB", // Kalimantan Barat
+                "62": "ID-KT", // Kalimantan Tengah
+                "63": "ID-KS", // Kalimantan Selatan
+                "64": "ID-KI", // Kalimantan Timur
+                "65": "ID-KU", // Kalimantan Utara
+                "71": "ID-SA", // Sulawesi Utara
+                "72": "ID-ST", // Sulawesi Tengah
+                "73": "ID-SN", // Sulawesi Selatan
+                "74": "ID-SG", // Sulawesi Tenggara
+                "75": "ID-GO", // Gorontalo
+                "76": "ID-SR", // Sulawesi Barat
+                "81": "ID-MA", // Maluku
+                "82": "ID-MU", // Maluku Utara
+                "91": "ID-PA", // Papua
+                "92": "ID-PB" // Papua Barat
+            };
+
+            // Ubah data API ke format Google Charts
+            const chartData = [
+                ['Province', 'Visitors']
+            ];
+            apiData.forEach(item => {
+                const provinceCode = provinceMapping[item.province_code]; // Konversi kode
+                if (provinceCode) {
+                    chartData.push([provinceCode, item.visitors]);
+                }
+            });
+
+
+            var data = google.visualization.arrayToDataTable(chartData);
+
+            var options = {
+                region: 'ID', // Fokus ke Indonesia
+                resolution: 'provinces',
+                colorAxis: {
+                    colors: ['#e0f3db', '#0868ac']
+                }
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('geochart'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script>
+        async function fetchChartData() {
+            try {
+                const response = await fetch('/chart/time'); // Panggil API
+                const data = await response.json();
+
+                // Format data agar sesuai dengan chart
+                const labels = data.map(item => item.hour + ":00"); // Konversi jam ke format "HH:00"
+                const guestCounts = data.map(item => item.guests);
+
+                // Render Chart
+                const ctx = document.getElementById('waktu-chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Guests by time',
+                            data: guestCounts,
+                            backgroundColor: 'rgba(44, 125, 157, 1)',
+                        }]
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching chart data:", error);
+            }
+        }
+
+        fetchChartData();
+    </script>
+    {{-- End Chart --}}
 </body>
 
 </html>
