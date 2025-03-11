@@ -51,15 +51,17 @@ class VisitorController extends Controller
         if ($user->role_id == 1) {
             $visitor = Visitor::where('village_code', $code)->get();
             $village_code = $user->village_code;
+            $village_name = Village::where('code', $village_code)->first()->name;
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
             $visit = VisitType::where('village_code', $user->village_code)->first()->id;
 
+            $title = "Admin - Desa $village_name";
 
             return view(
                 'admin.visitor',
-                ['isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
+                ['title'=> $title, 'isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
             );
         } else if ($code == $user->village_code) {
             $visitor = Visitor::where('village_code', $code)->get();
@@ -72,7 +74,7 @@ class VisitorController extends Controller
 
             return view(
                 'admin.visitor',
-                ['isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
+                ['isreceptionist' => $visit,'title' => 'Tamu - TamuDesa' ,'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo,]
             );
         } else {
             return redirect('/admin/visitor/' . $user->village_code);

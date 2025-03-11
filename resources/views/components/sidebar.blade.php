@@ -11,7 +11,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }} flex justify-center nav-item">
+    <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
         <a class="nav-link" href="/admin/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -29,7 +29,7 @@
 
 
     <!-- Nav Item - Tables -->
-    <li class="{{ request()->is('admin/visitor') ? 'active' : '' }} flex justify-center nav-item">
+    <li class="{{ request()->is('admin/visitor') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
         <a class="nav-link" href="/admin/visitor">
             <div class="flex flex-wrap md:flex-nowrap justify-center md:justify-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -42,7 +42,7 @@
         </a>
     </li>
     @if ($user == '1')
-        <li class="{{ request()->is('admin/receptionist') ? 'active' : '' }} nav-item">
+        <li class="{{ request()->is('admin/receptionist') ? 'active' : '' }} nav-item flex justify-center md:justify-start">
             <a class="nav-link" href="/admin/receptionist">
                 <div class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -112,7 +112,7 @@
 
     </li> --}}
     @if ($user == '1')
-        <li class="{{ request()->is('admin/qr_code') ? 'active' : '' }} flex justify-center nav-item">
+        <li class="{{ request()->is('admin/qr_code') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
             <a class="nav-link" href="/admin/qr_code">
                 <div class="flex flex-wrap md:flex-nowrap justify-center md:justify-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -129,7 +129,7 @@
             </a>
         </li>
     @else
-        <li class="{{ request()->is('admin/qr_code') ? 'active' : '' }} flex justify-center nav-item">
+        <li class="{{ request()->is('admin/qr_code') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
             <a class="nav-link" href="/generate/qrcode/{{$qrcode}}">
                 <div class="flex flex-wrap md:flex-nowrap justify-center md:justify-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

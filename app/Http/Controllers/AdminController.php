@@ -52,6 +52,8 @@ class AdminController extends Controller
         return view(
             'admin.dashboard',
             [
+                'title' => 'Admin 
+                Dashboard',
                 'user' => Auth::user(),
                 'username' => Auth::user()->username,
                 'photo' => Auth::user()->photo,
@@ -81,7 +83,7 @@ class AdminController extends Controller
         if($is_admin) {
             return view(
                 'admin.choose',
-                    ['isreceptionist' => $visit, 'villages' => $village, 'qrcode' => $visit,'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->username,'photo' => Auth::user()->photo,]
+                    ['title' => 'Admin - Pilih Desa','isreceptionist' => $visit, 'villages' => $village, 'qrcode' => $visit,'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->username,'photo' => Auth::user()->photo,]
             );
 
         } else {

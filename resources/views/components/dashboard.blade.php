@@ -83,7 +83,7 @@
 
         <!-- Sidebar -->
         <x-sidebar>
-            <x-slot:user>{{ $user->role_id }}</x-slot:user>
+            <x-slot:user>{{ $user}}</x-slot:user>
             <x-slot:qrcode>{{$isreceptionist}}</x-slot:qrcode>
 
         </x-sidebar>
