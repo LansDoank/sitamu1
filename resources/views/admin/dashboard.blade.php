@@ -52,7 +52,7 @@
         @media screen and (max-width:576px) {
 
             .sidebar {
-                width:30% !important;
+                width: 30% !important;
             }
 
             .sidebar-unactive {
@@ -315,7 +315,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="md:w-1/2 md:px-2">
                             <div class="card shadow mb-4 p-0 m-0 g-0">
@@ -397,7 +397,21 @@
         </div>
     </div>
 
+    <script>
+        const toggleSidebar = document.getElementById('sidebarToggleTop');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.getElementById('content');
 
+        document.addEventListener('DOMContentLoaded', function() {})
+
+
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('sidebar-unactive');
+        });
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -415,21 +429,7 @@
     <script src="/js/demo/chart-pie-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
-        const toggleSidebar = document.getElementById('sidebarToggleTop');
-        const sidebar = document.querySelector('.sidebar');
-        const content = document.getElementById('content');
 
-        document.addEventListener('DOMContentLoaded', function() {})
-
-
-        toggleSidebar.addEventListener('click', () => {
-            sidebar.classList.toggle('fixed');
-            sidebar.classList.toggle('fixed');
-            sidebar.classList.toggle('hidden');
-            content.classList.toggle('sidebar-unactive');
-        });
-    </script>
     {{-- Chart --}}
     <script>
         fetch('/chart/line')
