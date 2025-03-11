@@ -453,7 +453,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Jumlah Visitor per Bulan',
+                            label: 'Jumlah tamu berdasarkan bulan',
                             data: values,
                             borderColor: 'rgba(54, 162, 235, 1)',
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -487,7 +487,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Jumlah Visitor per Instansi',
+                            label: 'Jumlah tamu berdasarkan instansi',
                             data: data,
                             borderColor: 'rgba(54, 162, 235, 1)',
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -521,7 +521,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Jumlah Visitor per Instansi',
+                            label: 'Jumlah tamu berdasarkan instansi',
                             data: data,
                             backgroundColor: [
                                 'rgba(181, 78, 225, 1)',
@@ -629,7 +629,7 @@
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Guests by time',
+                            label: 'Jumlah tamu berdasarkan waktu',
                             data: guestCounts,
                             backgroundColor: 'rgba(44, 125, 157, 1)',
                         }]
