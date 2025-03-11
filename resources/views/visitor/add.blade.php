@@ -4,7 +4,7 @@
     <x-slot:isreceptionist>{{ $isreceptionist }}</x-slot:isreceptionist>
     <x-slot:username>{{ $username }}</x-slot:username>
     <x-slot:is_admin>{{ $is_admin }}</x-slot:is_admin>
-                   <!-- Topbar -->
+                   <!-- Topbr -->
                    <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
