@@ -47,7 +47,8 @@ class AdminController extends Controller
         $koordinasi = (clone $visitor)->where('objective','Koordinasi')->count();
         $lainnya = (clone $visitor)->whereNotIn('objective', ['Studi Banding', 'Cari Informasi', 'Pembinaan', 'Koordinasi'])->count();
 
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+
 
         return view(
             'admin.dashboard',
@@ -78,7 +79,8 @@ class AdminController extends Controller
     
         $is_admin = $user->role_id == 1 ? true : false;
         $village = VisitType::all();
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        
 
         if($is_admin) {
             return view(
@@ -99,10 +101,11 @@ class AdminController extends Controller
         }
         $receptionists = User::where('role_id', '2')->get();
         $is_admin = $user->role_id == 1 ? true : false;
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
 
 
-        return view('admin.receptionists', ['isreceptionist' => $visit,'user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->username,'photo' => Auth::user()->photo, 'receptionists' => $receptionists]);
+
+        return view('admin.receptionists', ['title' => 'Admin - Resepsionis','isreceptionist' => $visit,'user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->username,'photo' => Auth::user()->photo, 'receptionists' => $receptionists]);
     }
 
     public function masterData(){
@@ -123,6 +126,6 @@ class AdminController extends Controller
         $visit = VisitType::where('village_code',$user->village_code)->first()->id;
 
 
-        return view('admin.qrCode', ['isreceptionist' => $visit,'admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
+        return view('admin.qrCode', ['title' => 'Admin - Kode Qr', 'isreceptionist' => $visit,'admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
     }
 }

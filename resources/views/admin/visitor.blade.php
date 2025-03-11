@@ -54,7 +54,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="mb-2 text-2xl md:text-3xl text-gray-800">Tabel Tamu</h1>
+        <h1 class="mb-2 text-2xl  lg:text-3xl text-gray-800">Tabel Tamu</h1>
         @if (session('visitor_error'))
             <div class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
                 {{ session('visitor_error') }}</div>
@@ -67,14 +67,14 @@
         @if ($user->role_id == '1')
             <div class="flex mb-3 justify-between flex-wrap gap-3">
                 <a href="/admin/visitor/add/{{ $code }}"
-                    class="bg-klipaa w-full md:w-auto font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
+                    class="bg-klipaa w-full md:w-44 lg:w-48 font-medium text-base md:text-sm lg:text-base flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
                     Tambah Data Tamu</a>
-                <div class="flex gap-3 flex-wrap md:w-[400px] w-full">
+                <div class="flex gap-3 flex-wrap md:w-[300px] lg:w-[400px] w-full">
                     <a href="/generate/visitor/{{ $code }}"
-                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center md:w-48 w-full justify-center font-medium h-12">Buat
+                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-36 md:text-sm lg:text-base lg:w-48 justify-center font-medium h-12">Buat
                         Laporan</a>
                     <button onclick="downloadExcel()"
-                        class="bg-red-600 text-white font-medium rounded px-4 md:w-48 w-full h-12">Download
+                        class="bg-red-600 text-white font-medium rounded px-2 md:w-36 md:text-sm lg:text-base lg:w-48 w-full h-12">Download
                         Excel</button>
                 </div>
             </div>
@@ -83,12 +83,12 @@
                 <a href="/admin/visitor/add/{{ $user->village_code }}"
                     class="bg-klipaa font-medium text-md mb-3 md:mb-0 flex justify-center items-center text-white rounded px-3 h-12 w-full md:w-40 md:text-sm lg:w-48 text-decoration-none hover:brightness-90">+
                     Buat Data Tamu</a>
-                <div class="flex gap-3 flex-wrap md:w-[30px] lg:w-[400px] w-full">
+                <div class="flex gap-3 flex-wrap md:w-[300px] lg:w-[400px] w-full">
                     <a href="/generate/visitor/{{ $code }}"
-                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-40 md:text-sm lg:w-48 justify-center font-medium h-12">Buat
+                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-40 md:text-sm lg:text-base lg:w-48 justify-center font-medium h-12">Buat
                         Laporan</a>
                     <button onclick="downloadExcel()"
-                        class="bg-red-600 text-white font-medium rounded px-4 md:w-40 md:text-sm lg:w-48 w-full h-12">Download
+                        class="bg-red-600 text-white font-medium rounded px-4 md:w-40 md:text-sm lg:text-base lg:w-48 w-full h-12">Download
                         Excel</button>
                 </div>
 
