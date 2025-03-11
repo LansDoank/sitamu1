@@ -4,7 +4,54 @@
     <x-slot:isreceptionist>{{ $isreceptionist }}</x-slot:isreceptionist>
     <x-slot:username>{{ $username }}</x-slot:username>
     <x-slot:is_admin>{{ $is_admin }}</x-slot:is_admin>
-    <div class="">
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        @if ($is_admin)
+            <div>
+                <a class="text-decoration-none" href="/admin/visitor">
+                    <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Tamu</h1>
+                </a>
+            </div>
+        @else
+            <div>
+                <h1 class="text-gray-600 text-xl md:text-2xl mb-0">Tamu</h1>
+            </div>
+        @endif
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
+                    <img class="img-profile rounded-circle"
+                        src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Keluar
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+
+    </nav>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
         <!-- Page Heading -->
         <h1 class="mb-2 text-2xl md:text-3xl text-gray-800">Tabel Tamu</h1>
@@ -34,14 +81,14 @@
         @else
             <div class="flex mb-3 justify-between w-full flex-wrap">
                 <a href="/admin/visitor/add/{{ $user->village_code }}"
-                    class="bg-klipaa font-medium text-md mb-3 md:mb-0 flex justify-center items-center text-white rounded px-3 h-12 w-full md:w-40 md:text-sm lg:text-base lg:w-48 text-decoration-none hover:brightness-90">+
+                    class="bg-klipaa font-medium text-md mb-3 md:mb-0 flex justify-center items-center text-white rounded px-3 h-12 w-full md:w-40 md:text-sm lg:w-48 text-decoration-none hover:brightness-90">+
                     Buat Data Tamu</a>
-                <div class="flex gap-3 flex-wrap md:w-[350px] lg:w-[400px] w-full">
+                <div class="flex gap-3 flex-wrap md:w-[30px] lg:w-[400px] w-full">
                     <a href="/generate/visitor/{{ $code }}"
-                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-40 md:text-sm lg:text-base lg:w-48 justify-center font-medium h-12">Buat
+                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-40 md:text-sm lg:w-48 justify-center font-medium h-12">Buat
                         Laporan</a>
                     <button onclick="downloadExcel()"
-                        class="bg-red-600 text-white font-medium rounded px-4 md:w-40 md:text-sm lg:text-base lg:w-48 w-full h-12">Download
+                        class="bg-red-600 text-white font-medium rounded px-4 md:w-40 md:text-sm lg:w-48 w-full h-12">Download
                         Excel</button>
                 </div>
 
@@ -105,4 +152,5 @@
             </div>
         </div>
     </div>
+    <!-- /.container-fluid -->
 </x-dashboard>

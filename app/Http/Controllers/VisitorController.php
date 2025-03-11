@@ -180,7 +180,7 @@ class VisitorController extends Controller
         $village_code = "$code[0]$code[1]$code[2]$code[3]$code[4]$code[5]$code[6]$code[7]$code[8]$code[9]";
         $visit = VisitType::where('village_code',$user->village_code)->first()->id;
         $village = VisitType::where('village_code', $village_code)->first()->id;
-        return view('visitor.add', ['isreceptionist' => $visit, 'title' => 'Visitor Form', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code, 'visit_type' => $village]);
+        return view('visitor.add', ['title' => 'Admin - Form Tambah Tamu','isreceptionist' => $visit, 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code, 'visit_type' => $village]);
     }
 
     public function create(Request $request)

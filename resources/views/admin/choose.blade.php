@@ -4,7 +4,47 @@
     <x-slot:isreceptionist>{{ $isreceptionist }}</x-slot:isreceptionist>
     <x-slot:username>{{ $username }}</x-slot:username>
     <x-slot:is_admin>{{ $is_admin }}</x-slot:is_admin>
-    <div class="">
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <div>
+            <h1 class="text-gray-600 text-xl md:text-2xl mb-0">Tamu</h1>
+        </div>
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
+                    <img class="img-profile rounded-circle"
+                        src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Keluar
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+
+    </nav>
+    <!-- End of Topbar -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
         <!-- Page Heading -->
         <h1 class="mb-2 text-xl md:text-3xl text-gray-800">List Data Desa Yang Terdaftar</h1>
         @if (session('visitor_error'))
@@ -59,4 +99,5 @@
             </div>
         </div>
     </div>
+    <!-- /.container-fluid -->
 </x-dashboard>
