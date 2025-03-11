@@ -83,7 +83,7 @@
                                     <td>{{ $village->province->name }}</td>
                                     <td>{{ $village->district->name }}</td>
                                     <td>{{ $village->subdistrict->name }}</td>
-                                    <td>{{ $village->name }}</td>
+                                    <td>{{ Str::ucfirst($village->name) }}</td>
                                     <td class="flex">
                                         <a class="rounded bg-blue-600 text-white px-5 h-10 text-center flex items-center justify-center text-decoration-none "
                                             href="/admin/visitor/{{ $village->village_code }}">

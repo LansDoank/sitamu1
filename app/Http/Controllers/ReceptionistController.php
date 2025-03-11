@@ -31,10 +31,10 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
 
 
-        return view('receptionist.add', ['isreceptionist' => $visit,'title' => 'Add Receptionist','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('receptionist.add', ['isreceptionist' => $visit,'title' => 'Admin - Tambah Resepsionis','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
 
@@ -68,12 +68,18 @@ class ReceptionistController extends Controller
 
     // Fungsi untuk mengambil desa berdasarkan kecamatan yang dipilih
     public function getVillagesBySubDistrict($sub_district_code)
-    {
-        $villages = Village::where('sub_district_code', $sub_district_code)
+{
+    $villages = Village::where('sub_district_code', $sub_district_code)
         ->orderBy('name', 'asc')
-        ->get();
-        return response()->json($villages);
-    }
+        ->get()
+        ->map(function ($village) {
+            $village->name = ucwords(strtolower($village->name));
+            return $village;
+        });
+
+    return response()->json($villages);
+}
+
 
     // Fungsi untuk menyimpan data receptionist
     public function store(Request $request)
@@ -146,10 +152,11 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
 
 
-        return view('receptionist.preview',['isreceptionist' => $visit,'users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
+
+        return view('receptionist.preview',['title' => 'Admin - Pratinjau Resepsionis','isreceptionist' => $visit,'users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
     }
 
 
@@ -162,10 +169,11 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
         $receptionist = User::find($id);
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        
 
 
-        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Edit Receptionist', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Admin - Edit Resepsionis', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)
