@@ -95,7 +95,7 @@
                                         </a>
                                     <td>{{ Str::ucfirst($visitType->name) }}</td>
                                     <td class="">
-                                        {{ $visitType->province->name . ', ' . $visitType->district->name . ', ' . $visitType->subdistrict->name . ', ' . Str::ucfirst($visitType->village->name) }}
+                                        {{ $visitType->province->name . ', ' . $visitType->district->name . ', Kecamatan ' . $visitType->subdistrict->name . ', Desa ' . Str::ucfirst($visitType->village->name) }}
                                     </td>
                                     @if ($admin)
                                         <td class="flex justify-center">

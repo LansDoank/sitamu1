@@ -240,18 +240,6 @@
                     </div>
                 </div>
             </div>
-
-            @if ($is_admin)
-                {{-- Geographical Chart --}}
-                <div class="col-12 mb-4 p-0">
-                    <div class="card-header border py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Grafik Geografis</h6>
-                    </div>
-                    <div class="flex">
-                        <div id="geochart" style="width: 100%;"></div>
-                    </div>
-                </div>
-            @endif
         </div>
 
 
