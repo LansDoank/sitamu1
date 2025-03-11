@@ -103,7 +103,7 @@
                         </select>
                     </div>
                 </li>
-                <li class="md:my-3">
+                <li class="md:my-3 mt-2">
                     <textarea class="hidden w-full rounded-lg border border-gray-200 px-3 py-2" id="institution-textarea"
                         placeholder="Sebutkan Instansi Anda"></textarea>
                 </li>
@@ -195,7 +195,7 @@
                         </select>
                     </div>
                 </li>
-                <li class="md:my-3">
+                <li class="md:my-3 mt-2">
                     <textarea class="hidden w-full border rounded-lg border-gray-200 px-3 py-2" id="objective_textarea"
                         placeholder="Sebutkan Tujuan Anda"></textarea>
                 </li>
@@ -216,10 +216,9 @@
                 <li class="md:my-3 ">
                     <div class="flex flex-col items-start w-full">
                         <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
-                            <div
-                                class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                                <img class="max-w-[300px]" src="{{ asset("storage/$oldVisit->visitor_photo") }}"
-                                    alt="">
+                            Wajah
+                            <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
+                                <img class="w-full h-full max-w-[250px]" src="{{ asset("storage/$oldVisit->visitor_photo") }}" alt="">
                             </div>
                         </label>
                         <input class="hidden" type="file" name="visitor_photo" id="visitor_photo">

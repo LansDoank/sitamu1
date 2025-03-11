@@ -51,7 +51,7 @@ class VisitorController extends Controller
         if ($user->role_id == 1) {
             $visitor = Visitor::where('village_code', $code)->get();
             $village_code = $user->village_code;
-            $village_name = Village::where('code', $village_code)->first()->name;
+            $village_name = Str::ucfirst(Village::where('code', $village_code)->first()->name);
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
@@ -98,12 +98,12 @@ class VisitorController extends Controller
         $village = VisitType::where('village_code', $villageCode);
         $village = $village->where('slug', $slug)->first();
         $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
-
+        $village_name = "Desa " . Str::ucfirst($village->name);
 
 
         return view('user.form', [
             'isreceptionist' => $visit,
-            'title' => "Form Tamu - $village->name",
+            'title' => "Form Tamu - $village_name",
             'visit' => $village,
             'provinces' => Province::orderBy('name', 'asc')->get(),
         ]);

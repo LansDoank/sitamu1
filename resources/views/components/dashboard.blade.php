@@ -330,9 +330,9 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         inputPhoto.innerHTML = `
-                        Foto
-                        <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                            <img class="max-w-[400px] max-h-[200px] object-cover" src="${e.target.result}" alt="">
+                        Foto Wajah
+                            <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
+                                <img class="w-full h-full max-w-[250px]" src="${e.target.result}" alt="">
                             </div>`;
                     };
                     reader.readAsDataURL(file);
@@ -406,7 +406,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         inputPhoto.innerHTML = `
-                            Foto
+                            Foto Wajah
                             <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
                                 <img class="w-full h-full max-w-[250px]" src="${e.target.result}" alt="">
                             </div>`;

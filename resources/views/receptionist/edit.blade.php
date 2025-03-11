@@ -133,7 +133,7 @@
                 <label for="image" id="photo" class="mb-2 w-full">Foto
                     <div
                         class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
-                        <img class="max-w-[300px]" src="{{ asset("storage/$oldReceptionist->photo") }}"
+                        <img class="w-full h-full max-w-[250px]" src="{{ asset("storage/$oldReceptionist->photo") }}"
                             alt="">
                     </div>
                 </label>
