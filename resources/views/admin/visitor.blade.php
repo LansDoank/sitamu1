@@ -48,7 +48,7 @@
         </ul>
 
     </nav>
-    <!-- End of Topbar -->
+    <!-- End of Topar -->
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
