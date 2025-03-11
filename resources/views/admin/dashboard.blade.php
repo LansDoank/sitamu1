@@ -263,7 +263,7 @@
                         </div>
 
                         <!-- Pie Chart -->
-                        <div class="w-full p-0">
+                        <div class="md:w-1/2 w-full md:px-2">
                             <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -275,31 +275,31 @@
                                     class="card-body w-full flex flex-col-reverse md:flex-row flex-wrap md:flex-nowrap">
                                     <div class="flex md:w-1/2 flex-col justify-center p-2">
                                         <ul class="text-decoration-none list-none mb-0">
-                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-xs lg:text-sm justify-between">
                                                 Studi Banding
                                                 <div class="md:mx-5 flex">
                                                     {{ $studi_banding }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-xs lg:text-sm justify-between">
                                                 Cari Informasi
                                                 <div class="md:mx-5 flex">
                                                     {{ $cari_informasi }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-xs lg:text-sm justify-between">
                                                 Pembinaan
                                                 <div class="md:mx-5 flex">
                                                     {{ $pembinaan }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 text-sm md:text-sm lg:text-xl justify-between">
+                                            <li class="flex my-3 text-sm md:text-xs lg:text-sm justify-between">
                                                 Koordinasi
                                                 <div class="md:mx-5 flex">
                                                     {{ $koordinasi }}
                                                 </div>
                                             </li>
-                                            <li class="flex my-3 mb-0 text-sm md:text-sm lg:text-xl justify-between">
+                                            <li class="flex my-3 mb-0 text-sm md:text-xs lg:text-sm justify-between">
                                                 Lainnya
                                                 <div class="md:mx-5 flex">
                                                     {{ $lainnya }}
@@ -307,7 +307,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="flex w-full md:w-1/2 justify-center items-center md:w-1/2 lg:px-24">
+                                    <div class="flex w-full md:w-1/2 justify-center items-center md:w-1/2 lg:px-0">
                                         <canvas id="pie-chart" class="w-full"></canvas>
                                     </div>
 
@@ -317,7 +317,7 @@
 
                         
 
-                        <div class="col-12 p-0">
+                        <div class="md:w-1/2 md:px-2">
                             <div class="card shadow mb-4 p-0 m-0 g-0">
                                 <!-- Card Header - Dropdown -->
                                 <div
