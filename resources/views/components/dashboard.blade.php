@@ -58,7 +58,7 @@
             }
 
             .sidebar-unactive {
-                padding-left: 30%;
+                padding-left: 0%;
             }
 
             .footer {
@@ -163,16 +163,21 @@
         const toggleSidebar = document.getElementById('sidebarToggleTop');
         const sidebar = document.querySelector('.sidebar');
         const content = document.getElementById('content');
-
-        document.addEventListener('DOMContentLoaded', function() {})
-
+        const mobile = window.matchMedia("(max-width: 576px)");
+        
+        function mobileToggled(e) {
+            if(e.matches) {
+                sidebar.classList.add('toggled');
+            }
+        }
 
         toggleSidebar.addEventListener('click', () => {
-            sidebar.classList.toggle('fixed');
             sidebar.classList.toggle('fixed');
             sidebar.classList.toggle('hidden');
             content.classList.toggle('sidebar-unactive');
         });
+
+        mobileToggled(mobile);
     </script>
     <script>
         function downloadExcel() {

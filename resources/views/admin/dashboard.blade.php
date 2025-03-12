@@ -224,7 +224,7 @@
 
 
 
-            <div class="md:w-1/2 md:px-2">
+            <div class="md:w-1/2 w-full md:px-2">
                 <div class="card shadow mb-4 p-0 m-0 g-0">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
