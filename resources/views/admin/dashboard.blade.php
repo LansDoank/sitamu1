@@ -179,8 +179,8 @@
                         <h6 class="m-0 font-weight-bold text-primary">Tujuan</h6>
                     </div>
                     <!-- Card Body -->
-                    <div class="card-body w-full flex flex-col-reverse md:flex-row flex-wrap md:flex-nowrap">
-                        <div class="flex md:w-1/2 flex-col justify-center p-2">
+                    <div class="card-body w-full flex flex-col-reverse lg:flex-row flex-wrap md:flex-nowrap">
+                        <div class="flex lg:w-1/2 flex-col justify-center p-2">
                             <ul class="text-decoration-none list-none mb-0">
                                 <li class="flex my-3 text-sm md:text-xs lg:text-sm justify-between">
                                     Studi Banding
@@ -214,7 +214,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="flex w-full md:w-1/2 justify-center items-center md:w-1/2 lg:px-0">
+                        <div class="flex w-full lg:w-1/2 justify-center items-center lg:w-1/2 lg:px-0">
                             <canvas id="pie-chart" class="w-full"></canvas>
                         </div>
 
