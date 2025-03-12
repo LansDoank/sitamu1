@@ -95,10 +95,14 @@
                                         </a>
                                     <td>{{ Str::ucfirst($visitType->name) }}</td>
                                     <td class="">
-                                        {{ $visitType->province->name . ', ' . $visitType->district->name . ', Kecamatan ' . $visitType->subdistrict->name . ', Desa ' . Str::ucfirst($visitType->village->name) }}
+                                        {{'Desa ' . Str::ucfirst($visitType->village->name) .  ', Kecamatan ' . $visitType->subdistrict->name .  ', Provinsi ' . $visitType->province->name . ', ' . $visitType->district->name }}
                                     </td>
                                     @if ($admin)
-                                        <td class="flex justify-center">
+                                        <td class="flex justify-center md:gap-3">
+                                            <a class="rounded text-white w-1/2 h-10 text-center justify-center flex items-center text-decoration-none "
+                                                href="/generate/qrcode/{{ $visitType->id }}">
+                                                <img class="w-5" src="/img/download.png" alt="">
+                                            </a>
                                             <a class="rounded text-white w-1/2 h-10 text-center flex items-center justify-center text-decoration-none "
                                                 href="/admin/qr_code/edit/{{ $visitType->id }}">
                                                 <img class="w-5" src="/img/edit.png" alt="">
