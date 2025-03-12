@@ -85,10 +85,10 @@
                     Buat Data Tamu</a>
                 <div class="flex gap-3 flex-wrap md:w-[320px] lg:w-[400px] w-full">
                     <a href="/generate/visitor/{{ $code }}"
-                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-40 md:text-sm lg:text-base lg:w-48 justify-center font-medium h-12">Buat
+                        class="bg-blue-600 text-white rounded px-4 text-center flex text-decoration-none items-center w-full md:w-36 md:text-sm lg:text-base lg:w-48 justify-center font-medium h-12">Buat
                         Laporan</a>
                     <button onclick="downloadExcel()"
-                        class="bg-red-600 text-white font-medium rounded px-4 md:w-40 md:text-sm lg:text-base lg:w-48 w-full h-12">Download
+                        class="bg-red-600 text-white font-medium rounded px-2 md:w-40 md:text-sm lg:text-base lg:w-48 w-full h-12">Download
                         Excel</button>
                 </div>
 
