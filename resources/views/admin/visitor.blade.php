@@ -81,7 +81,7 @@
         @else
             <div class="flex mb-3 justify-between w-full flex-wrap">
                 <a href="/admin/visitor/add/{{ $user->village_code }}"
-                    class="bg-klipaa font-medium text-md mb-3 md:mb-0 flex justify-center items-center text-white rounded px-3 h-12 w-full md:w-40 md:text-sm lg:w-48 text-decoration-none hover:brightness-90">+
+                    class="bg-klipaa font-medium text-md mb-3 md:mb-0 flex justify-center items-center text-white rounded px-3 h-12 w-full md:w-40 md:text-sm lg:text-base lg:w-48 text-decoration-none hover:brightness-90">+
                     Buat Data Tamu</a>
                 <div class="flex gap-3 flex-wrap md:w-[320px] lg:w-[400px] w-full">
                     <a href="/generate/visitor/{{ $code }}"

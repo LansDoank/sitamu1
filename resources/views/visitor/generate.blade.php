@@ -59,9 +59,9 @@
                                     src="{{ asset("storage/$visitor->visitor_photo") }}" alt="">
                             </a>
                         </td>
-                        <td>{{ Str::limit($visitor->fullname, 20) }}</td>
+                        <td>{{ $visitor->fullname }}</td>
                         <td>{{ $visitor->institution }}</td>
-                        <td>{{ Str::limit($visitor->telephone, 20) }}</td>
+                        <td>{{ $visitor->telephone }}</td>
                         <td>{{ $visitor->check_in }}</td>
                         <td>{{ $visitor->check_out }}</td>
                     </tr>
