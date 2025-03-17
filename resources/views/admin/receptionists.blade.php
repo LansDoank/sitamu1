@@ -4,49 +4,11 @@
     <x-slot:isreceptionist>{{ $isreceptionist }}</x-slot:isreceptionist>
     <x-slot:username>{{ $username }}</x-slot:username>
     <x-slot:is_admin>{{ $is_admin }}</x-slot:is_admin>
-    <!-- Topbar -->
-    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-        <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-        </button>
-
-        <div>
-            <h1 class="text-gray-600 text-xl md:text-2xl mb-0">Resepsionis</h1>
-        </div>
-
-        <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-auto">
-            <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                    <img class="img-profile rounded-circle"
-                        src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
-                </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Keluar
-                    </a>
-                </div>
-            </li>
-
-        </ul>
-
-    </nav>
-    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="text-2xl md:text-3xl mb-2 text-gray-800">Tabel Resepsionis</h1>
         @if (session('receptionist_error'))
             <div class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
                 {{ session('receptionist_error') }}</div>
@@ -56,16 +18,16 @@
                 class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
                 {{ session('receptionist_success') }}</div>
         @endif
-        <div class="flex mb-3 ">
+        <div class="flex my-3 ">
             <a href="/admin/receptionist/add"
-                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded px-3 h-12 text-decoration-none hover:brightness-90">+
-                Buat Akun Resepsionis</a>
+                class="bg-klipaa font-medium text-md flex justify-center items-center text-white rounded-lg px-2 py-1 text-decoration-none hover:brightness-90">+
+                Tambah Resepsionis</a>
         </div>
 
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data Resepsionis</h6>
+        <div class="card bg-white mb-4">
+            <div class="card-header border-none bg-white py-3">
+                <h6 class="m-0 font-weight-bold text-klipaa">Daftar Data Resepsionis</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -89,22 +51,36 @@
                                         <a href="/admin/receptionist/preview/{{ $receptionist->id }}">
                                             <img class="mx-auto"
                                                 style="width: 50px; height: 50px; object-position: center; object-fit: cover;"
-                                                src="{{ asset('storage/' . $receptionist->photo) }}" alt="">
+                                                src="{{ asset('storage/' . $receptionist->photo) ?? '/public/img/default_profile.jpeg' }}" alt="">
                                         </a>
                                     </td>
                                     <td>{{ $receptionist->name }}</td>
                                     <td>{{ $receptionist->username }}</td>
                                     <td>{{ Str::ucfirst($receptionist->address->name) }}</td>
-                                    <td class="flex">
-                                        <a class="rounded text-white w-1/2 h-10 text-center flex items-center justify-center text-decoration-none "
-                                            href="/admin/receptionist/edit/{{ $receptionist->id }}">
-                                            <img class="w-5" src="/img/edit.png" alt="">
-                                        </a>
-                                        <a class="rounded text-white w-1/2 h-10 text-center justify-center flex items-center text-decoration-none "
-                                            onclick="return confirm('Yakin?')"
-                                            href="/admin/receptionist/delete/{{ $receptionist->id }}">
-                                            <img class="w-5" src="/img/trashcan.png" alt="">
-                                        </a>
+                                    <td>
+                                        <div class="flex justify-center items-center gap-2">
+                                            <a class="rounded-lg text-white bg-yellow-500 w-fit px-3 py-1 text-center flex items-center justify-center gap-3 text-decoration-none "
+                                                href="/admin/receptionist/edit/{{ $receptionist->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="none" stroke="#fff" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="1.5"
+                                                        d="m14.363 5.652l1.48-1.48a2 2 0 0 1 2.829 0l1.414 1.414a2 2 0 0 1 0 2.828l-1.48 1.48m-4.243-4.242l-9.616 9.615a2 2 0 0 0-.578 1.238l-.242 2.74a1 1 0 0 0 1.084 1.085l2.74-.242a2 2 0 0 0 1.24-.578l9.615-9.616m-4.243-4.242l4.243 4.242" />
+                                                </svg>
+                                                Edit
+                                            </a>
+                                            <a class="rounded-lg text-white bg-red-500 w-fit px-2 py-1 text-center flex items-center justify-center gap-3 text-decoration-non "
+                                                onclick="return confirm('Yakin?')"
+                                                href="/admin/receptionist/delete/{{ $receptionist->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="none" stroke="#fff" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="1.5"
+                                                        d="m20 9l-1.995 11.346A2 2 0 0 1 16.035 22h-8.07a2 2 0 0 1-1.97-1.654L4 9m17-3h-5.625M3 6h5.625m0 0V4a2 2 0 0 1 2-2h2.75a2 2 0 0 1 2 2v2m-6.75 0h6.75" />
+                                                </svg>
+                                                Hapus
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php $no++; ?>

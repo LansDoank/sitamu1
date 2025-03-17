@@ -22,7 +22,7 @@ class QrCodeController extends Controller
         $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
 
 
-        return view('qrcode.add', ['title' => 'Admin - Tambah Kode Qr','isreceptionist' => $visit, 'user' => Auth::user(), 'is_admin' => $is_admin, 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('qrcode.add', ['title' => 'Tambah Kode Qr','isreceptionist' => $visit, 'user' => Auth::user(), 'is_admin' => $is_admin,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
     public function create(Request $request)
@@ -71,7 +71,7 @@ class QrCodeController extends Controller
         }
         $visit = VisitType::find($id);
 
-        return view('qrcode.edit', [ 'title' => 'Admin - Edit Kode Qr', 'isreceptionist' => $visits, 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('qrcode.edit', [ 'title' => 'Edit Kode Qr', 'isreceptionist' => $visits, 'is_admin' => $is_admin, 'user' => Auth::user(),  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'oldVisit' => $visit, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
     public function update(Request $request)

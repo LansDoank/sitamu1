@@ -34,7 +34,7 @@ class ReceptionistController extends Controller
         $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
 
 
-        return view('receptionist.add', ['isreceptionist' => $visit,'title' => 'Admin - Tambah Resepsionis','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('receptionist.add', ['isreceptionist' => $visit,'title' => 'Tambah Resepsionis','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
 
@@ -156,7 +156,7 @@ class ReceptionistController extends Controller
 
 
 
-        return view('receptionist.preview',['title' => 'Admin - Pratinjau Resepsionis','isreceptionist' => $visit,'users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
+        return view('receptionist.preview',['title' => 'Detail Resepsionis','isreceptionist' => $visit,'users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
     }
 
 
@@ -170,10 +170,10 @@ class ReceptionistController extends Controller
         }
         $receptionist = User::find($id);
         $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
-        
 
 
-        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Admin - Edit Resepsionis', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+
+        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Edit Resepsionis', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)
@@ -229,7 +229,7 @@ class ReceptionistController extends Controller
         if ($user->role_id == '2') {
             return redirect()->route('admin.dashboard');
         }
-        
+
         User::find($id)->delete();
         return redirect()->route('admin.receptionists')->with('receptionist_success', 'Data resepsionis berhasil dihapus!');
     }

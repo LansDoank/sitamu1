@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Village;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Visitor;
 use App\Models\User;
 use App\Models\VisitType;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 
 class AdminController extends Controller
@@ -53,10 +50,9 @@ class AdminController extends Controller
         return view(
             'admin.dashboard',
             [
-                'title' => 'Admin 
-                Dashboard',
+                'title' => 'Dashboard',
                 'user' => Auth::user(),
-                'username' => Auth::user()->username,
+                'username' => Auth::user()->name ?? Auth::user()->username,
                 'photo' => Auth::user()->photo,
                 'isreceptionist' => $visit,
                 'is_admin' => $is_admin,
@@ -76,16 +72,16 @@ class AdminController extends Controller
     public function choose()
     {
         $user = Auth::user();
-    
+
         $is_admin = $user->role_id == 1 ? true : false;
         $village = VisitType::all();
         $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
-        
+
 
         if($is_admin) {
             return view(
                 'admin.choose',
-                    ['title' => 'Admin - Pilih Desa','isreceptionist' => $visit, 'villages' => $village, 'qrcode' => $visit,'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->username,'photo' => Auth::user()->photo,]
+                    ['title' => 'Desa Terdaftar','isreceptionist' => $visit, 'villages' => $village, 'qrcode' => $visit,'user' => $user,'is_admin' => $is_admin,'village_code' => $user->village_code,'username' => $user->name ?? $user->username ,'photo' => Auth::user()->photo,]
             );
 
         } else {
@@ -105,11 +101,11 @@ class AdminController extends Controller
 
 
 
-        return view('admin.receptionists', ['title' => 'Admin - Resepsionis','isreceptionist' => $visit,'user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->username,'photo' => Auth::user()->photo, 'receptionists' => $receptionists]);
+        return view('admin.receptionists', ['title' => 'Data Resepsionis','isreceptionist' => $visit,'user' => Auth::user(),'is_admin' => $is_admin,'username' => Auth::user()->name ?? Auth::user()->username,'photo' => Auth::user()->photo, 'receptionists' => $receptionists]);
     }
 
     public function masterData(){
-        return view('admin.masterdata',['user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitors' => Visitor::all()]);
+        return view('admin.masterdata',['user' => Auth::user(),'username' => Auth::user()->name ?? Auth::user()->username,'photo' => Auth::user()->photo,'visitors' => Visitor::all()]);
     }
 
     public function qrCode()
@@ -123,9 +119,9 @@ class AdminController extends Controller
             $qrcode = VisitType::where('village_code',$user->village_code)->get();
         }
         $is_admin = $user->role_id == 1 ? true : false;
-        $visit = VisitType::where('village_code',$user->village_code)->first()->id;
+        $visit = VisitType::where('village_code',$user->village_code)->first()->id ?? null;
 
 
-        return view('admin.qrCode', ['title' => 'Admin - Kode Qr', 'isreceptionist' => $visit,'admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
+        return view('admin.qrCode', ['title' => 'Data Kode Qr', 'isreceptionist' => $visit,'admin' => $admin,'is_admin' => $is_admin,'user' => Auth::user(),'username' => Auth::user()->name ?? Auth::user()->username,'photo' => Auth::user()->photo,'visitTypes' => $qrcode]);
     }
 }

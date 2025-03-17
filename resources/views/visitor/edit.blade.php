@@ -4,58 +4,19 @@
     <x-slot:isreceptionist>{{ $isreceptionist }}</x-slot:isreceptionist>
     <x-slot:username>{{ $username }}</x-slot:username>
     <x-slot:is_admin>{{ $is_admin }}</x-slot:is_admin>
-    <!-- Topbar -->
-    <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
 
-        <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-        </button>
-
-        <div>
-            <a class="text-decoration-none" href="/admin/visitor">
-                <h1 class="text-gray-600 text-sm md:text-2xl mb-0">&laquo; Edit Data Tamu</h1>
-            </a>
-        </div>
-
-        <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-auto">
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
-                    <img class="img-profile rounded-circle"
-                        src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
-                </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Keluar
-                    </a>
-                </div>
-            </li>
-
-        </ul>
-
-    </nav>
-    <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
     <!-- /.container-fluid -->
     <form action="/admin/visitor/update" method="POST" novalidate="false" enctype="multipart/form-data"
-        class="shadow mx-auto my-10 max-w-4xl p-8 bg-white border border-gray-200 rounded-lg">
+    class="shadow-none mx-auto my-10 max-w-4xl p-7 bg-white  rounded-xl">
         @csrf
         <div class="form-header">
             <div class="flex items-center md:my-3">
                 <img class="w-10 me-2" src="/img/logo.png" alt="">
                 <h5 class="text-klipaa font-semibold text-2xl mb-0">TamuDesa</h5>
             </div>
-            <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silakan isi data buku
+            <p class="text-gray-700 font-medium text-sm my-2 md:my-0 md:text-base">Silahkan isi data buku
                 tamu dengan benar.</p>
         </div>
         <div class="form-body">
@@ -84,15 +45,15 @@
             <ul class="md:my-5">
                 <li class="flex flex-wrap md:flex-nowrap gap-3 md:gap-0 md:my-3">
                     <div class="flex flex-col items-start w-full md:w-1/2">
-                        <label for="fullname" class="mb-2">Nama Lengkap</label>
+                        <label for="fullname" class="mb-2 text-sm text-gray-900 dark:text-white">Nama Lengkap</label>
                         <input type="text" name="fullname" id="fullname"
-                            class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                            placeholder="Masukkan nama anda" value="{{ $oldVisit->fullname }}">
+                            class="form-input border border-gray-200 rounded-xl w-full h-10 px-3 bg-white text-sm" required
+                            placeholder="Masukkan nama lengkap disini" value="{{ $oldVisit->fullname }}">
                     </div>
                     <div class="flex flex-col items-start md:ps-5 w-full md:w-1/2">
-                        <label for="institution" class="mb-2">Instansi</label>
+                        <label for="institution" class="mb-2 text-sm text-gray-900 dark:text-white">Instansi</label>
                         <select
-                            class="instance form-input text-gray-600 border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                            class="instance form-input text-gray-600 border border-gray-200 px-2 h-10 w-full md:w-1/2 bg-white text-sm rounded-xl"
                             name="institution" id="institution" required>
                             <option disabled>Pilih Instansi</option>
                             <option value="Lainnya" @selected('Lainnya' != $oldVisit->institution)>Lainnya</option>
@@ -105,20 +66,20 @@
                 </li>
                 <li class="md:my-3 mt-2">
                     <textarea class="hidden w-full rounded-lg border border-gray-200 px-3 py-2" id="institution-textarea"
-                        placeholder="Sebutkan Instansi Anda"></textarea>
+                        placeholder="Sebutkan Instansi disini"></textarea>
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="telephone" class="mb-2">No. Telepon</label>
+                        <label for="telephone" class="mb-2 text-sm text-gray-900 dark:text-white">Nomor Telepon</label>
                         <input type="text" name="telephone" id="telephone"
-                            class="form-input border border-gray-200 rounded w-full h-10 px-3" required
-                            placeholder="Masukkan telepon anda" value="{{ $oldVisit->telephone }}">
+                            class="form-input border border-gray-200 rounded-xl w-full h-10 px-3 bg-white text-sm" required
+                            placeholder="Masukkan nomor telepon disini" value="{{ $oldVisit->telephone }}">
                     </div>
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="province" class="mb-2">Provinsi</label>
-                        <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
+                        <label for="province" class="mb-2 text-sm text-gray-900 dark:text-white">Provinsi</label>
+                        <select class="form-input text-gray-600 border rounded-xl border-gray-200 px-2 h-10 w-full bg-white text-sm"
                             name="province" id="province" required>
                             <option disabled selected
                                 {{ $oldVisit->province_code == $oldVisit->province->code ? 'selected' : '' }}>
@@ -132,8 +93,8 @@
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="district" class="mb-2">Kabupaten</label>
-                        <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
+                        <label for="district" class="mb-2 text-sm text-gray-900 dark:text-white">Kabupaten</label>
+                        <select class="form-input text-gray-600 border rounded-xl border-gray-200 px-2 h-10 w-full bg-white text-sm"
                             name="district" id="district" required>
                             <option disabled selected
                                 {{ $oldVisit->district_code == $oldVisit->district->code ? 'selected' : '' }}>
@@ -143,8 +104,8 @@
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="sub_district" class="mb-2">Kecamatan</label>
-                        <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
+                        <label for="sub_district" class="mb-2 text-sm text-gray-900 dark:text-white">Kecamatan</label>
+                        <select class="form-input text-gray-600 border rounded-xl border-gray-200 px-2 h-10 w-full bg-white text-sm"
                             name="sub_district" id="sub_district" required>
                             <option disabled selected
                                 {{ $oldVisit->sub_district_code == $oldVisit->subdistrict->code ? 'selected' : '' }}>
@@ -154,10 +115,10 @@
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="village" class="mb-2">Desa</label>
-                        <select class="form-input text-gray-600 border rounded-lg border-gray-200 px-2 h-10 w-full"
+                        <label for="village" class="mb-2 text-sm text-gray-900 dark:text-white">Desa</label>
+                        <select class="form-input text-gray-600 border rounded-xl border-gray-200 px-2 h-10 w-full bg-white text-sm capitalize"
                             name="village" id="village" required>
-                            <option disabled selected
+                            <option disabled selected class="capitalize"
                                 {{ $oldVisit->village_code == $oldVisit->village->code ? 'selected' : '' }}>
                                 {{ $oldVisit->village->name }}</option>
                         </select>
@@ -166,25 +127,25 @@
                 <li class="md:my-3">
                     <div class="flex flex-wrap md:flex-nowrap w-full gap-3 md:gap-0">
                         <div class="flex flex-col items-start w-full md:w-1/2">
-                            <label for="check_in" class="mb-2">Tanggal Datang</label>
+                            <label for="check_in" class="mb-2 text-sm text-gray-900 dark:text-white">Tanggal Datang</label>
                             <input type="datetime-local" name="check_in" id="check_in"
-                                class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                                class="form-input text-gray-600 rounded-xl border bg-white text-sm border-gray-200 px-2 h-10 w-full md:w-1/2"
                                 value="{{ $oldVisit->check_in }}" required>
                         </div>
                         <div class="flex flex-col items-start w-full md:w-1/2">
-                            <label for="check_out" class="mb-2">Tanggal Pulang</label>
+                            <label for="check_out" class="mb-2 text-sm text-gray-900 dark:text-white">Tanggal Pulang</label>
                             <input type="datetime-local" name="check_out" id="check_out"
-                                class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full md:w-1/2"
+                                class="form-input text-gray-600 rounded-xl border bg-white text-sm border-gray-200 px-2 h-10 w-full md:w-1/2"
                                 value="{{ $oldVisit->check_out }}" required>
                         </div>
                     </div>
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="objective" class="mb-2">Tujuan</label>
-                        <select class="form-input text-gray-600 rounded-lg border border-gray-200 px-2 h-10 w-full"
+                        <label for="objective" class="mb-2 text-sm text-gray-900 dark:text-white">Tujuan</label>
+                        <select class="form-input text-gray-600 rounded-xl bg-white text-sm border border-gray-200 px-2 h-10 w-full"
                             name="objective" id="objective" required>
-                            <option disabled>Pilih Tujuan Anda</option>
+                            <option disabled>Pilih Tujuan disini</option>
                             <option value="Lainnya" @selected('Lainnya' != $oldVisit->objective)>Lainnya</option>
                             <option value="Koordinasi" @selected('Koordinasi' == $oldVisit->objective)>Koordinasi</option>
                             <option value="Cari Informasi" @selected('Cari Informasi' == $oldVisit->objective)>Cari Informasi
@@ -196,28 +157,28 @@
                     </div>
                 </li>
                 <li class="md:my-3 mt-2">
-                    <textarea class="hidden w-full border rounded-lg border-gray-200 px-3 py-2" id="objective_textarea"
-                        placeholder="Sebutkan Tujuan Anda"></textarea>
+                    <textarea class="hidden w-full border rounded-xl bg-white text-sm border-gray-200 px-3 py-2" id="objective_textarea"
+                        placeholder="Sebutkan Tujuan disini"></textarea>
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label class="mb-2">Lokasi Tujuan</label>
+                        <label class="mb-2 text-sm text-gray-900 dark:text-white">Lokasi Tujuan</label>
                         <input type="text" disabled value="{{ $oldVisit->visitType->name }}"
-                            class="form-input border border-gray-200 rounded w-full h-10 px-3">
+                            class="form-input border border-gray-200 rounded-xl w-full h-10 px-3 bg-white text-sm">
                     </div>
                 </li>
                 <li class="md:my-3">
                     <div class="flex flex-col items-start">
-                        <label for="i_n_i" class="mb-2">Keterangan</label>
+                        <label for="i_n_i" class="mb-2 text-sm text-gray-900 dark:text-white">Keterangan</label>
                         <textarea class="form-input rounded text-gray-600 border border-gray-200 px-2 h-10 w-full py-2 min-h-[150px]"
                             name="i_n_i" id="i_n_i" placeholder="Masukan Keterangan Disini"></textarea>
                     </div>
                 </li>
                 <li class="md:my-3 ">
                     <div class="flex flex-col items-start w-full">
-                        <label for="visitor_photo" id="photo" class="mb-2 w-full">Foto
+                        <label for="visitor_photo" id="photo" class="mb-2 w-full text-sm text-gray-900 dark:text-white">Foto
                             Wajah
-                            <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-lg flex justify-center items-center">
+                            <div class="w-full my-2 min-h-[150px] border border-gray-200 rounded-xl bg-white flex justify-center items-center">
                                 <img class="w-full h-full max-w-[250px]" src="{{ asset("storage/$oldVisit->visitor_photo") }}" alt="">
                             </div>
                         </label>
@@ -225,8 +186,8 @@
                     </div>
                 </li>
                 <li class="md:my-3">
-                    <button class="w-full bg-klipaa rounded text-white font-normal h-12"
-                        type="submit">Simpan</button>
+                    <button class="w-full bg-klipaa rounded-xl text-white font-normal h-12"
+                        type="submit">Perbarui Data Tamu</button>
                 </li>
             </ul>
         </div>

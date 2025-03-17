@@ -22,13 +22,26 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Fitur
+        MENU
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
 
 
     <!-- Nav Item - Tables -->
+    @if ($user == '1')
+    <li class="{{ request()->is('admin/receptionist') ? 'active' : '' }} nav-item flex justify-center md:justify-start">
+        <a class="nav-link" href="/admin/receptionist">
+            <div class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-person-fill w-full md:w-max" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                </svg>
+                <span class="md:ms-2">Resepsionis</span>
+            </div>
+        </a>
+    </li>
+@endif
     <li class="{{ request()->is('admin/visitor') ? 'active' : '' }} flex justify-center md:justify-start nav-item">
         <a class="nav-link" href="/admin/visitor">
             <div class="flex flex-wrap md:flex-nowrap justify-center md:justify-start">
@@ -41,19 +54,7 @@
             </div>
         </a>
     </li>
-    @if ($user == '1')
-        <li class="{{ request()->is('admin/receptionist') ? 'active' : '' }} nav-item flex justify-center md:justify-start">
-            <a class="nav-link" href="/admin/receptionist">
-                <div class="flex flex-wrap items-center justify-center md:flex-nowrap md:justify-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-person-fill w-full md:w-max" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                    </svg>
-                    <span class="md:ms-2">Resepsionis</span>
-                </div>
-            </a>
-        </li>
-    @endif
+
     {{-- <li class="{{ request()->is('admin/master_data') ? 'active' : '' }} nav-item">
 
         <ul class="nav-link flex absolute Z-50 overflow-hidden justify-end group cursor-pointer">

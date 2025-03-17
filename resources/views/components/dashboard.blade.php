@@ -93,20 +93,73 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content" class="sidebar-unactive">
+            <div id="content" class="sidebar-unactive" style="height: 100vh">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-none">
 
-                {{ $slot }}
-            </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; TamuDesa 2025</span>
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+
+                    <div class="pt-3">
+                        <ol class="flex items-center whitespace-nowrap">
+                            <li class="inline-flex items-center">
+                                <button onclick="history.back()" class="flex items-center text-sm text-gray-500 ">
+                                    Halaman
+                                </button>
+                                <svg class="shrink-0 size-5 text-gray-400 mx-2" width="16" height="16" viewBox="0 0 16 16"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path>
+                                </svg>
+                            </li>
+
+                            <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate" aria-current="page">
+
+                                <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-hidden focus:text-blue-600"
+                                    href="/receptionist/add">
+                                    {{ $title }}
+                                </a>
+                            </li>
+                        </ol>
                     </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-lg-inline text-gray-600 small">{{ $username }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Keluar
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                {{ $slot }}
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                <footer class="sticky-footer   ">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; TamuDesa 2025</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+            </div>
 
         </div>
         <!-- End of Content Wrapper -->
@@ -164,7 +217,7 @@
         const sidebar = document.querySelector('.sidebar');
         const content = document.getElementById('content');
         const mobile = window.matchMedia("(max-width: 576px)");
-        
+
         function mobileToggled(e) {
             if(e.matches) {
                 sidebar.classList.add('toggled');

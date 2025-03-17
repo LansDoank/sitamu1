@@ -5,7 +5,7 @@
     <x-slot:username>{{ $username }}</x-slot:username>
     <x-slot:is_admin>{{ $is_admin }}</x-slot:is_admin>
     <!-- Topbar -->
-    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    {{-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -39,14 +39,13 @@
 
         </ul>
 
-    </nav>
+    </nav> --}}
     <!-- End of Topbar -->
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="mb-2 text-xl md:text-3xl text-gray-800">Daftar Desa Yang Terdaftar</h1>
         @if (session('visitor_error'))
             <div class="bg-red-100 mt-2 mb-2 rounded border border-1 border-red-900 text-center px-5 py-2 text-red-900">
                 {{ session('visitor_error') }}</div>
@@ -59,8 +58,8 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data Desa</h6>
+            <div class="card-header border-none bg-white py-3">
+                <h6 class="m-0 font-weight-bold text-klipaa">Daftar Desa Terdaftar</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -72,7 +71,7 @@
                                 <th class="col-2">Kabupaten</th>
                                 <th class="col-2">Kecamatan</th>
                                 <th class="col-2">Nama Desa</th>
-                                <th class="col-1">Aksi</th>
+                                <th class="col-1 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,8 +83,8 @@
                                     <td>{{ $village->district->name }}</td>
                                     <td>{{ $village->subdistrict->name }}</td>
                                     <td>{{ Str::ucfirst($village->name) }}</td>
-                                    <td class="flex">
-                                        <a class="rounded bg-blue-600 text-white px-5 h-10 text-center flex items-center justify-center text-decoration-none "
+                                    <td>
+                                        <a class="rounded bg-blue-600 text-white px-2 py-1 text-center flex items-center justify-center text-decoration-none "
                                             href="/admin/visitor/{{ $village->village_code }}">
                                             Detail
                                         </a>
