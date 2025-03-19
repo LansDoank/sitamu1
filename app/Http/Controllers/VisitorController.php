@@ -51,7 +51,7 @@ class VisitorController extends Controller
         if ($user->role_id == 1) {
             $visitor = Visitor::where('village_code', $code)->get();
             $village_code = $user->village_code;
-            $village_name = Str::ucfirst(Village::where('code', $village_code)->first()->name);
+            $village_name = Str::ucfirst(Village::where('code', $code)->first()->name);
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
@@ -131,19 +131,13 @@ class VisitorController extends Controller
             'fullname' => 'required',
             'institution' => 'required',
             'check_in' => 'required',
-            'check_out' => 'required',
             'telephone' => 'required',
             'visitor_photo' => 'required',
-            'visit_type' => 'required',
             'objective' => 'required',
             'province' => 'required',
             'district' => 'required',
             'sub_district' => 'required',
             'village' => 'required',
-            'province_code' => 'required',
-            'district_code' => 'required',
-            'sub_district_code' => 'required',
-            'village_code' => 'required',
         ]);
 
 

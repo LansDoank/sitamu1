@@ -117,7 +117,7 @@
                             <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate" aria-current="page">
 
                                 <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-hidden focus:text-blue-600"
-                                    href="/receptionist/add">
+                                    href="#">
                                     {{ $title }}
                                 </a>
                             </li>
