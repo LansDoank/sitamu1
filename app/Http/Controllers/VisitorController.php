@@ -12,6 +12,11 @@ use App\Models\SubDistrict;
 use App\Models\Village;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Imagick\Driver;
+
+
 
 class VisitorController extends Controller
 {
@@ -55,14 +60,15 @@ class VisitorController extends Controller
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
-            $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+            $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
             $title = "Desa $village_name";
 
+
             return view(
                 'admin.visitor',
-                ['title'=> $title, 'isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo,]
+                ['title' => $title, 'isreceptionist' => $visit, 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo,]
             );
         } else if ($code == $user->village_code) {
             $visitor = Visitor::where('village_code', $code)->get();
@@ -70,15 +76,15 @@ class VisitorController extends Controller
             $slug = Str::slug(Village::where('code', $village_code)->first()->name);
             $is_admin = $user->role_id == 1 ? true : false;
 
-            $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
-
+            $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
             return view(
                 'admin.visitor',
-                ['isreceptionist' => $visit,'title' => 'Tamu - TamuDesa' ,'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo,]
+                ['isreceptionist' => $visit, 'title' => 'Tamu - TamuDesa', 'visitors' => $visitor, 'code' => $code, 'user' => $user, 'is_admin' => $is_admin, 'village_code' => $user->village_code, 'slug' => $slug,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo,]
             );
         } else {
+
             return redirect('/admin/visitor/' . $user->village_code);
         }
     }
@@ -97,7 +103,7 @@ class VisitorController extends Controller
 
         $village = VisitType::where('village_code', $villageCode);
         $village = $village->where('slug', $slug)->first();
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
         $village_name = "Desa " . Str::ucfirst($village->name);
 
 
@@ -114,7 +120,7 @@ class VisitorController extends Controller
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
         $visitor = Visitor::find($id);
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
         if ($user->role_id == '2') {
@@ -122,12 +128,11 @@ class VisitorController extends Controller
                 return redirect("/admin/visitor/$user->village_code");
             }
         }
-        return view('visitor.preview', ['title' => 'Pratinjau Tamu','isreceptionist' => $visit, 'user' => Auth::user(), 'is_admin' => $is_admin,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
+        return view('visitor.preview', ['title' => 'Pratinjau Tamu', 'isreceptionist' => $visit, 'user' => Auth::user(), 'is_admin' => $is_admin,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
     }
 
     public function addVisitor(Request $request)
     {
-
         $request->validate([
             'fullname' => 'required',
             'institution' => 'required',
@@ -145,14 +150,23 @@ class VisitorController extends Controller
             'village_code' => 'required',
         ]);
 
+        $imageManager = new ImageManager(new Driver());
+        $imageFile = $request->file('visitor_photo');
+
+        $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+        $path = 'visitors_photo/' . time() . '.jpg';
+        $image = $imageManager->read($imageFile->getPathname())
+        ->scaleDown(width: 200);
+        Storage::put($path, (string) $image->encode());
+
         $newVisitor = new Visitor();
         $newVisitor->fullname = $request->fullname;
         $newVisitor->institution = $request->institution;
-        $newVisitor->address = $request->province . " " . $request->district . " " . $request->sub_district .  " " . $request->village;
+        $newVisitor->address = $request->province . " " . $request->district . " " . $request->sub_district . " " . $request->village;
         $newVisitor->check_in = $request->check_in;
         $newVisitor->check_out = $request->check_out;
         $newVisitor->telephone = $request->telephone;
-        $newVisitor->visitor_photo = $request->file('visitor_photo')->store('user_photo');
+        $newVisitor->visitor_photo = $path;
         $newVisitor->visit_type_id = $request->visit_type;
         $newVisitor->objective = $request->objective;
         $newVisitor->i_n_i = $request->i_n_i;
@@ -162,9 +176,9 @@ class VisitorController extends Controller
         $newVisitor->village_code = $request->village_code;
         $newVisitor->save();
 
-
         return redirect()->route('visitor.popup')->with('visitor_success', 'Data berhasil ditambahkan!');
     }
+
 
     public function popup()
     {
@@ -180,9 +194,9 @@ class VisitorController extends Controller
         $district_code = $code[0] . $code[1] . $code[2] . $code[3];
         $sub_district_code = $code[0] . $code[1] . $code[2] . $code[3] . $code[4] . $code[5];
         $village_code = "$code[0]$code[1]$code[2]$code[3]$code[4]$code[5]$code[6]$code[7]$code[8]$code[9]";
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
         $village = VisitType::where('village_code', $village_code)->first()->id;
-        return view('visitor.add', ['title' => 'Tambah Tamu','isreceptionist' => $visit, 'is_admin' => $is_admin, 'user' => Auth::user(),  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code, 'visit_type' => $village]);
+        return view('visitor.add', ['title' => 'Tambah Tamu', 'isreceptionist' => $visit, 'is_admin' => $is_admin, 'user' => Auth::user(),  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get(), 'province_code' => $province_code, 'district_code' => $district_code, 'sub_district_code' => $sub_district_code, 'village_code' => $village_code, 'visit_type' => $village]);
     }
 
     public function create(Request $request)
@@ -237,7 +251,7 @@ class VisitorController extends Controller
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
         $visitor = Visitor::find($id);
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
 
