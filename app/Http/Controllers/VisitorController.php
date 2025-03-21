@@ -128,6 +128,23 @@ class VisitorController extends Controller
     public function addVisitor(Request $request)
     {
 
+        $request->validate([
+            'fullname' => 'required',
+            'institution' => 'required',
+            'check_in' => 'required',
+            'telephone' => 'required',
+            'visitor_photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'objective' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'sub_district' => 'required',
+            'village' => 'required',
+            'province_code' => 'required',
+            'district_code' => 'required',
+            'sub_district_code' => 'required',
+            'village_code' => 'required',
+        ]);
+
         $newVisitor = new Visitor();
         $newVisitor->fullname = $request->fullname;
         $newVisitor->institution = $request->institution;
