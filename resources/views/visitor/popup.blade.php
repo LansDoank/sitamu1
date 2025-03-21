@@ -33,7 +33,7 @@
                 <p class="lg:text-lg">{{ session('visitor_success') }}</p>
                 <div class="flex flex-wrap md:flex-nowrap space-x-4 mt-3 gap-y-2 md:gap-y-0 md:gap-x-3">
                     <a class="bg-red-600 rounded w-full md:w-36 lg:w-40 text-decoration-none text-white md:text-sm text-base lg:text-base py-3 px-4"
-                        href="/">Back</a>
+                        href="/">Kembali</a>
                     <a class="bg-blue-600 rounded w-full md:w-36 lg:w-40 text-decoration-none text-white md:text-sm text-base lg:text-base py-3 px-4 m-0"
                         href="/form/desa">Tambah Data</a>
                 </div>
