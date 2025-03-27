@@ -108,13 +108,15 @@
                                 <button onclick="history.back()" class="flex items-center text-sm text-gray-500 ">
                                     Halaman
                                 </button>
-                                <svg class="shrink-0 size-5 text-gray-400 mx-2" width="16" height="16" viewBox="0 0 16 16"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="shrink-0 size-5 text-gray-400 mx-2" width="16" height="16"
+                                    viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true">
                                     <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path>
                                 </svg>
                             </li>
 
-                            <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate" aria-current="page">
+                            <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate"
+                                aria-current="page">
 
                                 <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-hidden focus:text-blue-600"
                                     href="#">
@@ -137,7 +139,8 @@
                                     src="{{ $is_admin ? '/img/profile.png' : asset("storage/$user->photo") }}">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Keluar
@@ -212,6 +215,8 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
     <script>
         const toggleSidebar = document.getElementById('sidebarToggleTop');
         const sidebar = document.querySelector('.sidebar');
@@ -219,7 +224,7 @@
         const mobile = window.matchMedia("(max-width: 576px)");
 
         function mobileToggled(e) {
-            if(e.matches) {
+            if (e.matches) {
                 sidebar.classList.add('toggled');
             }
         }
@@ -238,12 +243,16 @@
             let rows = table.querySelectorAll("tr");
             let csvContent = "";
 
-            rows.forEach(row => {
+            rows.forEach((row, index) => {
                 let cols = row.querySelectorAll("td, th");
                 let rowData = [];
-                cols.forEach(col => rowData.push(col.innerText));
+                cols.forEach((col, index) => {
+                    if(index === 1 || index === cols.length - 1) return;
+                    rowData.push(col.innerText)
+                });
                 csvContent += rowData.join(",") + "\n";
             });
+
 
             let blob = new Blob([csvContent], {
                 type: "text/csv"
@@ -302,12 +311,13 @@
             const districtSelect = document.getElementById('district');
             const subDistrictSelect = document.getElementById('sub_district');
             const villageSelect = document.getElementById('village');
+            const visitorTable = document.querySelector('#visitor-table');
+            let no = 1;
 
             const old_province = document.getElementById
 
             provinceSelect.addEventListener('change', function() {
                 const provinceCode = this.value;
-
                 if (provinceCode) {
                     fetch(`/api/districts/${provinceCode}`)
                         .then(response => response.json())
@@ -318,6 +328,7 @@
                                 districtSelect.innerHTML +=
                                     `<option value="${district.code}">${district.name}</option>`;
                             });
+
                         });
                 }
             });
@@ -341,7 +352,6 @@
 
             subDistrictSelect.addEventListener('change', function() {
                 const subDistrictCode = this.value;
-                console.log(subDistrictCode)
                 if (subDistrictCode) {
                     fetch(`/api/villages/${subDistrictCode}`)
                         .then(response => response.json())
@@ -354,6 +364,49 @@
                         });
                 }
             });
+
+
+            $("#village").on("change", function() {
+                let villageCode = $(this).val();
+                if (villageCode) {
+                    $.ajax({
+                        url: `/api/desa/${villageCode}`,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            let visitorTable = $("#visitor-table");
+                            visitorTable
+                                .empty();
+
+                            let no = 1;
+                            $.each(data, function(index, desa) {
+                                visitorTable.append(`
+                                <tr>
+                                    <td>${no}</td>
+                                    <td>${desa.province.name}</td>
+                                    <td>${desa.district.name}</td>
+                                    <td>${desa.subdistrict.name}</td>
+                                    <td>${desa.name}</td>
+                                    <td>${desa.visitor}</td>
+                                    <td>
+                                        <a class="rounded bg-blue-600 text-white px-2 py-1 text-center flex items-center justify-center text-decoration-none"
+                                            href="/admin/visitor/${desa.village_code}">
+                                            Detail
+                                        </a>
+                                    </td>
+                                </tr>
+                            `);
+                                no++;
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error fetching data:", error);
+                        }
+                    });
+                } else {
+                    $("#visitor-table").empty(); // Jika tidak ada desa yang dipilih, kosongkan tabel
+                }
+            })
         });
     </script>
     <script>

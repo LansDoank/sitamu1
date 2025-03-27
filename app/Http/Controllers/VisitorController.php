@@ -119,15 +119,15 @@ class VisitorController extends Controller
     {
         $user = Auth::user();
         $is_admin = $user->role_id == 1 ? true : false;
-        $visitor = Visitor::find($id);
-        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
-
-
+        $visitor = Visitor::findOrFail($id);
         if ($user->role_id == '2') {
             if ($user->village_code != $visitor->village_code) {
                 return redirect("/admin/visitor/$user->village_code");
             }
         }
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
+
+
         return view('visitor.preview', ['title' => 'Pratinjau Tamu', 'isreceptionist' => $visit, 'user' => Auth::user(), 'is_admin' => $is_admin,  'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'visitor' => $visitor]);
     }
 
@@ -156,7 +156,7 @@ class VisitorController extends Controller
         $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
         $path = 'visitors_photo/' . time() . '.jpg';
         $image = $imageManager->read($imageFile->getPathname())
-        ->scaleDown(width: 200);
+            ->scaleDown(width: 200);
         Storage::put($path, (string) $image->encode());
 
         $newVisitor = new Visitor();
@@ -308,8 +308,16 @@ class VisitorController extends Controller
             if ($request->oldPhoto) {
                 Storage::delete($request->oldPhoto);
             }
+            $imageManager = new ImageManager(new Driver());
+            $imageFile = $request->file('visitor_photo');
+
+            $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
+            $path = 'visitors_photo/' . time() . '.jpg';
+            $image = $imageManager->read($imageFile->getPathname())
+                ->scaleDown(width: 200);
+            Storage::put($path, (string) $image->encode());
             $visitor->update([
-                'visitor_photo' => $request->file('visitor_photo')->store('user_photo'),
+                'visitor_photo' => $path,
             ]);
         }
 

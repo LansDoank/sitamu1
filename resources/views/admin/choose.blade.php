@@ -55,6 +55,44 @@
                 class="bg-green-100 mt-2 mb-2 rounded border border-1 border-green-900 text-center px-5 py-2 text-green-900">
                 {{ session('visitor_success') }}</div>
         @endif
+        <div class="flex  my-3">
+            <form class="w-full" action="" method="GET">
+                <input class="w-full px-3 py-2 bg-white rounded-xl border" type="search" id="desa" name="desa"
+                    id="desa" placeholder="Cari desa anda disini...">
+                    <button class="hidden" type="submit">Cari</button>
+            </form>
+        </div>
+        <div class="flex w-full mb-5 justify-between">
+            <div class="flex flex-col md:flex-row w-full justify-between">
+                <div class="w-full my-1 md:m-0 md:w-[23%]">
+                    <select class="rounded-xl border bg-white py-2 px-3 w-full" id="province" name="province"
+                        id="province">
+                        <option value="" disabled selected>Pilih Provinsi</option>
+                        @foreach ($provinces as $province)
+                            <option value="{{ $province->code }}">{{ $province->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="w-full my-1 md:m-0 md:w-[23%]">
+                    <select class="rounded-xl border bg-white py-2 px-3 w-full" id="district" name="district"
+                        id="district">
+                        <option disabled selected>Pilih Kabupaten</option>
+                    </select>
+                </div>
+                <div class="w-full my-1 md:m-0 md:w-[23%]">
+                    <select class="rounded-xl border bg-white py-2 px-3 w-full" id="sub_district" name="sub_district"
+                        id="sub_district">
+                        <option disabled selected>Pilih Kecamatan</option>
+                    </select>
+                </div>
+                <div class="w-full my-1 md:m-0 md:w-[23%]">
+                    <select class="rounded-xl border bg-white py-2 px-3 w-full" id="village" name="village"
+                        id="village">
+                        <option disabled selected>Pilih Desa</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -71,10 +109,11 @@
                                 <th class="col-2">Kabupaten</th>
                                 <th class="col-2">Kecamatan</th>
                                 <th class="col-2">Nama Desa</th>
+                                <th class="col-2">Jumlah Tamu</th>
                                 <th class="col-1 text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="visitor-table">
                             <?php $no = 1; ?>
                             @foreach ($villages as $village)
                                 <tr>
@@ -83,6 +122,7 @@
                                     <td>{{ $village->district->name }}</td>
                                     <td>{{ $village->subdistrict->name }}</td>
                                     <td>{{ Str::ucfirst($village->name) }}</td>
+                                    <td>{{ $visitor->where('village_code', $village->village_code)->count() }}</td>
                                     <td>
                                         <a class="rounded bg-blue-600 text-white px-2 py-1 text-center flex items-center justify-center text-decoration-none "
                                             href="/admin/visitor/{{ $village->village_code }}">

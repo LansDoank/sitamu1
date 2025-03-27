@@ -7,6 +7,7 @@ use App\Models\Province;
 use App\Models\User;
 use App\Models\SubDistrict;
 use App\Models\Village;
+use App\Models\Visitor;
 use App\Models\VisitType;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -31,10 +32,10 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
-        return view('receptionist.add', ['isreceptionist' => $visit,'title' => 'Tambah Resepsionis','is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
+        return view('receptionist.add', ['isreceptionist' => $visit, 'title' => 'Tambah Resepsionis', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'provinces' => Province::orderBy('name', 'asc')->get()]);
     }
 
 
@@ -52,8 +53,8 @@ class ReceptionistController extends Controller
     public function getDistrictsByProvince($province_code)
     {
         $districts = District::where('province_code', $province_code)
-        ->orderBy('name', 'asc')
-        ->get();
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json($districts);
     }
 
@@ -61,24 +62,69 @@ class ReceptionistController extends Controller
     public function getSubDistrictsByDistrict($district_code)
     {
         $sub_districts = SubDistrict::where('district_code', $district_code)
-        ->orderBy('name', 'asc')
-        ->get();
+            ->orderBy('name', 'asc')
+            ->get();
         return response()->json($sub_districts);
     }
 
     // Fungsi untuk mengambil desa berdasarkan kecamatan yang dipilih
     public function getVillagesBySubDistrict($sub_district_code)
-{
-    $villages = Village::where('sub_district_code', $sub_district_code)
-        ->orderBy('name', 'asc')
-        ->get()
-        ->map(function ($village) {
+    {
+        $villages = Village::where('sub_district_code', $sub_district_code)
+            ->orderBy('name', 'asc')
+            ->get()
+            ->map(function ($village) {
+                $village->name = ucwords(strtolower($village->name));
+                return $village;
+            });
+
+        return response()->json($villages);
+    }
+    public function getVillageByName($name = null)
+    {
+        $villages = VisitType::where('name', 'LIKE', "%$name%")
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $villages = $villages->map(function ($village) {
             $village->name = ucwords(strtolower($village->name));
             return $village;
         });
 
-    return response()->json($villages);
-}
+        return response()->json($villages);
+    }
+
+   
+
+
+    public function getVillage($village_code)
+    {
+        $villages = VisitType::where('village_code', $village_code)
+            ->orderBy('name', 'asc')
+            ->get()
+            ->map(function ($village) use ($village_code) {
+                $village->name = ucwords(strtolower($village->name));
+                $village->visitor = Visitor::where('village_code',$village_code)->count();
+                return $village;
+            });
+        return response()->json($villages);
+    }
+
+    public function getDesa() {
+        return response()->json(VisitType::all());
+    }
+
+    // public function getProvince($code)
+    // {
+    //     $villages = VisitType::where('province_code', $code)
+    //         ->orderBy('name', 'asc')
+    //         ->get()
+    //         ->map(function ($village) {
+    //             $village->name = ucwords(strtolower($village->name));
+    //             return $village;
+    //         });
+    //     return response()->json($villages);
+    // }
 
 
     // Fungsi untuk menyimpan data receptionist
@@ -142,7 +188,8 @@ class ReceptionistController extends Controller
         return redirect()->route('admin.receptionists')->with('receptionist_success', 'Akun resepsionis baru dan kode qr baru telah ditambahkan!');
     }
 
-    public function preview($id) {
+    public function preview($id)
+    {
         $users = User::find($id);
 
         $user = Auth::user();
@@ -152,11 +199,11 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
 
-        return view('receptionist.preview',['title' => 'Detail Resepsionis','isreceptionist' => $visit,'users' => $users,'is_admin' => $is_admin,'user' => $user,'username' => $user->username,'photo' => $user->photo]);
+        return view('receptionist.preview', ['title' => 'Detail Resepsionis', 'isreceptionist' => $visit, 'users' => $users, 'is_admin' => $is_admin, 'user' => $user, 'username' => $user->username, 'photo' => $user->photo]);
     }
 
 
@@ -169,11 +216,11 @@ class ReceptionistController extends Controller
             return redirect()->route('admin.dashboard');
         }
         $receptionist = User::find($id);
-        $visit = VisitType::where('village_code',$user->village_code ?? null)->first()->id ?? null;
+        $visit = VisitType::where('village_code', $user->village_code ?? null)->first()->id ?? null;
 
 
 
-        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Edit Resepsionis', 'is_admin' => $is_admin,'user' => Auth::user(), 'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
+        return view('receptionist.edit', ['isreceptionist' => $visit, 'title' => 'Edit Resepsionis', 'is_admin' => $is_admin, 'user' => Auth::user(), 'username' => Auth::user()->name ?? Auth::user()->username, 'photo' => Auth::user()->photo, 'oldReceptionist' => $receptionist, 'provinces' => Province::orderBy('name', 'asc')->get(),]);
     }
 
     public function update(Request $request)
@@ -184,7 +231,7 @@ class ReceptionistController extends Controller
             'username' => $request->username,
         ]);
 
-        if($request->password) {
+        if ($request->password) {
             $receptionist->update([
                 'password' => $request->password,
             ]);
@@ -194,7 +241,7 @@ class ReceptionistController extends Controller
             ]);
         }
 
-        if($request->village) {
+        if ($request->village) {
             $receptionist->update([
                 'province_code' => $request->province,
                 'district_code' => $request->district,

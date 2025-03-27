@@ -82,6 +82,12 @@ Route::get('/admin/receptionist/create', [ReceptionistController::class, 'create
 Route::get('/api/districts/{province_code}', [ReceptionistController::class, 'getDistrictsByProvince']);
 Route::get('/api/sub-districts/{district_code}', [ReceptionistController::class, 'getSubDistrictsByDistrict']);
 Route::get('/api/villages/{sub_district_code}', [ReceptionistController::class, 'getVillagesBySubDistrict']);
+Route::get('/api/desa/{village_code}', [ReceptionistController::class, 'getVillage']);
+Route::get('/api/desa', [ReceptionistController::class, 'getDesa']);
+Route::get('/api/desa/name/{village_name}', [ReceptionistController::class, 'getVillageByName']);
+// Route::get('/api/province/{code}', [ReceptionistController::class, 'getProvince']);
+Route::get('/ajax/village',[AdminController::class,'ajaxVillage'])->name('ajax.village');
+
 
 Route::get('/visitor', function () {
     return response()->json(Visitor::all());
